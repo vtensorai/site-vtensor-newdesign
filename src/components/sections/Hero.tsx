@@ -309,7 +309,7 @@ export function Hero() {
             <Image
               src="/logos/vtensor.svg"
               alt="Vtensor"
-              width={220}
+              width={200}
               height={80}
               priority
               className="h-[64px] sm:h-[80px] md:h-[96px] lg:h-[112px] w-auto select-none drop-shadow-[0_0_40px_rgba(139,92,246,0.25)]"
