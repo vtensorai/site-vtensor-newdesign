@@ -304,6 +304,19 @@ export function Hero() {
           animate="show"
           className="flex flex-col items-center text-center w-full max-w-full"
         >
+          {/* Logo wordmark grand — V0.18.0 signature */}
+          <motion.div variants={itemVariants} className="mb-6 md:mb-8 flex justify-center">
+            <Image
+              src="/logos/vtensor.svg"
+              alt="Vtensor"
+              width={320}
+              height={80}
+              priority
+              className="h-[64px] sm:h-[80px] md:h-[96px] lg:h-[112px] w-auto select-none drop-shadow-[0_0_40px_rgba(139,92,246,0.25)]"
+              draggable={false}
+            />
+          </motion.div>
+
           {/* Kicker — V0.18.0 : style mono signature // xxx */}
           <motion.div variants={itemVariants} className="mb-5 md:mb-6 px-2">
             <span

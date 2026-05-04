@@ -122,7 +122,7 @@ export function HiddenCostMobile() {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-[#0A0A0F] text-white overflow-hidden"
+      className="relative text-white overflow-hidden"
       aria-label="Le coût caché du travail manuel (mobile)"
     >
       {/* Sticky compteur en haut, suit le scroll de la section */}

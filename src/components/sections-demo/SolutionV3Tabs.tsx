@@ -31,7 +31,6 @@ import {
   AgentChatPreview,
   AgentBadgeNumber,
 } from "./AgentChatPreview";
-import { AnimatedGridBackground } from "@/components/backgrounds/AnimatedGridBackground";
 import { SolutionStackMobile } from "./SolutionStackMobile";
 import { OrgChartCompact } from "./OrgChartCompact";
 
@@ -52,7 +51,7 @@ export function SolutionV3Tabs({ withGrid = false }: { withGrid?: boolean } = {}
     <section
       ref={sectionRef}
       id="agents"
-      className="relative bg-[#0A0A0F] text-white solutionv3-section"
+      className="relative text-white solutionv3-section"
       aria-label="Catalogue des 7 agents Vtensor"
     >
       <style jsx>{`
@@ -73,19 +72,7 @@ export function SolutionV3Tabs({ withGrid = false }: { withGrid?: boolean } = {}
           "flex-col py-20 md:py-28",
         ].join(" ")}
       >
-        {/* Grid interactive de fond (optionnelle) */}
-        {withGrid && (
-          <>
-            <div className="absolute inset-0 z-0 pointer-events-none">
-              <AnimatedGridBackground />
-            </div>
-            <div
-              className="absolute inset-0 z-[1] pointer-events-none"
-              style={{ background: "rgba(10,10,15,0.55)" }}
-              aria-hidden
-            />
-          </>
-        )}
+        {/* V0.18.0 : grid+glow body suffisent (signature dev/tech). withGrid kept for backwards compat */}
 
         {/* Section header */}
         <div className="relative z-10 max-w-[1100px] mx-auto px-6 sm:px-10 text-center mb-10 md:mb-14 lg:mb-12">

@@ -17,7 +17,6 @@
  */
 
 import { useReducedMotion, motion, useTransform } from "motion/react";
-import { AnimatedGridBackground } from "@/components/backgrounds/AnimatedGridBackground";
 import {
   PAINS,
   Counter,
@@ -88,25 +87,12 @@ function HiddenCostBDesktop({ withGrid = false }: { withGrid?: boolean } = {}) {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-[#0A0A0F] text-white"
+      className="relative text-white"
       style={{ height: `${SECTION_HEIGHT_VH}vh` }}
       aria-label="Le coût caché du travail manuel"
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
-        {/* Fond Animated Grid (optionnel) */}
-        {withGrid && (
-          <>
-            <div className="absolute inset-0 z-0">
-              <AnimatedGridBackground />
-            </div>
-            {/* Overlay sombre pour préserver lisibilité du compteur + chips */}
-            <div
-              className="absolute inset-0 z-[1] pointer-events-none"
-              style={{ background: "rgba(10,10,15,0.4)" }}
-              aria-hidden
-            />
-          </>
-        )}
+        {/* V0.18.0 : grid+glow body suffisent (signature dev/tech). withGrid kept for backwards compat */}
 
         {/* Sticky counter top */}
         <motion.div

@@ -9,7 +9,6 @@
  */
 
 import { motion, useReducedMotion } from "motion/react";
-import { AnimatedGridBackground } from "@/components/backgrounds/AnimatedGridBackground";
 
 type Props = {
   /** Chemin vers la capture d'écran (default: /screenshots/app-vtensor.png si présent) */
@@ -26,22 +25,10 @@ export function AppPreview({
 
   return (
     <section
-      className="relative bg-[#0A0A0F] text-white py-24 md:py-32 px-5 sm:px-10 overflow-hidden"
+      className="relative text-white py-24 md:py-32 px-5 sm:px-10 overflow-hidden"
       aria-label="Aperçu de l'application Vtensor"
     >
-      {/* Grille animée interactive en arrière-plan (même que sections 2/3) */}
-      {withGrid && (
-        <>
-          <div className="absolute inset-0 z-0 pointer-events-none">
-            <AnimatedGridBackground />
-          </div>
-          <div
-            className="absolute inset-0 z-[1] pointer-events-none"
-            style={{ background: "rgba(10,10,15,0.55)" }}
-            aria-hidden
-          />
-        </>
-      )}
+      {/* V0.18.0 : grid+glow body suffisent (signature dev/tech). withGrid kept for backwards compat */}
 
       {/* Glows ambient violet/cyan en arrière-plan */}
       <div

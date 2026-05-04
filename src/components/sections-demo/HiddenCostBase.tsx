@@ -319,7 +319,7 @@ export function FloatingPill({
 /** Rendu reduced-motion commun aux 3 variantes. */
 export function StaticFallback() {
   return (
-    <section className="relative bg-[#0A0A0F] text-white py-24 px-6">
+    <section className="relative text-white py-24 px-6">
       <div className="max-w-[1100px] mx-auto">
         <div className="flex flex-wrap justify-center gap-6 mb-10">
           <CounterStatic

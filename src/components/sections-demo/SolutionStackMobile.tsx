@@ -18,7 +18,7 @@ export function SolutionStackMobile() {
 
   return (
     <section
-      className="relative bg-[#0A0A0F] text-white py-16 px-5"
+      className="relative text-white py-16 px-5"
       aria-label="Catalogue des 7 agents Vtensor — version mobile"
     >
       {/* Section header */}
