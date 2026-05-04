@@ -1,0 +1,241 @@
+/**
+ * Vtensor Design System — Tokens (V0.16.0+)
+ *
+ * Drop-in CSS pour tout nouveau projet qui veut le style Vtensor "dev/tech".
+ * Inclut palette dark + light mode (toggle via [data-theme="light"]),
+ * grid+glow background, et utilities (.dev-pill, .dev-section-title, etc.).
+ *
+ * Source de vérité : c:/Users/victo/BOS Agence Agents IA/Output/design-system-vtensor-dev/
+ * App de référence : https://app.vtensor.ai
+ */
+
+/* ─── Fonts ─────────────────────────────────────────────────────────── */
+/* À mettre dans <head> : <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"> */
+
+/* ─── Variables — Dark mode (par défaut) ────────────────────────────── */
+:root {
+  --color-bg: #0A0A0A;
+  --color-surface: #08080a;
+  --color-surface-2: #111114;
+  --color-surface-3: #16161a;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-hover: rgba(255, 255, 255, 0.16);
+  --color-border-violet: rgba(139, 92, 246, 0.3);
+  --color-border-cyan: rgba(34, 211, 238, 0.3);
+  --color-text: #FAFAFA;
+  --color-text-muted: #8B8B97;
+  --color-text-faint: #5A5A66;
+  --color-violet: #8B5CF6;
+  --color-violet-soft: rgba(139, 92, 246, 0.10);
+  --color-cyan: #22D3EE;
+  --color-cyan-soft: rgba(34, 211, 238, 0.10);
+  --color-violet-glow: rgba(139, 92, 246, 0.4);
+  --color-cyan-glow: rgba(34, 211, 238, 0.4);
+  --color-rose: #fb7185;
+  --color-rose-soft: rgba(251, 113, 133, 0.10);
+
+  /* Background decorations */
+  --grid-line: rgba(255, 255, 255, 0.025);
+  --glow-1: rgba(139, 92, 246, 0.10);
+  --glow-2: rgba(34, 211, 238, 0.07);
+
+  /* Hover/input abstractions */
+  --color-hover: rgba(255, 255, 255, 0.04);
+  --color-hover-strong: rgba(255, 255, 255, 0.10);
+  --color-input-bg: rgba(0, 0, 0, 0.4);
+  --color-pre-bg: rgba(0, 0, 0, 0.25);
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace;
+}
+
+/* ─── Variables — Light mode ────────────────────────────────────────── */
+[data-theme="light"] {
+  --color-bg: #fafaf7;
+  --color-surface: #ffffff;
+  --color-surface-2: #f4f4f1;
+  --color-surface-3: #e9e9e5;
+  --color-border: rgba(0, 0, 0, 0.10);
+  --color-border-hover: rgba(0, 0, 0, 0.20);
+  --color-border-violet: rgba(124, 58, 237, 0.35);
+  --color-border-cyan: rgba(8, 145, 178, 0.35);
+  --color-text: #18181b;
+  --color-text-muted: #4f4f57;
+  --color-text-faint: #8a8a93;
+  --color-violet: #7c3aed;
+  --color-violet-soft: rgba(124, 58, 237, 0.08);
+  --color-cyan: #0891b2;
+  --color-cyan-soft: rgba(8, 145, 178, 0.08);
+  --color-violet-glow: rgba(124, 58, 237, 0.20);
+  --color-cyan-glow: rgba(8, 145, 178, 0.18);
+  --color-rose: #be123c;
+  --color-rose-soft: rgba(190, 18, 60, 0.08);
+
+  --grid-line: rgba(0, 0, 0, 0.045);
+  --glow-1: rgba(124, 58, 237, 0.06);
+  --glow-2: rgba(8, 145, 178, 0.04);
+
+  --color-hover: rgba(0, 0, 0, 0.04);
+  --color-hover-strong: rgba(0, 0, 0, 0.07);
+  --color-input-bg: #ffffff;
+  --color-pre-bg: #f4f4f1;
+}
+
+/* ─── Base body ─────────────────────────────────────────────────────── */
+/* V0.18.0 — désactivé dans le fork site-vtensor-newdesign : le body est déjà
+   stylé par le layout.tsx Next.js et Tailwind, on évite le conflit. */
+body {
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Background grid + glow signature Vtensor */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, #000 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, #000 30%, transparent 80%);
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 600px 400px at 12% 8%, var(--glow-1), transparent 60%),
+    radial-gradient(ellipse 500px 400px at 92% 80%, var(--glow-2), transparent 60%);
+}
+/* Tout enfant direct du root passe au-dessus du décor */
+#root, body > main, body > div { position: relative; z-index: 1; }
+
+* { box-sizing: border-box; }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-border-hover); }
+
+/* ─── Utilities Vtensor ─────────────────────────────────────────────── */
+
+/* Section title style "// xxx" */
+.dev-section-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+.dev-section-title .num {
+  color: var(--color-cyan);
+  font-weight: 500;
+}
+
+/* Mono label uppercase letterspaced (KPIs, status, etc.) */
+.dev-mono-label {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+.dev-bracket::before { content: '['; opacity: 0.5; }
+.dev-bracket::after { content: ']'; opacity: 0.5; }
+
+/* Pill statuts */
+.dev-pill {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 1px 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.dev-pill.live {
+  background: var(--color-violet-soft);
+  color: var(--color-violet);
+  border: 1px solid var(--color-border-violet);
+}
+.dev-pill.cyan {
+  background: var(--color-cyan-soft);
+  color: var(--color-cyan);
+  border: 1px solid var(--color-border-cyan);
+}
+.dev-pill.soon {
+  background: var(--color-surface-2);
+  color: var(--color-text-faint);
+  border: 1px solid var(--color-border);
+}
+.dev-pill.warn {
+  background: var(--color-rose-soft);
+  color: var(--color-rose);
+  border: 1px solid rgba(251, 113, 133, 0.3);
+}
+
+/* Gradient text (réutilisable) */
+.dev-gradient-text {
+  background: linear-gradient(90deg, var(--color-violet), var(--color-cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Brand mark hexagonal */
+.dev-brand-mark {
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, var(--color-violet), var(--color-cyan));
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  box-shadow: 0 0 16px var(--color-violet-glow);
+  flex-shrink: 0;
+}
+
+/* Top scanline animée (decoration "live") */
+.dev-scanline { position: relative; }
+.dev-scanline::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-violet), var(--color-cyan), transparent);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Status dot avec glow + pulse */
+.dev-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-violet);
+  box-shadow: 0 0 10px var(--color-violet);
+  display: inline-block;
+  animation: dev-blink 2s ease-in-out infinite;
+}
+@keyframes dev-blink {
+  50% { opacity: 0.4; }
+}
+
+/* Dot vert pour pill "actif" */
+.dev-dot-green {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #86efac;
+  box-shadow: 0 0 6px #86efac;
+  display: inline-block;
+}
