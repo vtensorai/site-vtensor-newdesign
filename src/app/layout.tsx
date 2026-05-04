@@ -1,19 +1,15 @@
 import type { Metadata } from "next";
-import { Manrope, Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { LenisProvider } from "@/components/providers/LenisProvider";
 
-const fontDisplay = Manrope({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  display: "swap",
-});
-
-const fontSans = Inter({
+// V0.18.2 — Cohérence avec app.vtensor.ai après redesign : Inter partout (sans
+// + display via alias CSS dans globals.css). Le site reflète exactement
+// l'expérience que le client aura dans l'app.
+const fontInter = Inter({
   variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
   display: "swap",
 });
 
@@ -31,7 +27,7 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`dark ${fontDisplay.variable} ${fontSans.variable} h-full antialiased`}
+      className={`dark ${fontInter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[#0A0A0F] text-white">
         <LenisProvider>{children}</LenisProvider>
