@@ -203,7 +203,7 @@ function ShimmerLine({
         className="inline-block"
         style={{
           color: "rgba(255,255,255,0.7)",
-          fontFamily: "var(--font-display), Manrope, sans-serif",
+          fontFamily: "var(--font-sans), Inter, ui-sans-serif, system-ui, sans-serif",
           fontWeight: 600,
           fontSize: "clamp(24px, 3vw, 36px)",
           lineHeight: 1.2,
@@ -221,7 +221,7 @@ function ShimmerLine({
       style={{
         position: "relative",
         display: "inline-block",
-        fontFamily: "var(--font-display), Manrope, sans-serif",
+        fontFamily: "var(--font-sans), Inter, ui-sans-serif, system-ui, sans-serif",
         fontWeight: 600,
         fontSize: "clamp(24px, 3vw, 36px)",
         lineHeight: 1.2,
@@ -333,7 +333,7 @@ function HighlightLine({
     return (
       <div
         style={{
-          fontFamily: "var(--font-display), Manrope, sans-serif",
+          fontFamily: "var(--font-sans), Inter, ui-sans-serif, system-ui, sans-serif",
           fontWeight: 600,
           fontSize: "clamp(24px, 3vw, 36px)",
           lineHeight: 1.2,
@@ -350,7 +350,7 @@ function HighlightLine({
       style={{
         opacity,
         scale,
-        fontFamily: "var(--font-display), Manrope, sans-serif",
+        fontFamily: "var(--font-sans), Inter, ui-sans-serif, system-ui, sans-serif",
         fontWeight: 600,
         fontSize: "clamp(24px, 3vw, 36px)",
         lineHeight: 1.2,
@@ -436,7 +436,7 @@ function WordSwitcher({ reduced }: { reduced: boolean }) {
     return (
       <div
         style={{
-          fontFamily: "var(--font-display), Manrope, sans-serif",
+          fontFamily: "var(--font-sans), Inter, ui-sans-serif, system-ui, sans-serif",
           fontWeight: 600,
           fontSize: "clamp(24px, 3vw, 36px)",
           lineHeight: 1.2,
@@ -465,7 +465,7 @@ function WordSwitcher({ reduced }: { reduced: boolean }) {
           exit={{ y: -30, opacity: 0, filter: "blur(8px)" }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            fontFamily: "var(--font-display), Manrope, sans-serif",
+            fontFamily: "var(--font-sans), Inter, ui-sans-serif, system-ui, sans-serif",
             fontWeight: 600,
             lineHeight: 1.2,
             color: "white",

@@ -36,7 +36,7 @@ export function WordSwitcherTagline({
   }, [reduced, intervalMs, items.length]);
 
   const sharedTextStyle = {
-    fontFamily: "var(--font-display), Manrope, sans-serif",
+    fontFamily: "var(--font-sans), Inter, ui-sans-serif, system-ui, sans-serif",
     lineHeight: 1.1,
     backgroundImage:
       "linear-gradient(90deg, #A78BFA 0%, #22D3EE 100%)",

@@ -250,7 +250,7 @@ function IdentificationCard({
  * --------------------------------------------------- */
 function StaticTagline({ reduced }: { reduced: boolean }) {
   const baseStyle = {
-    fontFamily: "var(--font-display), Manrope, sans-serif",
+    fontFamily: "var(--font-sans), Inter, ui-sans-serif, system-ui, sans-serif",
     fontWeight: 700,
     fontSize: "clamp(56px, 8vw, 96px)",
     lineHeight: 1.05,
