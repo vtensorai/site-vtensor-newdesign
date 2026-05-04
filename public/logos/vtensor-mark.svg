@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80">
+  <!-- Vtensor monogram officiel (V0.18.0) — [v] seul, version compacte
+       pour favicon, sidebar collapsed, app icon. JetBrains Mono italique. -->
+  <defs>
+    <linearGradient id="vtMonoOfficial" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8B5CF6"/>
+      <stop offset="1" stop-color="#22D3EE"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(16 18)">
+    <path d="M14 4 L4 4 L4 44 L14 44" fill="none" stroke="url(#vtMonoOfficial)" stroke-width="2.8" stroke-linecap="square" stroke-linejoin="miter"/>
+    <text x="14" y="38" font-family="JetBrains Mono, ui-monospace, monospace"
+          font-size="32" font-weight="700" font-style="italic" fill="url(#vtMonoOfficial)">v</text>
+    <path d="M38 4 L48 4 L48 44 L38 44" fill="none" stroke="url(#vtMonoOfficial)" stroke-width="2.8" stroke-linecap="square" stroke-linejoin="miter"/>
+  </g>
+</svg>

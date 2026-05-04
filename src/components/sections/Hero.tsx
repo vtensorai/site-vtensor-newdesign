@@ -10,8 +10,24 @@ import {
   X,
 } from "@phosphor-icons/react/dist/ssr";
 import { Marquee } from "@/components/ui/marquee";
-import { VideoBackground } from "@/components/backgrounds/VideoBackground";
 import { WordSwitcherTagline } from "@/components/WordSwitcherTagline";
+
+/**
+ * Hero — V0.18.0 (Victor 2026-05-05) : refonte au design system dev/tech.
+ *
+ * Changements vs ancienne version :
+ * - VideoBackground retiré → grid+glow body (du design system) suffit, plus
+ *   épuré et cohérent avec l'app.
+ * - Logo wordmark remplacé par le logo officiel V0.18.0 ([v]tensor JetBrains
+ *   Mono italique).
+ * - Kicker en mono `// l'agence...` au lieu d'uppercase letterspaced standard.
+ * - CTAs : bordures carrées (pas rounded-full), accents mono uppercase pour
+ *   le primaire, sans-serif pour le secondaire.
+ * - Réassurances en pills mono `[done]` style.
+ * - Ticker garde le marquee mais avec un kicker mono unifié.
+ *
+ * Le contenu (copy, URLs, structure) est intégralement préservé.
+ */
 
 const ROTATION_ITEMS = [
   "de votre temps",
@@ -72,7 +88,6 @@ export function Hero() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Verrouille le scroll du body quand le drawer mobile est ouvert
   useEffect(() => {
     if (menuOpen) {
       const previous = document.body.style.overflow;
@@ -83,7 +98,6 @@ export function Hero() {
     }
   }, [menuOpen]);
 
-  // Détecte le scroll pour activer le fond blur de la nav
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
@@ -92,30 +106,24 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-[#0A0A0F] flex flex-col">
-      {/* Video background — Seedance 15s, puis 2ème vidéo 12s à la suite, puis freeze sur la dernière frame */}
-      <div className="absolute inset-0 z-0">
-        <VideoBackground
-          src="/videos/city-dawn-seedance-15s.mp4"
-          loopSrc="/videos/city-dawn-loop-seamless.mp4"
-          loopMode="pause"
-          overlayOpacity={0.5}
-        />
-      </div>
+    <section className="relative min-h-screen overflow-hidden flex flex-col">
+      {/* V0.18.0 — pas de VideoBackground : le grid+glow body (du design system
+          dev/tech) fournit l'ambiance. Plus épuré, plus cohérent avec l'app. */}
 
-      {/* Top radial gradient violet */}
+      {/* Top scanline gradient — signature Vtensor */}
       <div
-        className="pointer-events-none absolute inset-x-0 -top-40 h-[600px] z-[2]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px z-[2]"
         style={{
           background:
-            "radial-gradient(ellipse 80% 50% at 50% 0%, rgba(139, 92, 246, 0.15), transparent 70%)",
+            "linear-gradient(90deg, transparent, var(--color-violet, #8B5CF6), var(--color-cyan, #22D3EE), transparent)",
+          opacity: 0.6,
         }}
       />
 
-      {/* Bottom fade */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0A0A0F] to-transparent z-10" />
+      {/* Bottom fade — pour transition douce vers la section suivante */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0A0A0F] to-transparent z-10" />
 
-      {/* Nav fixed — reste ancrée au top pendant tout le scroll */}
+      {/* Nav fixed */}
       <nav
         className={[
           "fixed top-0 inset-x-0 z-50 transition-all duration-300",
@@ -125,57 +133,72 @@ export function Hero() {
         ].join(" ")}
       >
         <div className="w-full max-w-[1200px] mx-auto px-5 sm:px-10 lg:px-20 py-4 md:py-5 flex items-center justify-between">
-        <a href="/" className="inline-flex items-center" aria-label="Vtensor">
-          <Image
-            src="/logos/vtensor-wordmark-white.svg"
-            alt="Vtensor"
-            width={112}
-            height={28}
-            priority
-            className="h-7 w-auto"
-          />
-        </a>
-        <ul className="hidden md:flex items-center gap-8">
-          {NAV_LINKS.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className="text-sm text-white/70 hover:text-white transition-colors"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-        <div className="flex items-center gap-3">
-          <a
-            href="https://app.vtensor.ai"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/15 text-sm text-white/90 hover:bg-white/[0.05] transition-colors"
-          >
-            Accéder à l&apos;app
-            <ArrowRight size={14} weight="bold" />
+          <a href="/" className="inline-flex items-center" aria-label="Vtensor">
+            <Image
+              src="/logos/vtensor.svg"
+              alt="Vtensor"
+              width={120}
+              height={30}
+              priority
+              className="h-7 w-auto"
+            />
           </a>
-          <a
-            href="https://cal.com/vtensor/audi-30min"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/15 text-sm text-white/90 hover:bg-white/[0.05] transition-colors"
-          >
-            Audit gratuit
-            <ArrowRight size={14} weight="bold" />
-          </a>
-          <button
-            type="button"
-            aria-label="Ouvrir le menu"
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen(true)}
-            className="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-full border border-white/15 text-white/90 hover:bg-white/[0.05] transition-colors"
-          >
-            <List size={20} weight="bold" />
-          </button>
-        </div>
+          <ul className="hidden md:flex items-center gap-8">
+            {NAV_LINKS.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className="text-sm text-white/70 hover:text-white transition-colors"
+                  style={{ fontFamily: "var(--font-mono, 'JetBrains Mono')" }}
+                >
+                  {link.label.toLowerCase()}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <div className="flex items-center gap-3">
+            <a
+              href="https://app.vtensor.ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-xs uppercase tracking-wider text-white/90 hover:bg-white/[0.05] transition-colors"
+              style={{
+                fontFamily: "var(--font-mono, 'JetBrains Mono')",
+                fontWeight: 600,
+                border: "1px solid rgba(255,255,255,0.15)",
+                letterSpacing: "0.05em",
+              }}
+            >
+              accéder à l&apos;app
+              <ArrowRight size={12} weight="bold" />
+            </a>
+            <a
+              href="https://cal.com/vtensor/audi-30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-xs uppercase tracking-wider text-white hover:opacity-90 transition-all"
+              style={{
+                fontFamily: "var(--font-mono, 'JetBrains Mono')",
+                fontWeight: 700,
+                background: "linear-gradient(135deg, #8B5CF6, #22D3EE)",
+                letterSpacing: "0.05em",
+                boxShadow: "0 0 16px rgba(139,92,246,0.35)",
+              }}
+            >
+              audit gratuit
+              <ArrowRight size={12} weight="bold" />
+            </a>
+            <button
+              type="button"
+              aria-label="Ouvrir le menu"
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen(true)}
+              className="md:hidden inline-flex items-center justify-center h-10 w-10 text-white/90 hover:bg-white/[0.05] transition-colors"
+              style={{ border: "1px solid rgba(255,255,255,0.15)" }}
+            >
+              <List size={20} weight="bold" />
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -190,14 +213,12 @@ export function Hero() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
-            {/* Backdrop */}
             <button
               type="button"
               aria-label="Fermer le menu"
               onClick={() => setMenuOpen(false)}
               className="absolute inset-0 bg-black/70 backdrop-blur-md"
             />
-            {/* Panel */}
             <motion.div
               initial={{ y: -24, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -207,17 +228,18 @@ export function Hero() {
             >
               <div className="flex items-center justify-between mb-8">
                 <Image
-                  src="/logos/vtensor-wordmark-white.svg"
+                  src="/logos/vtensor.svg"
                   alt="Vtensor"
-                  width={112}
-                  height={28}
+                  width={120}
+                  height={30}
                   className="h-7 w-auto"
                 />
                 <button
                   type="button"
                   aria-label="Fermer le menu"
                   onClick={() => setMenuOpen(false)}
-                  className="inline-flex items-center justify-center h-10 w-10 rounded-full border border-white/15 text-white/90"
+                  className="inline-flex items-center justify-center h-10 w-10 text-white/90"
+                  style={{ border: "1px solid rgba(255,255,255,0.15)" }}
                 >
                   <X size={20} weight="bold" />
                 </button>
@@ -229,8 +251,9 @@ export function Hero() {
                       href={link.href}
                       onClick={() => setMenuOpen(false)}
                       className="block py-3 text-lg text-white/85 hover:text-white transition-colors border-b border-white/5"
+                      style={{ fontFamily: "var(--font-mono, 'JetBrains Mono')" }}
                     >
-                      {link.label}
+                      {link.label.toLowerCase()}
                     </a>
                   </li>
                 ))}
@@ -240,24 +263,33 @@ export function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMenuOpen(false)}
-                className="mt-6 inline-flex w-full items-center justify-center gap-2 px-6 py-3.5 rounded-full text-white font-semibold text-sm shadow-[0_0_40px_-10px_rgba(34,211,238,0.5)]"
+                className="mt-6 inline-flex w-full items-center justify-center gap-2 px-6 py-3.5 text-white text-sm uppercase tracking-wider"
                 style={{
-                  background:
-                    "linear-gradient(90deg, #8B5CF6 0%, #22D3EE 100%)",
+                  fontFamily: "var(--font-mono, 'JetBrains Mono')",
+                  fontWeight: 700,
+                  background: "linear-gradient(135deg, #8B5CF6, #22D3EE)",
+                  letterSpacing: "0.05em",
+                  boxShadow: "0 0 24px rgba(139,92,246,0.4)",
                 }}
               >
-                Audit gratuit · 30 min
-                <ArrowRight size={16} weight="bold" />
+                audit gratuit · 30 min
+                <ArrowRight size={14} weight="bold" />
               </a>
               <a
                 href="https://app.vtensor.ai"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMenuOpen(false)}
-                className="mt-3 inline-flex w-full items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-white/15 text-white/90 font-semibold text-sm hover:bg-white/[0.05] transition-colors"
+                className="mt-3 inline-flex w-full items-center justify-center gap-2 px-6 py-3.5 text-white/90 text-sm uppercase tracking-wider hover:bg-white/[0.05] transition-colors"
+                style={{
+                  fontFamily: "var(--font-mono, 'JetBrains Mono')",
+                  fontWeight: 600,
+                  border: "1px solid rgba(255,255,255,0.15)",
+                  letterSpacing: "0.05em",
+                }}
               >
-                Accéder à l&apos;app
-                <ArrowRight size={16} weight="bold" />
+                accéder à l&apos;app
+                <ArrowRight size={14} weight="bold" />
               </a>
             </motion.div>
           </motion.div>
@@ -272,14 +304,23 @@ export function Hero() {
           animate="show"
           className="flex flex-col items-center text-center w-full max-w-full"
         >
-          {/* Kicker */}
+          {/* Kicker — V0.18.0 : style mono signature // xxx */}
           <motion.div variants={itemVariants} className="mb-5 md:mb-6 px-2">
-            <span className="text-[10px] sm:text-xs uppercase tracking-[0.16em] text-white/50 font-medium">
-              L&apos;agence qui automatise votre entreprise
+            <span
+              className="text-[10.5px] sm:text-xs"
+              style={{
+                fontFamily: "var(--font-mono, 'JetBrains Mono')",
+                color: "rgba(255,255,255,0.5)",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                fontWeight: 500,
+              }}
+            >
+              // l&apos;agence qui automatise votre entreprise
             </span>
           </motion.div>
 
-          {/* H1 — Word Switcher rotation */}
+          {/* H1 — Inter big, garde le WordSwitcher */}
           <div className="mb-5 md:mb-6 w-full">
             <h1 className="font-display font-bold mx-auto w-full max-w-[20ch] text-[clamp(36px,8vw,96px)] leading-[1.05] tracking-[-0.02em] flex flex-col items-center gap-2 sm:gap-3">
               <motion.span
@@ -313,70 +354,92 @@ export function Hero() {
             </p>
           </motion.div>
 
-          {/* CTAs */}
+          {/* CTAs — bordures carrées, mono uppercase */}
           <motion.div variants={itemVariants} className="mb-8 md:mb-10 w-full">
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full">
               <a
                 href="https://cal.com/vtensor/audi-30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group/cta inline-flex w-full sm:w-auto justify-center items-center gap-2 px-6 sm:px-7 py-3 rounded-full text-white font-semibold text-sm shadow-[0_0_40px_-10px_rgba(34,211,238,0.5)] hover:shadow-[0_0_50px_-5px_rgba(34,211,238,0.7)] transition-all hover:scale-[1.03] active:scale-[0.98]"
+                className="group/cta inline-flex w-full sm:w-auto justify-center items-center gap-2 px-7 py-3.5 text-white text-sm transition-all hover:scale-[1.03] active:scale-[0.98]"
                 style={{
-                  background:
-                    "linear-gradient(90deg, #8B5CF6 0%, #22D3EE 100%)",
+                  fontFamily: "var(--font-mono, 'JetBrains Mono')",
+                  fontWeight: 700,
+                  background: "linear-gradient(135deg, #8B5CF6, #22D3EE)",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.06em",
+                  boxShadow: "0 0 40px -10px rgba(34,211,238,0.5)",
                 }}
               >
-                Audit gratuit · 30 min
+                audit gratuit · 30 min
                 <ArrowRight
-                  size={16}
+                  size={14}
                   weight="bold"
                   className="transition-transform group-hover/cta:translate-x-0.5"
                 />
               </a>
               <a
                 href="#tarifs"
-                className="inline-flex w-full sm:w-auto justify-center items-center gap-2 px-6 sm:px-7 py-3 rounded-full border border-white/15 text-white/90 font-semibold text-sm hover:bg-white/[0.05] hover:scale-[1.03] active:scale-[0.98] transition-all"
+                className="inline-flex w-full sm:w-auto justify-center items-center gap-2 px-7 py-3.5 text-white/90 text-sm hover:bg-white/[0.05] hover:scale-[1.03] active:scale-[0.98] transition-all"
+                style={{
+                  fontFamily: "var(--font-mono, 'JetBrains Mono')",
+                  fontWeight: 600,
+                  border: "1px solid rgba(255,255,255,0.15)",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.06em",
+                }}
               >
-                Voir les tarifs
+                voir les tarifs
               </a>
             </div>
           </motion.div>
 
-          {/* Réassurance line */}
-          <motion.div variants={itemVariants} className="mb-10 sm:mb-14 md:mb-16">
-            <div className="flex flex-wrap justify-center items-center gap-x-5 gap-y-2 text-[11px] sm:text-xs text-white/50">
-              <span className="inline-flex items-center gap-1.5">
-                <CheckCircle
-                  size={14}
-                  weight="fill"
-                  className="text-[#22D3EE]"
-                />
-                Données sécurisées en Europe
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <CheckCircle
-                  size={14}
-                  weight="fill"
-                  className="text-[#22D3EE]"
-                />
-                Sans engagement de durée
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <CheckCircle
-                  size={14}
-                  weight="fill"
-                  className="text-[#22D3EE]"
-                />
-                Réponse sous 24 h
-              </span>
+          {/* Réassurances — pills carrées mono [check] style */}
+          <motion.div
+            variants={itemVariants}
+            className="mb-10 sm:mb-14 md:mb-16"
+          >
+            <div className="flex flex-wrap justify-center items-center gap-2">
+              {[
+                "Données sécurisées en Europe",
+                "Sans engagement de durée",
+                "Réponse sous 24 h",
+              ].map((label) => (
+                <span
+                  key={label}
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[10.5px] sm:text-[11px]"
+                  style={{
+                    fontFamily: "var(--font-mono, 'JetBrains Mono')",
+                    color: "rgba(255,255,255,0.7)",
+                    background: "rgba(34,211,238,0.06)",
+                    border: "1px solid rgba(34,211,238,0.2)",
+                    letterSpacing: "0.02em",
+                  }}
+                >
+                  <CheckCircle
+                    size={11}
+                    weight="fill"
+                    className="text-[#22D3EE]"
+                  />
+                  {label}
+                </span>
+              ))}
             </div>
           </motion.div>
 
-          {/* Ticker */}
+          {/* Ticker intégrations — kicker mono unifié */}
           <motion.div variants={itemVariants} className="w-full">
             <div className="w-full max-w-[1100px] mx-auto">
-              <p className="text-center text-[11px] uppercase tracking-[0.18em] text-white/40 mb-6">
-                Compatible avec vos outils du quotidien
+              <p
+                className="text-center text-[10.5px] mb-6"
+                style={{
+                  fontFamily: "var(--font-mono, 'JetBrains Mono')",
+                  color: "rgba(255,255,255,0.4)",
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase",
+                }}
+              >
+                // compatible avec vos outils du quotidien
               </p>
               <div
                 className="relative"
