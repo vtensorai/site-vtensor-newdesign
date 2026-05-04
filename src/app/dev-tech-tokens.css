@@ -90,7 +90,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Background grid + glow signature Vtensor */
+/* Background grid + glow signature Vtensor — V0.18.1 site
+   Mask élargi pour couvrir tout le viewport (évite les bandes nettes aux jonctions
+   de sections). Glows recentrés pour ne plus être cropés en bord d'écran. */
 body::before {
   content: '';
   position: fixed;
@@ -101,8 +103,8 @@ body::before {
     linear-gradient(var(--grid-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 24px 24px;
-  mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, #000 30%, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, #000 30%, transparent 80%);
+  mask-image: radial-gradient(ellipse 130% 120% at 50% 50%, #000 60%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 130% 120% at 50% 50%, #000 60%, transparent 100%);
 }
 body::after {
   content: '';
@@ -111,8 +113,8 @@ body::after {
   pointer-events: none;
   z-index: 0;
   background:
-    radial-gradient(ellipse 600px 400px at 12% 8%, var(--glow-1), transparent 60%),
-    radial-gradient(ellipse 500px 400px at 92% 80%, var(--glow-2), transparent 60%);
+    radial-gradient(ellipse 900px 700px at 30% 25%, var(--glow-1), transparent 70%),
+    radial-gradient(ellipse 800px 600px at 75% 80%, var(--glow-2), transparent 70%);
 }
 /* Tout enfant direct du root passe au-dessus du décor */
 #root, body > main, body > div { position: relative; z-index: 1; }

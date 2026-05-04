@@ -120,8 +120,8 @@ export function Hero() {
         }}
       />
 
-      {/* Bottom fade — pour transition douce vers la section suivante */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0A0A0F] to-transparent z-10" />
+      {/* V0.18.0 : pas de bottom fade — le body grid+glow doit rester continu
+          entre les sections (sinon bande opaque visible en jonction Hero/section 2) */}
 
       {/* Nav fixed */}
       <nav
