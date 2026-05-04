@@ -76,7 +76,7 @@ function MobileChip({ pain }: { pain: (typeof PAINS)[number] }) {
               fontSize: "13px",
               lineHeight: 1.6,
               fontFamily:
-                "var(--font-inter), Inter, ui-sans-serif, system-ui, sans-serif",
+                "var(--font-sans), Inter, ui-sans-serif, system-ui, sans-serif",
             }}
           >
             {pain.desc}
