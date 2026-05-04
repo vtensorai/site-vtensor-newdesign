@@ -89,6 +89,12 @@ export function SolutionV3Tabs({ withGrid = false }: { withGrid?: boolean } = {}
 
         {/* Section header */}
         <div className="relative z-10 max-w-[1100px] mx-auto px-6 sm:px-10 text-center mb-10 md:mb-14 lg:mb-12">
+          <div
+            className="text-[11px] uppercase tracking-[0.18em] text-[#22D3EE] mb-4"
+            style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
+          >
+            // catalogue agents
+          </div>
           <h2
             className="font-display font-bold leading-[1.05] tracking-[-0.02em]"
             style={{ fontSize: "clamp(32px, 4vw, 56px)" }}
@@ -133,8 +139,8 @@ export function SolutionV3Tabs({ withGrid = false }: { withGrid?: boolean } = {}
         >
           <div
             className={[
-              "relative w-full rounded-3xl overflow-hidden",
-              "border border-white/10 bg-[#0E0E13]/80",
+              "relative w-full overflow-hidden",
+              "border border-[#22D3EE]/20 bg-[#0E0E13]/80",
               "backdrop-blur",
               "shadow-[0_30px_80px_-30px_rgba(0,0,0,0.7)]",
             ].join(" ")}
@@ -168,8 +174,11 @@ export function SolutionV3Tabs({ withGrid = false }: { withGrid?: boolean } = {}
                 role="tablist"
                 aria-label="Liste des agents"
               >
-                <div className="hidden lg:block px-2 mb-3 text-[10px] uppercase tracking-[0.18em] text-white/40 font-semibold">
-                  Vos agents
+                <div
+                  className="hidden lg:block px-2 mb-3 text-[10px] uppercase tracking-[0.18em] text-[#22D3EE]/70"
+                  style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
+                >
+                  // vos agents
                 </div>
                 <div
                   className={[
@@ -198,11 +207,11 @@ export function SolutionV3Tabs({ withGrid = false }: { withGrid?: boolean } = {}
                           "snap-center lg:snap-none",
                           "text-left cursor-pointer",
                           "flex items-center gap-3",
-                          "px-3 py-2.5 rounded-xl",
+                          "px-3 py-2.5",
                           "transition-all duration-200",
                           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22D3EE]/40",
                           isActive
-                            ? "bg-gradient-to-r from-[#8B5CF6]/15 to-[#22D3EE]/10 border border-[#8B5CF6]/30"
+                            ? "bg-gradient-to-r from-[#8B5CF6]/15 to-[#22D3EE]/10 border border-[#22D3EE]/40"
                             : "border border-transparent hover:bg-white/[0.06] hover:border-white/10 hover:translate-x-0.5",
                         ].join(" ")}
                       >
@@ -284,7 +293,10 @@ export function SolutionV3Tabs({ withGrid = false }: { withGrid?: boolean } = {}
                           size="md"
                         />
                         {active.flagship && (
-                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-[#FBBF24]/30 bg-[#FBBF24]/10 text-[10px] uppercase tracking-[0.16em] font-semibold text-[#FBBF24]">
+                          <span
+                            className="inline-flex items-center gap-1.5 px-3 py-1 border border-[#FBBF24]/30 bg-[#FBBF24]/10 text-[10px] uppercase tracking-[0.16em] text-[#FBBF24]"
+                            style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
+                          >
                             <Star size={12} weight="fill" />
                             Agent maître
                           </span>
@@ -296,8 +308,11 @@ export function SolutionV3Tabs({ withGrid = false }: { withGrid?: boolean } = {}
                       >
                         {active.name}
                       </h3>
-                      <p className="mt-1 text-[12px] uppercase tracking-[0.14em] text-white/45 font-medium">
-                        {active.metier}
+                      <p
+                        className="mt-1 text-[11px] uppercase tracking-[0.16em] text-[#22D3EE]/70"
+                        style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
+                      >
+                        // {active.metier}
                       </p>
                       <p className="mt-5 text-white/70 text-base leading-relaxed">
                         {active.description}
@@ -312,10 +327,10 @@ export function SolutionV3Tabs({ withGrid = false }: { withGrid?: boolean } = {}
                             <li
                               key={cap}
                               className={[
-                                "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-[12px]",
+                                "inline-flex items-center gap-1.5 px-3 py-1.5 border text-[12px]",
                                 isMasterSkill
                                   ? "border-[#FBBF24]/40 bg-[#FBBF24]/[0.08] text-[#FBBF24]"
-                                  : "border-white/10 bg-white/[0.03] text-white/75",
+                                  : "border-[#22D3EE]/20 bg-white/[0.03] text-white/75",
                               ].join(" ")}
                               title={
                                 isMasterSkill
@@ -338,9 +353,12 @@ export function SolutionV3Tabs({ withGrid = false }: { withGrid?: boolean } = {}
                         })}
                       </ul>
 
-                      <div className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/[0.04]">
-                        <span className="text-[11px] uppercase tracking-[0.14em] text-white/45 font-semibold">
-                          Tarif
+                      <div className="mt-6 inline-flex items-center gap-2 px-4 py-2 border border-[#22D3EE]/25 bg-white/[0.04]">
+                        <span
+                          className="text-[11px] uppercase tracking-[0.16em] text-[#22D3EE]/80"
+                          style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
+                        >
+                          // tarif
                         </span>
                         <span className="text-sm font-semibold text-white">
                           {active.price}
@@ -362,13 +380,19 @@ export function SolutionV3Tabs({ withGrid = false }: { withGrid?: boolean } = {}
 
                 {/* Hint scroll-driven (desktop uniquement) */}
                 {activeIdx === 0 && (
-                  <div className="hidden lg:block absolute bottom-4 right-5 text-[10px] uppercase tracking-[0.14em] text-white/35">
-                    ↓ Scrollez pour découvrir chaque agent
+                  <div
+                    className="hidden lg:block absolute bottom-4 right-5 text-[10px] uppercase tracking-[0.18em] text-[#22D3EE]/45"
+                    style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
+                  >
+                    // ↓ scrollez pour découvrir chaque agent
                   </div>
                 )}
                 {activeIdx === 0 && (
-                  <div className="lg:hidden absolute bottom-4 right-5 text-[10px] uppercase tracking-[0.14em] text-white/35">
-                    ← Cliquez pour explorer chaque agent
+                  <div
+                    className="lg:hidden absolute bottom-4 right-5 text-[10px] uppercase tracking-[0.18em] text-[#22D3EE]/45"
+                    style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
+                  >
+                    // ← cliquez pour explorer chaque agent
                   </div>
                 )}
               </div>

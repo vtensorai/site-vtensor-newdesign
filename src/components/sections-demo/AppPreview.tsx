@@ -64,8 +64,11 @@ export function AppPreview({
       <div className="relative z-10 max-w-[1200px] mx-auto">
         {/* Header de section */}
         <div className="text-center mb-12 md:mb-16">
-          <div className="text-[10px] uppercase tracking-[0.22em] text-[#22D3EE] font-semibold mb-4">
-            Application Vtensor
+          <div
+            className="text-[11px] uppercase tracking-[0.18em] text-[#22D3EE] mb-4"
+            style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
+          >
+            // application vtensor
           </div>
           <h2
             className="font-display font-bold leading-[1.1] tracking-[-0.02em] mb-5"
@@ -103,14 +106,14 @@ export function AppPreview({
           />
 
           <div
-            className="relative overflow-hidden rounded-2xl border border-white/10"
+            className="relative overflow-hidden border border-[#22D3EE]/20"
             style={{
               boxShadow:
-                "0 60px 120px -30px rgba(139,92,246,0.25), 0 30px 60px -15px rgba(0,0,0,0.7), inset 0 1px 0 0 rgba(255,255,255,0.08)",
+                "0 60px 120px -30px rgba(139,92,246,0.25), 0 30px 60px -15px rgba(0,0,0,0.7), inset 0 1px 0 0 rgba(34,211,238,0.12)",
             }}
           >
             {/* Browser chrome — barre du haut */}
-            <div className="flex items-center gap-3 px-4 py-3 bg-[#15151B] border-b border-white/8">
+            <div className="flex items-center gap-3 px-4 py-3 bg-[#15151B] border-b border-[#22D3EE]/15">
               {/* Dots Mac */}
               <div className="flex items-center gap-1.5">
                 <span className="h-3 w-3 rounded-full bg-[#FF5F57]" />
@@ -118,7 +121,9 @@ export function AppPreview({
                 <span className="h-3 w-3 rounded-full bg-[#28C840]" />
               </div>
               {/* Barre URL */}
-              <div className="flex-1 mx-3 px-3 py-1.5 rounded-md bg-[#0A0A0F] border border-white/8 text-[12px] text-white/55 font-mono truncate">
+              <div className="flex-1 mx-3 px-3 py-1.5 bg-[#0A0A0F] border border-white/8 text-[12px] text-white/55 truncate"
+                style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
+              >
                 app.vtensor.ai
               </div>
             </div>
@@ -151,8 +156,11 @@ export function AppPreview({
                   <rect x="3" y="3" width="18" height="18" rx="2" />
                   <path d="M3 9h18M9 21V9" />
                 </svg>
-                <span className="text-[12px] uppercase tracking-[0.2em] font-semibold">
-                  Capture d&apos;écran à venir
+                <span
+                  className="text-[12px] uppercase tracking-[0.2em]"
+                  style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
+                >
+                  // capture d&apos;écran à venir
                 </span>
               </div>
             </div>

@@ -148,8 +148,11 @@ export function Counter({
 }) {
   return (
     <div
-      className="flex items-baseline gap-2 rounded-2xl border border-white/10 bg-black/55 backdrop-blur-md px-4 py-2.5"
-      style={{ boxShadow: `0 0 32px ${accent}22` }}
+      className="flex items-baseline gap-2 border bg-black/55 backdrop-blur-md px-4 py-2.5"
+      style={{
+        boxShadow: `0 0 32px ${accent}22`,
+        borderColor: `${accent}40`,
+      }}
     >
       <span
         className="font-display font-bold tabular-nums"
@@ -161,7 +164,10 @@ export function Counter({
       >
         {value}
       </span>
-      <span className="text-[10px] md:text-[11px] uppercase tracking-[0.18em] text-white/60">
+      <span
+        className="text-[10px] md:text-[11px] uppercase tracking-[0.18em] text-white/60"
+        style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
+      >
         {label}
       </span>
     </div>
@@ -258,12 +264,12 @@ export function FloatingPill({
       }}
     >
       <div
-        className="relative overflow-hidden rounded-3xl px-7 py-7 text-left"
+        className="relative overflow-hidden px-7 py-7 text-left"
         style={{
           background: "rgba(10,10,15,0.94)",
-          border: "1px solid rgba(255,255,255,0.08)",
+          border: "1px solid rgba(34,211,238,0.20)",
           boxShadow:
-            "0 16px 40px -12px rgba(0,0,0,0.55), inset 0 1px 0 0 rgba(255,255,255,0.05)",
+            "0 16px 40px -12px rgba(0,0,0,0.55), inset 0 1px 0 0 rgba(34,211,238,0.08)",
         }}
       >
         {/* Numéro géant en watermark coin haut-droit */}
@@ -277,8 +283,11 @@ export function FloatingPill({
 
         <div className="relative">
           {/* Label uppercase cyan tout en haut */}
-          <div className="text-[10px] uppercase tracking-[0.22em] text-[#22D3EE] font-semibold mb-4">
-            {pain.label}
+          <div
+            className="text-[10px] uppercase tracking-[0.22em] text-[#22D3EE] mb-4"
+            style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
+          >
+            // {pain.label}
           </div>
 
           {/* Titre display blanc, gauche-aligné */}
@@ -376,11 +385,17 @@ export function CenterTitle({
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/logos/vtensor-wordmark-white.svg"
+        src="/logos/vtensor.svg"
         alt="Vtensor"
         className="h-12 sm:h-16 md:h-20 w-auto select-none"
         draggable={false}
       />
+      <div
+        className="text-[11px] uppercase tracking-[0.22em] text-[#22D3EE]/80"
+        style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
+      >
+        // diagnostic
+      </div>
       <h2
         className="font-display text-white/90 font-semibold mx-auto"
         style={{
