@@ -30,15 +30,8 @@ export function AppPreview({
     >
       {/* V0.18.0 : grid+glow body suffisent (signature dev/tech). withGrid kept for backwards compat */}
 
-      {/* Glows ambient violet/cyan en arrière-plan */}
-      <div
-        className="pointer-events-none absolute -top-32 left-1/4 h-[420px] w-[420px] rounded-full z-[2]"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(139,92,246,0.18), transparent 65%)",
-        }}
-        aria-hidden
-      />
+      {/* V0.18.1 : glow violet ambiant retiré (cropé en jonction avec section 3,
+          créait un blob disgracieux). Glow cyan bas-droite conservé. */}
       <div
         className="pointer-events-none absolute -bottom-32 right-1/4 h-[420px] w-[420px] rounded-full z-[2]"
         style={{
