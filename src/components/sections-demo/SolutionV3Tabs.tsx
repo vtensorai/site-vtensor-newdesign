@@ -25,8 +25,16 @@ import {
   motion,
   useReducedMotion,
 } from "motion/react";
-import { CheckCircle, Star } from "@phosphor-icons/react/dist/ssr";
-import { AGENTS } from "@/data/agents";
+import {
+  CheckCircle,
+  Star,
+  Phone,
+  WhatsappLogo,
+  TelegramLogo,
+  EnvelopeSimple,
+  Browser,
+} from "@phosphor-icons/react/dist/ssr";
+import { AGENTS, type Channel } from "@/data/agents";
 import {
   AgentChatPreview,
   AgentBadgeNumber,
@@ -34,7 +42,13 @@ import {
 import { SolutionStackMobile } from "./SolutionStackMobile";
 import { OrgChartCompact } from "./OrgChartCompact";
 
-export function SolutionV3Tabs({ withGrid = false }: { withGrid?: boolean } = {}) {
+export function SolutionV3Tabs({
+  withGrid = false,
+  compactTop = false,
+}: {
+  withGrid?: boolean;
+  compactTop?: boolean;
+} = {}) {
   const reduce = useReducedMotion();
   const sectionRef = useRef<HTMLElement | null>(null);
   const [activeIdx, setActiveIdx] = useState(0);
@@ -69,7 +83,8 @@ export function SolutionV3Tabs({ withGrid = false }: { withGrid?: boolean } = {}
       <div
         className={[
           "hidden lg:flex relative w-full overflow-hidden",
-          "flex-col py-20 md:py-28",
+          "flex-col",
+          compactTop ? "pt-4 pb-20 md:pt-6 md:pb-28" : "py-20 md:py-28",
         ].join(" ")}
       >
         {/* V0.18.0 : grid+glow body suffisent (signature dev/tech). withGrid kept for backwards compat */}
@@ -353,30 +368,25 @@ export function SolutionV3Tabs({ withGrid = false }: { withGrid?: boolean } = {}
                       </div>
                     </div>
 
-                    {/* Chat preview */}
-                    <div>
+                    {/* Chat preview + canaux */}
+                    <div className="flex flex-col gap-5">
                       <AgentChatPreview
                         agentName={active.name}
                         user={active.user}
                         agent={active.agent}
                         incoming={active.incoming}
                       />
+                      {active.channels && active.channels.length > 0 && (
+                        <ChannelsBlock channels={active.channels} />
+                      )}
                     </div>
                   </motion.div>
                 </AnimatePresence>
 
-                {/* Hint scroll-driven (desktop uniquement) */}
+                {/* Hint UX : cliquer sur les agents dans la sidebar */}
                 {activeIdx === 0 && (
                   <div
-                    className="hidden lg:block absolute bottom-4 right-5 text-[10px] uppercase tracking-[0.18em] text-[#22D3EE]/45"
-                    style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
-                  >
-                    // ↓ scrollez pour découvrir chaque agent
-                  </div>
-                )}
-                {activeIdx === 0 && (
-                  <div
-                    className="lg:hidden absolute bottom-4 right-5 text-[10px] uppercase tracking-[0.18em] text-[#22D3EE]/45"
+                    className="absolute bottom-4 right-5 text-[10px] uppercase tracking-[0.18em] text-[#22D3EE]/45"
                     style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
                   >
                     // ← cliquez pour explorer chaque agent
@@ -394,5 +404,48 @@ export function SolutionV3Tabs({ withGrid = false }: { withGrid?: boolean } = {}
         }
       `}</style>
     </section>
+  );
+}
+
+/**
+ * ChannelsBlock — Affiche les canaux par lesquels le Founder peut joindre cet
+ * agent (téléphone, WhatsApp, email, app web). Rendu sous la chat preview.
+ */
+const CHANNEL_META: Record<
+  Channel,
+  { label: string; Icon: typeof Phone }
+> = {
+  web: { label: "Application web", Icon: Browser },
+  email: { label: "Email", Icon: EnvelopeSimple },
+  whatsapp: { label: "WhatsApp", Icon: WhatsappLogo },
+  telegram: { label: "Telegram", Icon: TelegramLogo },
+  phone: { label: "Téléphone", Icon: Phone },
+};
+
+function ChannelsBlock({ channels }: { channels: readonly Channel[] }) {
+  return (
+    <div className="px-4 py-3 border border-white/8 bg-white/[0.02]">
+      <div
+        className="text-[10px] uppercase tracking-[0.18em] text-[#22D3EE]/70 mb-2.5"
+        style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
+      >
+        // joignable via
+      </div>
+      <ul className="flex flex-wrap gap-2">
+        {channels.map((c) => {
+          const meta = CHANNEL_META[c];
+          const Icon = meta.Icon;
+          return (
+            <li
+              key={c}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 border border-[#22D3EE]/25 bg-white/[0.03] text-[12px] text-white/75"
+            >
+              <Icon size={13} weight="regular" className="text-[#22D3EE]" />
+              {meta.label}
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 }

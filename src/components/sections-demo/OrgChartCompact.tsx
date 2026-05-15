@@ -30,9 +30,9 @@ const METIERS_COURTS: Record<string, string> = {
   "02": "Service après-vente",
   "03": "Commercial",
   "04": "Administration des ventes",
-  "05": "Financier",
+  "05": "Webmaster",
   "06": "Marketing",
-  "07": "Webmaster",
+  "07": "Standardiste",
 };
 
 const TRAIT_HEIGHT = 70;

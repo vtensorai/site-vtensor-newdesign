@@ -168,13 +168,13 @@ export function AgentChatPreview({
 }
 
 /**
- * AgentBadgeNumber — Monogramme Vtensor (gradient SVG).
- * Le `num` n'est plus affiché visuellement (gardé en alt + aria pour la sémantique).
- * Affiche aussi ⭐ si l'agent est flagship.
+ * AgentBadgeNumber — Badge numérique de l'agent.
+ * Format : pastille bordée cyan avec le numéro (01-07) en mono cyan.
+ * Le marqueur "agent maître" est rendu séparément par le composant parent
+ * (badge "AGENT MAÎTRE" à côté du badge numérique).
  */
 export function AgentBadgeNumber({
   num,
-  flagship,
   size = "md",
 }: {
   num: string;
@@ -186,28 +186,26 @@ export function AgentBadgeNumber({
     md: 40,
     lg: 56,
   }[size];
+  const fontSize = {
+    sm: 12,
+    md: 16,
+    lg: 22,
+  }[size];
 
   return (
-    <div className="inline-flex items-center gap-2">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/logos/vtensor_monogram_gradient.svg"
-        alt={`Agent ${num}`}
-        width={sizePx}
-        height={sizePx}
-        style={{ width: sizePx, height: sizePx }}
-        className="block select-none"
-        draggable={false}
-      />
-      {flagship && (
-        <span
-          className="text-[#FBBF24] leading-none text-xl"
-          aria-label="Agent maître"
-          title="Agent maître"
-        >
-          ★
-        </span>
-      )}
-    </div>
+    <span
+      aria-label={`Agent ${num}`}
+      className="inline-flex items-center justify-center font-mono font-bold leading-none select-none"
+      style={{
+        width: sizePx,
+        height: sizePx,
+        fontSize: `${fontSize}px`,
+        color: "#22D3EE",
+        background: "rgba(34,211,238,0.06)",
+        border: "1px solid rgba(34,211,238,0.30)",
+      }}
+    >
+      {num}
+    </span>
   );
 }

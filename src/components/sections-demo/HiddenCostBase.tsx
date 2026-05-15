@@ -28,36 +28,36 @@ export const PAINS = [
   {
     num: "01",
     label: "Capacité",
-    title: "Les ressources que vous ne pouviez pas vous offrir",
+    title: "L'équipe que vous ne pouviez pas vous offrir",
     desc: "Vous savez précisément ce que votre entreprise pourrait accomplir avec un service client, un commercial et une équipe marketing dédiés à plein temps. Recruter ces profils représente un investissement souvent hors de portée. Vtensor vous donne accès à cette équipe complète pour le coût d'un stagiaire.",
     pos: { x: -32, y: -26 },
   },
   {
     num: "02",
     label: "Focus",
-    title: "Vos ressources existantes arrêtent les tâches à faible valeur ajoutée",
-    desc: "Vos collaborateurs consacrent une part importante de leur temps à des tâches répétitives — rédiger des mémoires techniques, relancer les factures impayées, mettre à jour les bases articles. Les agents de Vtensor prennent ces opérations en charge et libèrent votre équipe pour ce qui crée réellement de la valeur.",
+    title: "Votre équipe se concentre enfin sur ce qui compte",
+    desc: "Vos collaborateurs passent une part importante de leur temps sur des tâches répétitives — relancer les factures impayées, rédiger les mémoires techniques, mettre à jour les catalogues. Les agents Vtensor prennent ces opérations en charge, votre équipe revient à ce pour quoi vous l'avez recrutée.",
     pos: { x: 32, y: -26 },
   },
   {
     num: "03",
     label: "Pilotage",
     title: "Vous reprenez le contrôle de votre temps",
-    desc: "Le pilotage d'une entreprise mérite votre attention sur les décisions stratégiques, et non sur des tâches opérationnelles répétitives. Vtensor reprend ces dernières et vous restitue les heures que vous seul pouvez consacrer à la croissance de votre activité.",
+    desc: "Le pilotage demande votre attention sur la stratégie, pas sur l'opérationnel répétitif. Vtensor s'occupe de l'opérationnel, vous récupérez les heures que vous seul pouvez investir dans la croissance.",
     pos: { x: -36, y: 18 },
   },
   {
     num: "04",
     label: "Avance",
     title: "Prenez de l'avance tant que c'est encore un avantage",
-    desc: "Dans quelques années, l'intégration d'agents IA sera devenue la norme dans toutes les entreprises. C'est aujourd'hui que les organisations qui s'équipent prennent une avance compétitive durable. Vtensor vous aide à prendre ce virage technologique.",
+    desc: "Dans quelques années, l'intégration d'agents IA sera devenue la norme dans toutes les entreprises. C'est aujourd'hui que les organisations qui s'équipent prennent une avance compétitive durable. Vtensor vous permet de prendre ce virage.",
     pos: { x: 36, y: 18 },
   },
   {
     num: "05",
     label: "Souveraineté",
-    title: "Made in France, hébergé en France",
-    desc: "Vos données restent intégralement en Europe, sur une infrastructure française souveraine. Conformité RGPD garantie par construction, aucun transfert vers les grands fournisseurs cloud américains.",
+    title: "Vos données en Allemagne, ou directement chez vous",
+    desc: "Hébergement sur des datacenters allemands certifiés ISO 27001, choisis pour leur fiabilité industrielle et leur haute disponibilité. Aucun transfert vers les clouds américains. Pour les organisations qui exigent un contrôle total, Vtensor se déploie aussi en local, directement sur vos propres serveurs. Made in France côté équipe et développement.",
     pos: { x: 0, y: 32 },
   },
 ] as const;
@@ -339,16 +339,22 @@ export function StaticFallback() {
             className="h-12 sm:h-16 md:h-20 w-auto select-none"
             draggable={false}
           />
+          <div
+            className="text-[11px] uppercase tracking-[0.22em] text-[#22D3EE]/80 mb-1"
+            style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
+          >
+            // ce que vous vivez
+          </div>
           <h2
             className="font-display text-center text-white/90 font-semibold mx-auto"
             style={{
               fontSize: "clamp(20px, 2.2vw, 32px)",
               letterSpacing: "-0.01em",
               lineHeight: 1.2,
-              maxWidth: "20ch",
+              maxWidth: "22ch",
             }}
           >
-            c&apos;est concrètement…
+            Cinq blocages que vous reconnaissez probablement.
           </h2>
         </div>
         <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-[820px] mx-auto">
@@ -394,7 +400,7 @@ export function CenterTitle({
         className="text-[11px] uppercase tracking-[0.22em] text-[#22D3EE]/80"
         style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
       >
-        // diagnostic
+        // ce que vous vivez
       </div>
       <h2
         className="font-display text-white/90 font-semibold mx-auto"
@@ -402,10 +408,10 @@ export function CenterTitle({
           fontSize: "clamp(20px, 2.2vw, 32px)",
           letterSpacing: "-0.01em",
           lineHeight: 1.2,
-          maxWidth: "20ch",
+          maxWidth: "22ch",
         }}
       >
-        c&apos;est concrètement…
+        Cinq blocages que vous reconnaissez probablement.
       </h2>
     </motion.div>
   );

@@ -142,6 +142,13 @@ export function HiddenCostMobile() {
       </div>
 
       <div className="px-5 pt-6 pb-16">
+        {/* Label "ce que vous vivez" */}
+        <div
+          className="text-[11px] uppercase tracking-[0.22em] text-[#22D3EE]/80 text-center mb-2"
+          style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
+        >
+          // ce que vous vivez
+        </div>
         {/* Titre central */}
         <h2
           className="font-display text-white font-bold text-center mb-8 mx-auto"
@@ -149,10 +156,10 @@ export function HiddenCostMobile() {
             fontSize: "clamp(24px, 7vw, 36px)",
             letterSpacing: "-0.02em",
             lineHeight: 1.15,
-            maxWidth: "18ch",
+            maxWidth: "22ch",
           }}
         >
-          Vtensor, c&apos;est concrètement…
+          Cinq blocages que vous reconnaissez probablement.
         </h2>
 
         {/* Stack chips dans le flow naturel — fade-up en arrivant au viewport */}

@@ -65,19 +65,22 @@ export function SolutionStackMobile() {
                 "0 16px 40px -12px rgba(0,0,0,0.6), inset 0 1px 0 0 rgba(255,255,255,0.05)",
             }}
           >
-            {/* Header : monogramme + nom + badge flagship */}
+            {/* Header : badge numéro + nom + badge flagship */}
             <header className="flex items-start gap-3 mb-3">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/logos/vtensor_monogram_gradient.svg"
-                alt=""
+              <span
                 aria-hidden="true"
-                width={36}
-                height={36}
-                className="shrink-0 select-none"
-                style={{ width: 36, height: 36 }}
-                draggable={false}
-              />
+                className="shrink-0 inline-flex items-center justify-center font-mono font-bold leading-none select-none"
+                style={{
+                  width: 36,
+                  height: 36,
+                  fontSize: "14px",
+                  color: "#22D3EE",
+                  background: "rgba(34,211,238,0.06)",
+                  border: "1px solid rgba(34,211,238,0.30)",
+                }}
+              >
+                {agent.num}
+              </span>
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2 flex-wrap">
                   <h3
