@@ -136,7 +136,7 @@ const TIERS: Tier[] = [
 
 export function SolutionFeaturesSection() {
   return (
-    <section className="pt-24 md:pt-32 pb-2 md:pb-4 bg-vt-bg-deep">
+    <section className="relative pt-24 md:pt-32 pb-2 md:pb-4">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-12 md:mb-16">
           <div
@@ -187,7 +187,7 @@ export function SolutionFeaturesSection() {
 
 export function PricingSection() {
   return (
-    <section className="py-24 md:py-32 bg-vt-bg-deep">
+    <section className="relative py-24 md:py-32">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-10">
           <div
@@ -343,7 +343,7 @@ import { SolutionV3Tabs } from "./SolutionV3Tabs";
 
 export function SolutionPricingShowcase() {
   return (
-    <div className="bg-vt-bg-deep min-h-screen">
+    <div className="relative min-h-screen">
       <SolutionFeaturesSection />
       <SolutionV3Tabs compactTop />
       <PricingSection />
