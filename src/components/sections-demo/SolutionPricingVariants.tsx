@@ -137,44 +137,64 @@ const TIERS: Tier[] = [
 export function SolutionFeaturesSection() {
   return (
     <section className="relative pt-24 md:pt-32 pb-2 md:pb-4">
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-[1200px] mx-auto px-6 sm:px-10">
+        {/* Header : look dashboard */}
         <div className="text-center mb-12 md:mb-16">
           <div
-            className="text-[11px] uppercase tracking-[0.22em] text-[#22D3EE]/80 mb-3"
+            className="text-[11px] uppercase tracking-[0.22em] text-[#22D3EE] mb-4"
             style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
           >
             // notre solution
           </div>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-white leading-[1.05] mb-4">
+          <h2
+            className="font-display font-bold text-white leading-[1.08] tracking-[-0.02em] mb-4"
+            style={{ fontSize: "clamp(28px, 4vw, 56px)" }}
+          >
             Des agents IA{" "}
-            <span className="bg-gradient-to-r from-vt-violet to-vt-cyan bg-clip-text text-transparent">
-              pensés pour votre business
-            </span>
+            <span className="text-[#22D3EE]">pensés pour votre business</span>
           </h2>
-          <p className="text-white/60 text-lg md:text-xl max-w-2xl mx-auto">
+          <p className="text-white/55 text-base md:text-lg max-w-2xl mx-auto">
             Conçus par notre équipe, mis à jour en permanence, intégrés à vos outils existants.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {FEATURES.map((f, i) => (
-            <motion.div
-              key={f.title}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.5, delay: i * 0.06 }}
-              className="bg-vt-card border border-vt-border rounded-2xl p-6"
-            >
-              <div className="w-10 h-10 rounded-xl bg-vt-violet/10 border border-vt-violet/20 flex items-center justify-center mb-4">
-                <f.icon size={18} className="text-vt-violet" />
-              </div>
-              <h3 className="font-display font-semibold text-white text-base md:text-lg leading-snug mb-2">
-                {f.title}
-              </h3>
-              <p className="text-white/60 text-sm leading-relaxed">{f.desc}</p>
-            </motion.div>
-          ))}
+        {/* 4 piliers — grille bordée fine style dashboard cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/8 border border-white/8">
+          {FEATURES.map((f, i) => {
+            const idx = String(i + 1).padStart(2, "0");
+            return (
+              <motion.div
+                key={f.title}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, delay: i * 0.06 }}
+                className="relative bg-vt-bg-deep p-6 group hover:bg-white/[0.02] transition-colors"
+              >
+                {/* Label mono `// pillier_NN` */}
+                <div
+                  className="text-[10px] uppercase tracking-[0.22em] text-white/35 mb-4"
+                  style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
+                >
+                  // pillier_{idx}
+                </div>
+                {/* Icon cyan flat */}
+                <div
+                  className="inline-flex items-center justify-center w-9 h-9 mb-5"
+                  style={{
+                    border: "1px solid rgba(34,211,238,0.3)",
+                    background: "rgba(34,211,238,0.06)",
+                  }}
+                >
+                  <f.icon size={16} className="text-[#22D3EE]" />
+                </div>
+                <h3 className="font-display font-semibold text-white text-[15px] md:text-base leading-snug mb-2.5">
+                  {f.title}
+                </h3>
+                <p className="text-white/55 text-[13px] leading-relaxed">{f.desc}</p>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -187,25 +207,32 @@ export function SolutionFeaturesSection() {
 
 export function PricingSection() {
   return (
-    <section className="relative py-24 md:py-32">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center mb-10">
+    <section className="relative py-24 md:py-32" id="tarifs">
+      <div className="max-w-[1200px] mx-auto px-6 sm:px-10">
+        <div className="text-center mb-12">
           <div
-            className="text-[11px] uppercase tracking-[0.22em] text-[#22D3EE]/80 mb-3"
+            className="text-[11px] uppercase tracking-[0.22em] text-[#22D3EE] mb-4"
             style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
           >
             // nos offres
           </div>
-          <h3 className="font-display text-3xl md:text-4xl font-semibold tracking-tight text-white mb-3">
+          <h3
+            className="font-display font-bold text-white leading-[1.08] tracking-[-0.02em] mb-3"
+            style={{ fontSize: "clamp(28px, 3.6vw, 48px)" }}
+          >
             Choisissez votre formule
           </h3>
-          <p className="text-white/45 text-sm">
-            Tarifs hors taxes — B2B France.
+          <p
+            className="text-white/45 text-[12px] tracking-[0.18em] uppercase"
+            style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
+          >
+            // tarifs hors taxes · b2b france
           </p>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 items-stretch">
-          {TIERS.map((t) => (
-            <PricingCard key={t.id} tier={t} />
+        {/* Grille bordée fine type dashboard */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-px bg-white/8 border border-white/8">
+          {TIERS.map((t, i) => (
+            <PricingCard key={t.id} tier={t} index={i} />
           ))}
         </div>
       </div>
@@ -213,46 +240,73 @@ export function PricingSection() {
   );
 }
 
-function PricingCard({ tier }: { tier: Tier }) {
+function PricingCard({ tier, index }: { tier: Tier; index: number }) {
   const featured = tier.featured;
+  const idx = String(index + 1).padStart(2, "0");
   return (
     <motion.article
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5 }}
-      className={`relative rounded-3xl p-8 md:p-10 flex flex-col overflow-hidden ${
-        featured
-          ? "border-2 border-vt-cyan/40 bg-gradient-to-b from-vt-violet/[0.08] to-vt-card lg:scale-[1.04] lg:-my-2"
-          : "border border-vt-border bg-vt-card"
-      }`}
+      className={[
+        "relative p-8 md:p-9 flex flex-col",
+        featured ? "bg-[#0E0E13]" : "bg-vt-bg-deep",
+      ].join(" ")}
     >
-      {featured && tier.badge && (
-        <div className="absolute -top-px left-0 right-0 mx-auto w-fit px-4 py-1.5 rounded-b-xl bg-gradient-to-r from-vt-violet to-vt-cyan text-xs font-semibold uppercase tracking-wider text-white">
-          {tier.badge}
-        </div>
+      {/* Top accent line on featured tier — signature dashboard */}
+      {featured && (
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-vt-violet to-vt-cyan" />
       )}
-      <header className="mt-3">
-        <h4 className="font-display text-2xl md:text-3xl font-bold text-white mb-2">
+
+      {/* Header : label mono + badge */}
+      <header className="mb-6">
+        <div className="flex items-center justify-between mb-4">
+          <div
+            className="text-[10px] uppercase tracking-[0.22em] text-white/40"
+            style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
+          >
+            // offre_{idx} · {tier.id.replace("-", "_")}
+          </div>
+          {featured && tier.badge && (
+            <span
+              className="px-2 py-0.5 text-[9px] uppercase tracking-[0.18em] font-semibold border inline-flex items-center gap-1.5"
+              style={{
+                fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)",
+                color: "#22D3EE",
+                borderColor: "rgba(34,211,238,0.4)",
+                background: "rgba(34,211,238,0.08)",
+              }}
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#22D3EE]" />
+              accès anticipé
+            </span>
+          )}
+        </div>
+        <h4
+          className="font-display font-bold text-white leading-tight mb-2"
+          style={{ fontSize: "clamp(24px, 2.4vw, 30px)", letterSpacing: "-0.015em" }}
+        >
           {tier.name}
         </h4>
-        <p className="text-white/55 text-sm leading-relaxed min-h-[60px]">
+        <p className="text-white/55 text-[13px] leading-relaxed min-h-[60px]">
           {tier.tagline}
         </p>
       </header>
 
-      <div className="my-6 pb-6 border-b border-white/[0.06]">
+      {/* Prix */}
+      <div className="mb-7 pb-6 border-b border-white/8">
         <PriceBlock tier={tier} />
       </div>
 
-      <ul className="space-y-3 flex-1 mb-8">
+      {/* Features */}
+      <ul className="space-y-3 flex-1 mb-7">
         {tier.features.map((f) => (
-          <li key={f} className="flex items-start gap-3 text-sm text-white/75">
+          <li key={f} className="flex items-start gap-2.5 text-[13px] text-white/75 leading-relaxed">
             <Check
-              size={16}
-              className={`mt-0.5 flex-shrink-0 ${
-                featured ? "text-vt-cyan" : "text-vt-violet"
-              }`}
+              size={14}
+              strokeWidth={2.5}
+              className="mt-1 flex-shrink-0 text-[#22D3EE]"
             />
             <span>{f}</span>
           </li>
@@ -311,7 +365,15 @@ function PriceBlock({ tier }: { tier: Tier }) {
           )}
         </div>
         {tier.pricePromo && (
-          <div className="mt-2 inline-flex px-2.5 py-1 rounded-md bg-vt-cyan/15 border border-vt-cyan/30 text-vt-cyan text-xs font-semibold">
+          <div
+            className="mt-3 inline-flex px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.1em]"
+            style={{
+              fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)",
+              color: "#22D3EE",
+              border: "1px solid rgba(34,211,238,0.4)",
+              background: "rgba(34,211,238,0.08)",
+            }}
+          >
             {tier.pricePromo}
           </div>
         )}
@@ -324,13 +386,20 @@ function CTAButton({ tier }: { tier: Tier }) {
   const featured = tier.featured;
   return (
     <button
-      className={`w-full px-6 py-3 text-sm font-semibold rounded-xl transition-all ${
-        featured
-          ? "bg-gradient-to-r from-vt-violet to-vt-cyan text-white hover:opacity-90"
-          : "bg-white/[0.04] border border-vt-border text-white hover:bg-white/[0.07] hover:border-white/15"
-      }`}
+      type="button"
+      className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 text-[12px] uppercase tracking-[0.06em] font-semibold transition-colors group/cta"
+      style={{
+        fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)",
+        color: featured ? "#FFFFFF" : "rgba(255,255,255,0.9)",
+        background: featured
+          ? "linear-gradient(135deg, #8B5CF6, #22D3EE)"
+          : "rgba(255,255,255,0.04)",
+        border: featured ? "none" : "1px solid rgba(255,255,255,0.18)",
+        boxShadow: featured ? "0 0 24px -8px rgba(34,211,238,0.4)" : "none",
+      }}
     >
       {tier.cta}
+      <span className="transition-transform group-hover/cta:translate-x-0.5">→</span>
     </button>
   );
 }
