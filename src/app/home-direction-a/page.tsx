@@ -8,7 +8,21 @@ import {
 import { AppPreview } from "@/components/sections-demo/AppPreview";
 import { SectionDivider } from "@/components/sections-demo/SectionDivider";
 
-export default function Home() {
+export const metadata = {
+  title: "Vtensor — Home Direction A (preview dashboard look)",
+};
+
+/**
+ * Home version Direction A — preview avec tous les ajouts dashboard look :
+ *   - Section 2 (douleurs) avec hover scale sur chips
+ *   - Solution (4 piliers) avec hover scale + label `// pillier_NN`
+ *   - Catalogue agents avec acronymes colorés (sidebar + organigramme + panneau)
+ *   - AppPreview placée AVANT le pricing (séquence vente : ce que vous obtenez → le prix)
+ *   - Pricing avec layout dashboard (borders fines, mono labels, CTA mono)
+ *
+ * Quand Victor valide, on cascade ces ajouts vers /app/page.tsx.
+ */
+export default function HomeDirectionAPage() {
   return (
     <main className="flex flex-col">
       <Hero />

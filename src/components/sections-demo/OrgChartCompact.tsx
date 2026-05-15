@@ -23,6 +23,8 @@ type Props = {
   agents: readonly Agent[];
   activeIdx: number;
   onAgentClick?: (idx: number) => void;
+  /** Mode dashboard : acronymes colorés (CEO/SAV/ATC/...) en couleur d'accent par agent, au lieu du numéro cyan. */
+  coloredAcronyms?: boolean;
 };
 
 const METIERS_COURTS: Record<string, string> = {
@@ -41,10 +43,12 @@ function MasterBox({
   agent,
   active,
   onClick,
+  coloredAcronyms = false,
 }: {
   agent: Agent;
   active: boolean;
   onClick?: () => void;
+  coloredAcronyms?: boolean;
 }) {
   return (
     <button
@@ -52,7 +56,8 @@ function MasterBox({
       onClick={onClick}
       className={[
         "relative overflow-hidden inline-flex items-center gap-3",
-        "px-6 py-4 rounded-2xl",
+        "px-6 py-4",
+        coloredAcronyms ? "" : "rounded-2xl",
         "transition-all duration-200",
         "cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FBBF24]/40",
         active ? "-translate-y-0.5" : "hover:-translate-y-0.5",
@@ -67,13 +72,29 @@ function MasterBox({
           : "0 0 30px -10px rgba(251,191,36,0.30), inset 0 0 16px rgba(34,211,238,0.04)",
       }}
     >
-      {/* Numéro mono cyan */}
-      <span
-        className="font-mono font-bold leading-none text-[#22D3EE]"
-        style={{ fontSize: "20px" }}
-      >
-        01
-      </span>
+      {/* Acronyme / Numéro */}
+      {coloredAcronyms && agent.acronym ? (
+        <span
+          className="inline-flex items-center justify-center font-mono font-bold leading-none"
+          style={{
+            minWidth: 46,
+            padding: "6px 10px",
+            fontSize: "13px",
+            color: agent.accent || "#22D3EE",
+            background: `${agent.accent || "#22D3EE"}10`,
+            border: `1px solid ${agent.accent || "#22D3EE"}40`,
+          }}
+        >
+          {agent.acronym}
+        </span>
+      ) : (
+        <span
+          className="font-mono font-bold leading-none text-[#22D3EE]"
+          style={{ fontSize: "20px" }}
+        >
+          01
+        </span>
+      )}
 
       <span className="w-px self-stretch bg-[#22D3EE]/25" aria-hidden />
 
@@ -101,19 +122,23 @@ function SubAgentBox({
   agent,
   active,
   onClick,
+  coloredAcronyms = false,
 }: {
   agent: Agent;
   active: boolean;
   onClick?: () => void;
+  coloredAcronyms?: boolean;
 }) {
   const num = parseInt(agent.num, 10);
+  const accent = agent.accent || "#22D3EE";
   return (
     <button
       type="button"
       onClick={onClick}
       className={[
         "relative overflow-hidden inline-flex items-stretch gap-3",
-        "px-3.5 py-2.5 rounded-xl w-full",
+        "px-3.5 py-2.5 w-full",
+        coloredAcronyms ? "" : "rounded-xl",
         "transition-all duration-200",
         "cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22D3EE]/40",
         active ? "-translate-y-0.5" : "hover:-translate-y-0.5",
@@ -121,22 +146,50 @@ function SubAgentBox({
       style={{
         background: "rgba(8,8,12,0.95)",
         border: active
-          ? "1px solid rgba(34,211,238,0.5)"
-          : "1px solid rgba(34,211,238,0.18)",
+          ? coloredAcronyms
+            ? `1px solid ${accent}80`
+            : "1px solid rgba(34,211,238,0.5)"
+          : coloredAcronyms
+            ? `1px solid ${accent}30`
+            : "1px solid rgba(34,211,238,0.18)",
         boxShadow: active
-          ? "0 0 24px -6px rgba(34,211,238,0.35), inset 0 0 14px rgba(34,211,238,0.06)"
-          : "inset 0 0 12px rgba(34,211,238,0.04)",
+          ? coloredAcronyms
+            ? `0 0 24px -6px ${accent}60, inset 0 0 14px ${accent}10`
+            : "0 0 24px -6px rgba(34,211,238,0.35), inset 0 0 14px rgba(34,211,238,0.06)"
+          : coloredAcronyms
+            ? `inset 0 0 12px ${accent}08`
+            : "inset 0 0 12px rgba(34,211,238,0.04)",
       }}
     >
-      {/* Numéro mono cyan */}
-      <span
-        className="font-mono font-bold leading-none self-center text-[#22D3EE]"
-        style={{ fontSize: "14px" }}
-      >
-        0{num}
-      </span>
+      {/* Acronyme / Numéro */}
+      {coloredAcronyms && agent.acronym ? (
+        <span
+          className="inline-flex items-center justify-center font-mono font-bold leading-none self-center"
+          style={{
+            minWidth: 38,
+            padding: "4px 6px",
+            fontSize: "10px",
+            color: accent,
+            background: `${accent}10`,
+            border: `1px solid ${accent}40`,
+          }}
+        >
+          {agent.acronym}
+        </span>
+      ) : (
+        <span
+          className="font-mono font-bold leading-none self-center text-[#22D3EE]"
+          style={{ fontSize: "14px" }}
+        >
+          0{num}
+        </span>
+      )}
 
-      <span className="w-px self-stretch bg-[#22D3EE]/25" aria-hidden />
+      <span
+        className="w-px self-stretch"
+        style={{ background: coloredAcronyms ? `${accent}30` : "rgba(34,211,238,0.25)" }}
+        aria-hidden
+      />
 
       <span className="flex flex-col items-start gap-0.5 text-left min-w-0 flex-1">
         <span className="text-[9px] uppercase tracking-[0.18em] text-white/45 font-semibold leading-none">
@@ -150,7 +203,7 @@ function SubAgentBox({
   );
 }
 
-export function OrgChartCompact({ agents, activeIdx, onAgentClick }: Props) {
+export function OrgChartCompact({ agents, activeIdx, onAgentClick, coloredAcronyms = false }: Props) {
   const master = agents[0];
   const subs = agents.slice(1);
   const n = subs.length;
@@ -169,6 +222,7 @@ export function OrgChartCompact({ agents, activeIdx, onAgentClick }: Props) {
         agent={master}
         active={activeIdx === 0}
         onClick={() => onAgentClick?.(0)}
+        coloredAcronyms={coloredAcronyms}
       />
 
       {/* Zone des connecteurs animés */}
@@ -252,6 +306,7 @@ export function OrgChartCompact({ agents, activeIdx, onAgentClick }: Props) {
               agent={agent}
               active={activeIdx === realIdx}
               onClick={() => onAgentClick?.(realIdx)}
+              coloredAcronyms={coloredAcronyms}
             />
           );
         })}

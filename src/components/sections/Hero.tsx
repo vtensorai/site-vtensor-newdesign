@@ -35,10 +35,10 @@ const ROTATION_ITEMS = [
   "de votre quotidien",
 ];
 
+// Ordre cohérent avec l'ordre d'apparition sur la home
 const NAV_LINKS = [
-  { label: "Tarifs", href: "#tarifs" },
   { label: "Agents", href: "#agents" },
-  { label: "Process", href: "#process" },
+  { label: "Tarifs", href: "#tarifs" },
   { label: "FAQ", href: "#faq" },
 ];
 
@@ -132,31 +132,31 @@ export function Hero() {
             : "bg-transparent",
         ].join(" ")}
       >
-        <div className="w-full max-w-[1200px] mx-auto px-5 sm:px-10 lg:px-20 py-4 md:py-5 flex items-center justify-between">
+        <div className="w-full max-w-[1200px] mx-auto px-5 sm:px-10 lg:px-20 py-4 md:py-5 grid md:grid-cols-[1fr_auto_1fr] grid-cols-[1fr_auto] items-center gap-6">
           <a href="/" className="inline-flex items-center" aria-label="Vtensor">
             <Image
               src="/logos/vtensor.svg"
               alt="Vtensor"
-              width={120}
-              height={30}
+              width={140}
+              height={36}
               priority
-              className="h-7 w-auto"
+              className="h-9 w-auto"
             />
           </a>
-          <ul className="hidden md:flex items-center gap-8">
+          <ul className="hidden md:flex items-center gap-7 justify-self-center">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className="text-sm text-white/70 hover:text-white transition-colors"
+                  className="text-sm text-white/65 hover:text-[#22D3EE] transition-colors"
                   style={{ fontFamily: "var(--font-mono, 'JetBrains Mono')" }}
                 >
-                  {link.label.toLowerCase()}
+                  // {link.label.toLowerCase()}
                 </a>
               </li>
             ))}
           </ul>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 justify-self-end">
             <a
               href="https://app.vtensor.ai"
               target="_blank"

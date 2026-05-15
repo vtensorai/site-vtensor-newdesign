@@ -30,8 +30,14 @@ export type Agent = {
   agent: string;
   flagship?: boolean;
   incoming?: boolean;
-  /** Canaux par lesquels le Founder peut joindre cet agent (affichés sous la chat preview). */
+  /** Canaux par lesquels le Founder peut joindre cet agent. */
   channels?: readonly Channel[];
+  /** Acronyme 3 lettres affiché en badge style dashboard (CEO/SAV/ATC/ADV/WEB/MKT/STA). */
+  acronym?: string;
+  /** Couleur d'accent hex pour l'acronyme + le glow (palette dashboard). */
+  accent?: string;
+  /** Marqué autonome (badge AUTO style dashboard sur les agents qui tournent en boucle). */
+  autonomous?: boolean;
 };
 
 export const AGENTS: readonly Agent[] = [
@@ -50,17 +56,20 @@ export const AGENTS: readonly Agent[] = [
     ],
     price: "Inclus avec votre équipe",
     channels: ["web", "email", "whatsapp", "telegram", "phone"],
+    acronym: "CEO",
+    accent: "#8B5CF6",
     user: "Briefing du matin stp.",
     agent:
       "✓ **Ta journée** : 3 RDV, dont Camille Roux à 10 h — elle hésite encore sur le contrat annuel (relancée 2 fois), prépare bien ton argument prix. **Cash** : +4 230 € reçus cette nuit, 2 impayés à J+30 (l'Agent ADV les relance ce matin). **SAV** : Pierre Acme avait un blocage export hier soir, l'Agent SAV a déjà répondu, situation OK. **Suggestion** : je te bloque 15 h-16 h pour brainstormer ta nouvelle offre ?",
   },
   {
     num: "02",
-    name: "Agent SAV (autonome)",
+    name: "Agent SAV",
     metier: "Service après-vente multi-canal",
     description:
       "Répond directement à vos clients en moins d'une minute, 24h/24, dans votre ton, sur tous les canaux : email, WhatsApp, chat. Escalade vers un humain quand c'est nécessaire. La base de connaissances métier s'auto-enrichit à mesure que les questions arrivent.",
     capabilities: [
+      "Agent 100 % autonome",
       "Multi-canal (email, WhatsApp, chat)",
       "Base de connaissances métier",
       "Gestion de tickets",
@@ -73,14 +82,18 @@ export const AGENTS: readonly Agent[] = [
     agent:
       "✓ Répondu à Pierre en 47 secondes : workaround envoyé (utiliser Chrome au lieu de Safari iOS), excuses, ETA fix < 24 h. Ticket ouvert côté tech. Pierre a confirmé que ça fonctionne. **Tu n'as rien à faire.**",
     channels: ["web", "email", "whatsapp", "telegram"],
+    acronym: "SAV",
+    accent: "#22D3EE",
+    autonomous: true,
   },
   {
     num: "03",
-    name: "Agent Commercial (autonome)",
+    name: "Agent Commercial",
     metier: "Prospection, appels d'offres et qualification",
     description:
       "Prospecte vos futurs clients à grande échelle (intelligence LinkedIn, Apollo, Clay), qualifie les leads entrants, rédige vos réponses aux appels d'offres en PDF brandé, et prépare vos devis. Vous gardez la main sur la signature, il s'occupe de toute la machinerie commerciale.",
     capabilities: [
+      "Agent 100 % autonome",
       "Prospection (LinkedIn, Apollo, Clay)",
       "Qualification de leads entrants",
       "Réponse aux appels d'offres (PDF brandé)",
@@ -93,14 +106,18 @@ export const AGENTS: readonly Agent[] = [
     agent:
       "✓ 47 ETI identifiées (croisé Apollo + Clay + signaux d'intent). Pour chacune : décideur cible, taille équipe, stack tech, événements récents (recrutements, levées, presse). Messages personnalisés rédigés sur tes 3 angles de positionnement. CSV prêt à importer dans ton Waalaxy. Estimation : ~12 RDV qualifiés sur 2 semaines.",
     channels: ["web", "email", "whatsapp", "telegram"],
+    acronym: "ATC",
+    accent: "#3B82F6",
+    autonomous: true,
   },
   {
     num: "04",
-    name: "Agent ADV (autonome)",
+    name: "Agent ADV",
     metier: "Administration des ventes, facturation et trésorerie",
     description:
       "Saisit vos commandes, prépare vos devis, émet vos factures, relance les impayés, suit la logistique et gère les litiges. Connecté à votre comptabilité (Pennylane, Sage, Cegid) et à votre banque (Bridge, Powens) : reporting de trésorerie hebdo, P&L mensuel et rapports PDF brandés pour banquier ou expert-comptable.",
     capabilities: [
+      "Agent 100 % autonome",
       "Saisie commandes et facturation",
       "Préparation de devis",
       "Relances impayés (J+1, J+15, J+30)",
@@ -114,6 +131,9 @@ export const AGENTS: readonly Agent[] = [
     agent:
       "✓ **Impayés** : 4 factures +30 j (total 8 720 € HT). Toutes relancées. Camille Roux confirme virement vendredi, Marc Lefèvre demande échéancier 3 mois → je te le passe si OK. **Trésorerie** : position cash 87 540 €, runway 6,2 mois, DSO 47 j (vs objectif 35 j). Rapport PDF brandé prêt pour ton banquier si besoin.",
     channels: ["web", "email", "whatsapp", "telegram"],
+    acronym: "ADV",
+    accent: "#10B981",
+    autonomous: true,
   },
   {
     num: "05",
@@ -134,6 +154,8 @@ export const AGENTS: readonly Agent[] = [
     agent:
       "✓ Audit complet. **SEO** : 3 problèmes — H1 sans mots-clés recherchés (12 propositions calibrées), meta descriptions absentes sur 8 pages, contenu trop pauvre sur les pages produit. Plus 14 backlinks toxiques à désavouer. **Google Ads** : ton CPA est 2,4× au-dessus du benchmark secteur. 3 mots-clés cannibalisent 67 % du budget pour 12 % des conversions. Je redistribue les enchères et je publie 4 articles SEO cette semaine ?",
     channels: ["web", "email", "whatsapp", "telegram"],
+    acronym: "WEB",
+    accent: "#F59E0B",
   },
   {
     num: "06",
@@ -153,6 +175,8 @@ export const AGENTS: readonly Agent[] = [
     agent:
       "✓ Carrousel 8 slides posé en draft (titre + 3 erreurs + 3 fixes + CTA). Tonalité directe, hook validé. Visuels générés en cohérence avec ta charte. Tu veux 3 variantes de thumbnail ?",
     channels: ["web", "email", "whatsapp", "telegram"],
+    acronym: "MKT",
+    accent: "#EC4899",
   },
   {
     num: "07",
@@ -161,6 +185,7 @@ export const AGENTS: readonly Agent[] = [
     description:
       "Décroche votre standard 24h/24 d'une voix française naturelle. Qualifie l'appel, prend des messages structurés, transfère vers la bonne personne, escalade vers vous quand c'est urgent. Reconnaît votre voix : quand vous l'appelez, c'est elle qui dispatche vos demandes à l'équipe.",
     capabilities: [
+      "Agent 100 % autonome",
       "Accueil téléphonique 24/7",
       "Voix française naturelle",
       "Prise de messages structurés",
@@ -174,5 +199,8 @@ export const AGENTS: readonly Agent[] = [
     agent:
       "✓ Appel reçu. Pierre Lambert identifié comme nouveau prospect (premier contact). Message structuré transmis à l'Agent Commercial : « Partenariat — Acme Industries, Pierre Lambert cherche Sophie ». ETA rappel : 24 h. SMS de confirmation envoyé à Pierre.",
     channels: ["phone"],
+    acronym: "STA",
+    accent: "#67E8F9",
+    autonomous: true,
   },
 ] as const;

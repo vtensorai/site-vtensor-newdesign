@@ -9,23 +9,42 @@
  */
 
 import { motion, useReducedMotion } from "motion/react";
+import { DashboardMockup } from "./DashboardMockup";
 
 type Props = {
   /** Chemin vers la capture d'écran (default: /screenshots/app-vtensor.png si présent) */
   screenshot?: string;
   /** Grille animée interactive en arrière-plan (cohérent avec sections 2 et 3). Default true. */
   withGrid?: boolean;
+  /** Réduit le padding-top de la section (utile quand suit une autre section dashboard). */
+  compactTop?: boolean;
+  /** Réduit le padding-bottom de la section (utile quand précède une autre section dashboard). */
+  compactBottom?: boolean;
+  /** Affiche le DashboardMockup (HTML/CSS) avec données fictives au lieu de l'image screenshot. */
+  useMockup?: boolean;
 };
 
 export function AppPreview({
   screenshot = "/screenshots/app-vtensor.png",
   withGrid = true,
+  compactTop = false,
+  compactBottom = false,
+  useMockup = false,
 }: Props) {
   const reduce = useReducedMotion();
 
   return (
     <section
-      className="relative text-white py-24 md:py-32 px-5 sm:px-10 overflow-hidden"
+      className={[
+        "relative text-white px-5 sm:px-10 overflow-hidden",
+        compactTop && compactBottom
+          ? "py-6 md:py-8"
+          : compactTop
+            ? "pt-6 pb-24 md:pt-8 md:pb-32"
+            : compactBottom
+              ? "pt-24 pb-6 md:pt-32 md:pb-8"
+              : "py-24 md:py-32",
+      ].join(" ")}
       aria-label="Aperçu de l'application Vtensor"
     >
       {/* V0.18.0 : grid+glow body suffisent (signature dev/tech). withGrid kept for backwards compat */}
@@ -108,42 +127,46 @@ export function AppPreview({
               </div>
             </div>
 
-            {/* Zone capture d'écran */}
-            <div className="relative bg-[#06060A] aspect-[16/10] w-full">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={screenshot}
-                alt="Interface de l'application Vtensor — tableau de bord agents"
-                className="w-full h-full object-cover object-top"
-                draggable={false}
-                onError={(e) => {
-                  // Si l'image n'existe pas encore, laisse le placeholder visible
-                  (e.currentTarget as HTMLImageElement).style.display = "none";
-                }}
-              />
+            {/* Zone capture d'écran ou DashboardMockup */}
+            {useMockup ? (
+              <DashboardMockup />
+            ) : (
+              <div className="relative bg-[#06060A] aspect-[16/10] w-full">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={screenshot}
+                  alt="Interface de l'application Vtensor — tableau de bord agents"
+                  className="w-full h-full object-cover object-top"
+                  draggable={false}
+                  onError={(e) => {
+                    // Si l'image n'existe pas encore, laisse le placeholder visible
+                    (e.currentTarget as HTMLImageElement).style.display = "none";
+                  }}
+                />
 
-              {/* Placeholder si screenshot absent (visible quand img dispatch onError) */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center text-white/35 pointer-events-none">
-                <svg
-                  width="64"
-                  height="64"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  className="mb-4 opacity-60"
-                >
-                  <rect x="3" y="3" width="18" height="18" rx="2" />
-                  <path d="M3 9h18M9 21V9" />
-                </svg>
-                <span
-                  className="text-[12px] uppercase tracking-[0.2em]"
-                  style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
-                >
-                  // capture d&apos;écran à venir
-                </span>
+                {/* Placeholder si screenshot absent (visible quand img dispatch onError) */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-white/35 pointer-events-none">
+                  <svg
+                    width="64"
+                    height="64"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    className="mb-4 opacity-60"
+                  >
+                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                    <path d="M3 9h18M9 21V9" />
+                  </svg>
+                  <span
+                    className="text-[12px] uppercase tracking-[0.2em]"
+                    style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
+                  >
+                    // capture d&apos;écran à venir
+                  </span>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </motion.div>
       </div>

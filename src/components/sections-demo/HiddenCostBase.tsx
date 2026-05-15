@@ -264,7 +264,7 @@ export function FloatingPill({
       }}
     >
       <div
-        className="relative overflow-hidden px-7 py-7 text-left"
+        className="relative overflow-hidden px-7 py-7 text-left hover:scale-[1.04] hover:border-[#22D3EE]/45 transition-all duration-200 cursor-pointer"
         style={{
           background: "rgba(10,10,15,0.94)",
           border: "1px solid rgba(34,211,238,0.20)",
@@ -381,8 +381,11 @@ export function StaticFallback() {
 /** Le titre central (commun aux 3 variantes), opacité contrôlée par le scroll. */
 export function CenterTitle({
   opacity,
+  hideKickerLabel = false,
 }: {
   opacity: MotionValue<number> | number;
+  /** Cache le label `// ce que vous vivez` (utile quand un SectionDivider amont rend déjà ce label). */
+  hideKickerLabel?: boolean;
 }) {
   return (
     <motion.div
@@ -396,12 +399,14 @@ export function CenterTitle({
         className="h-12 sm:h-16 md:h-20 w-auto select-none"
         draggable={false}
       />
-      <div
-        className="text-[11px] uppercase tracking-[0.22em] text-[#22D3EE]/80"
-        style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
-      >
-        // ce que vous vivez
-      </div>
+      {!hideKickerLabel && (
+        <div
+          className="text-[11px] uppercase tracking-[0.22em] text-[#22D3EE]/80"
+          style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
+        >
+          // ce que vous vivez
+        </div>
+      )}
       <h2
         className="font-display text-white/90 font-semibold mx-auto"
         style={{

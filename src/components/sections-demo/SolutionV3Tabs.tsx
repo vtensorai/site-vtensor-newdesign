@@ -45,9 +45,14 @@ import { OrgChartCompact } from "./OrgChartCompact";
 export function SolutionV3Tabs({
   withGrid = false,
   compactTop = false,
+  compactBottom = false,
+  coloredAcronyms = false,
 }: {
   withGrid?: boolean;
   compactTop?: boolean;
+  compactBottom?: boolean;
+  /** Sidebar : afficher les acronymes (CEO/SAV/ATC/...) en couleur d'accent par agent, au lieu du numéro en gradient. */
+  coloredAcronyms?: boolean;
 } = {}) {
   const reduce = useReducedMotion();
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -84,7 +89,13 @@ export function SolutionV3Tabs({
         className={[
           "hidden lg:flex relative w-full overflow-hidden",
           "flex-col",
-          compactTop ? "pt-4 pb-20 md:pt-6 md:pb-28" : "py-20 md:py-28",
+          compactTop && compactBottom
+            ? "py-4 md:py-6"
+            : compactTop
+              ? "pt-4 pb-20 md:pt-6 md:pb-28"
+              : compactBottom
+                ? "pt-20 pb-4 md:pt-28 md:pb-6"
+                : "py-20 md:py-28",
         ].join(" ")}
       >
         {/* V0.18.0 : grid+glow body suffisent (signature dev/tech). withGrid kept for backwards compat */}
@@ -110,6 +121,27 @@ export function SolutionV3Tabs({
           <p className="mt-5 text-white/60 text-base sm:text-lg max-w-[55ch] mx-auto">
             Une équipe complète, sous votre supervision.
           </p>
+          {/* Pill 24/7 — signature dashboard "service live" */}
+          <div className="mt-5 flex justify-center">
+            <span
+              className="inline-flex items-center gap-2 px-3 py-1.5 text-[11px] uppercase tracking-[0.18em] font-semibold border"
+              style={{
+                fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)",
+                color: "#10B981",
+                borderColor: "rgba(16,185,129,0.4)",
+                background: "rgba(16,185,129,0.06)",
+              }}
+            >
+              <span className="relative flex h-2 w-2">
+                <span
+                  className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-60"
+                  style={{ background: "#10B981" }}
+                />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#10B981]" />
+              </span>
+              Disponible 24 / 7
+            </span>
+          </div>
         </div>
 
         {/* Organigramme compact (desktop only) — vue hiérarchique avant les tabs */}
@@ -118,6 +150,7 @@ export function SolutionV3Tabs({
             agents={AGENTS}
             activeIdx={activeIdx}
             onAgentClick={handleSelectAgent}
+            coloredAcronyms={coloredAcronyms}
           />
         </div>
 
@@ -236,14 +269,30 @@ export function SolutionV3Tabs({
                           )}
                         </span>
 
-                        <span
-                          className={[
-                            "font-display font-bold text-xs leading-none tracking-tight",
-                            "bg-gradient-to-r from-[#8B5CF6] to-[#22D3EE] bg-clip-text text-transparent",
-                          ].join(" ")}
-                        >
-                          {parseInt(agent.num, 10)}
-                        </span>
+                        {coloredAcronyms && agent.acronym ? (
+                          <span
+                            className="inline-flex items-center justify-center font-mono font-bold leading-none shrink-0"
+                            style={{
+                              minWidth: 36,
+                              padding: "3px 6px",
+                              fontSize: "10px",
+                              color: agent.accent || "#22D3EE",
+                              background: `${agent.accent || "#22D3EE"}10`,
+                              border: `1px solid ${agent.accent || "#22D3EE"}40`,
+                            }}
+                          >
+                            {agent.acronym}
+                          </span>
+                        ) : (
+                          <span
+                            className={[
+                              "font-display font-bold text-xs leading-none tracking-tight",
+                              "bg-gradient-to-r from-[#8B5CF6] to-[#22D3EE] bg-clip-text text-transparent",
+                            ].join(" ")}
+                          >
+                            {parseInt(agent.num, 10)}
+                          </span>
+                        )}
 
                         <span className="flex flex-col min-w-0">
                           <span
@@ -288,18 +337,55 @@ export function SolutionV3Tabs({
                   >
                     {/* Text */}
                     <div>
-                      <div className="flex items-center gap-3">
-                        <AgentBadgeNumber
-                          num={active.num}
-                          flagship={active.flagship}
-                          size="md"
-                        />
+                      <div className="flex items-center gap-2 flex-wrap">
+                        {coloredAcronyms && active.acronym ? (
+                          <span
+                            className="inline-flex items-center justify-center font-mono font-bold leading-none"
+                            style={{
+                              minWidth: 48,
+                              padding: "6px 10px",
+                              fontSize: "14px",
+                              color: active.accent || "#22D3EE",
+                              background: `${active.accent || "#22D3EE"}10`,
+                              border: `1px solid ${active.accent || "#22D3EE"}40`,
+                            }}
+                          >
+                            {active.acronym}
+                          </span>
+                        ) : (
+                          <AgentBadgeNumber num={active.num} size="md" />
+                        )}
+                        {active.autonomous && (
+                          <span
+                            className="inline-flex items-center px-2 py-0.5 text-[10px] uppercase tracking-[0.18em] font-semibold border"
+                            style={{
+                              fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)",
+                              color: "#22D3EE",
+                              borderColor: "rgba(34,211,238,0.4)",
+                              background: "rgba(34,211,238,0.06)",
+                            }}
+                          >
+                            Auto
+                          </span>
+                        )}
+                        <span
+                          className="inline-flex items-center gap-1.5 px-2 py-0.5 text-[10px] uppercase tracking-[0.18em] font-semibold border"
+                          style={{
+                            fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)",
+                            color: "#10B981",
+                            borderColor: "rgba(16,185,129,0.4)",
+                            background: "rgba(16,185,129,0.06)",
+                          }}
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
+                          Actif
+                        </span>
                         {active.flagship && (
                           <span
-                            className="inline-flex items-center gap-1.5 px-3 py-1 border border-[#FBBF24]/30 bg-[#FBBF24]/10 text-[10px] uppercase tracking-[0.16em] text-[#FBBF24]"
+                            className="inline-flex items-center gap-1.5 px-2 py-0.5 border border-[#FBBF24]/30 bg-[#FBBF24]/10 text-[10px] uppercase tracking-[0.16em] text-[#FBBF24]"
                             style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
                           >
-                            <Star size={12} weight="fill" />
+                            <Star size={11} weight="fill" />
                             Agent maître
                           </span>
                         )}

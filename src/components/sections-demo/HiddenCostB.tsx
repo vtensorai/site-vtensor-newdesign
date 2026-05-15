@@ -32,7 +32,14 @@ import {
 } from "./HiddenCostBase";
 import { HiddenCostMobile } from "./HiddenCostMobile";
 
-export function HiddenCostB({ withGrid = false }: { withGrid?: boolean } = {}) {
+export function HiddenCostB({
+  withGrid = false,
+  hideKickerLabel = false,
+}: {
+  withGrid?: boolean;
+  /** Cache le label `// ce que vous vivez` du CenterTitle (utilisé quand un SectionDivider amont rend déjà ce label). */
+  hideKickerLabel?: boolean;
+} = {}) {
   const reduce = useReducedMotion();
 
   if (reduce) return <StaticFallback />;
@@ -45,13 +52,19 @@ export function HiddenCostB({ withGrid = false }: { withGrid?: boolean } = {}) {
       </div>
       {/* Desktop (≥ md) — version Sanjaya complète */}
       <div className="hidden md:block">
-        <HiddenCostBDesktop withGrid={withGrid} />
+        <HiddenCostBDesktop withGrid={withGrid} hideKickerLabel={hideKickerLabel} />
       </div>
     </>
   );
 }
 
-function HiddenCostBDesktop({ withGrid = false }: { withGrid?: boolean } = {}) {
+function HiddenCostBDesktop({
+  withGrid = false,
+  hideKickerLabel = false,
+}: {
+  withGrid?: boolean;
+  hideKickerLabel?: boolean;
+} = {}) {
   const { sectionRef, scrollYProgress, hours, euros } = useHiddenCostScroll(false);
 
   // Cercles : pulse léger sur la traversée
@@ -145,7 +158,7 @@ function HiddenCostBDesktop({ withGrid = false }: { withGrid?: boolean } = {}) {
         </motion.div>
 
         {/* Central title */}
-        <CenterTitle opacity={titleOpacity} />
+        <CenterTitle opacity={titleOpacity} hideKickerLabel={hideKickerLabel} />
 
         {/* Pills — scroll-linked strict */}
         {PAINS.map((p, i) => {

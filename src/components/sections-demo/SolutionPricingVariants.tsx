@@ -64,6 +64,8 @@ type Tier = {
   recurringValue: string;
   /** Suffixe sous/à côté du gros chiffre (ex: "/ mois", null si pas applicable) */
   recurringUnit?: string;
+  /** Note optionnelle en dessous du prix (ex: "selon les agents souscrits") */
+  recurringNote?: string;
   /** Affichage des frais d'intégration (secondaire) */
   setupValue: string;
   /** Prix initial barré pour Founder */
@@ -99,8 +101,9 @@ const TIERS: Tier[] = [
     name: "Founder",
     tagline:
       "L'offre standard adaptée pour les PME — à tarif lancement, réservée aux 10 premières entreprises qui nous rejoignent.",
-    recurringValue: "Selon les agents",
-    recurringUnit: "choisis",
+    recurringValue: "À partir de 500 € HT",
+    recurringUnit: "/ mois",
+    recurringNote: "selon les agents souscrits",
     setupValue: "2 500 € HT",
     setupCrossed: "5 000 € HT",
     pricePromo: "−50 % + 1er mois offert",
@@ -151,15 +154,17 @@ export function SolutionFeaturesSection() {
             style={{ fontSize: "clamp(28px, 4vw, 56px)" }}
           >
             Des agents IA{" "}
-            <span className="text-[#22D3EE]">pensés pour votre business</span>
+            <span className="bg-gradient-to-r from-vt-violet to-vt-cyan bg-clip-text text-transparent">
+              pensés pour votre business
+            </span>
           </h2>
           <p className="text-white/55 text-base md:text-lg max-w-2xl mx-auto">
             Conçus par notre équipe, mis à jour en permanence, intégrés à vos outils existants.
           </p>
         </div>
 
-        {/* 4 piliers — grille bordée fine style dashboard cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/8 border border-white/8">
+        {/* 4 piliers — chaque card a sa propre bordure (scale au hover sans perdre l'encadré) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {FEATURES.map((f, i) => {
             const idx = String(i + 1).padStart(2, "0");
             return (
@@ -169,11 +174,14 @@ export function SolutionFeaturesSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.5, delay: i * 0.06 }}
-                className="relative bg-vt-bg-deep p-6 group hover:bg-white/[0.02] transition-colors"
+                className="relative bg-vt-bg-deep p-6 group hover:scale-[1.04] transition-transform duration-200 cursor-pointer"
+                style={{
+                  border: "1px solid rgba(34,211,238,0.20)",
+                }}
               >
-                {/* Label mono `// pillier_NN` */}
+                {/* Label mono `// pillier_NN` (cyan, cohérence Section 2 chips) */}
                 <div
-                  className="text-[10px] uppercase tracking-[0.22em] text-white/35 mb-4"
+                  className="text-[10px] uppercase tracking-[0.22em] text-[#22D3EE] mb-4"
                   style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
                 >
                   // pillier_{idx}
@@ -205,9 +213,15 @@ export function SolutionFeaturesSection() {
 // Pricing — 3 cards alignées, Founder centrée et mise en valeur
 // ────────────────────────────────────────────────────────────────────
 
-export function PricingSection() {
+export function PricingSection({ compactTop = false }: { compactTop?: boolean } = {}) {
   return (
-    <section className="relative py-24 md:py-32" id="tarifs">
+    <section
+      className={[
+        "relative",
+        compactTop ? "pt-8 pb-24 md:pt-10 md:pb-32" : "py-24 md:py-32",
+      ].join(" ")}
+      id="tarifs"
+    >
       <div className="max-w-[1200px] mx-auto px-6 sm:px-10">
         <div className="text-center mb-12">
           <div
@@ -335,7 +349,7 @@ function PriceBlock({ tier }: { tier: Tier }) {
         </div>
         <div className="flex items-baseline gap-2 flex-wrap">
           <span
-            className="font-display font-bold text-white text-3xl md:text-4xl"
+            className="font-display font-bold text-white text-2xl md:text-3xl"
             style={{ letterSpacing: "-0.02em" }}
           >
             {tier.recurringValue}
@@ -344,6 +358,9 @@ function PriceBlock({ tier }: { tier: Tier }) {
             <span className="text-white/55 text-base">{tier.recurringUnit}</span>
           )}
         </div>
+        {tier.recurringNote && (
+          <div className="text-white/45 text-xs mt-1.5">{tier.recurringNote}</div>
+        )}
       </div>
 
       {/* FRAIS D'INTÉGRATION — secondaire */}
