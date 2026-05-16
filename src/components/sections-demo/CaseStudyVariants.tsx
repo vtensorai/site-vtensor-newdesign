@@ -47,8 +47,8 @@ const CASES: Case[] = [
   },
   {
     id: "bravel",
-    company: "Bravel",
-    sector: "B2B · Services",
+    company: "Cabinet B2B",
+    sector: "Service client multi-canal",
     person: "[Prénom Nom]",
     role: "Directeur Général",
     quote:
@@ -62,8 +62,8 @@ const CASES: Case[] = [
   },
   {
     id: "maeva-refford",
-    company: "Maeva Refford",
-    sector: "Architecte d'intérieur",
+    company: "Architecte d'intérieur",
+    sector: "Indépendante",
     person: "Maeva Refford",
     role: "Fondatrice",
     quote:
