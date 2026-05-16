@@ -102,7 +102,7 @@ function VariantA() {
                       className="overflow-hidden"
                     >
                       <div className="pl-[60px] pr-11 pb-6">
-                        <p className="text-white/70 text-[15px] leading-relaxed">{faq.answer}</p>
+                        <p className="text-white/70 text-[15px] leading-relaxed whitespace-pre-line">{faq.answer}</p>
                       </div>
                     </motion.div>
                   )}
@@ -177,7 +177,7 @@ function VariantB() {
                   className="text-[#22D3EE] flex-shrink-0 hidden group-open:block"
                 />
               </summary>
-              <p className="mt-4 text-white/70 text-[14px] leading-relaxed">{faq.answer}</p>
+              <p className="mt-4 text-white/70 text-[14px] leading-relaxed whitespace-pre-line">{faq.answer}</p>
             </details>
           ))}
         </motion.div>
@@ -316,7 +316,7 @@ function VariantC() {
             >
               {active.question}
             </h3>
-            <p className="text-white/75 text-[16px] leading-relaxed">{active.answer}</p>
+            <p className="text-white/75 text-[16px] leading-relaxed whitespace-pre-line">{active.answer}</p>
           </motion.div>
         </div>
       </div>
@@ -360,7 +360,7 @@ function VariantD() {
               <h3 className="font-display font-bold text-white text-[16px] leading-snug mb-3">
                 {faq.question}
               </h3>
-              <p className="text-white/65 text-[13.5px] leading-relaxed">{faq.answer}</p>
+              <p className="text-white/65 text-[13.5px] leading-relaxed whitespace-pre-line">{faq.answer}</p>
             </article>
           ))}
         </div>
@@ -460,7 +460,7 @@ function ChatExchange({ faq, idx }: { faq: Faq; idx: number }) {
             border: "1px solid rgba(139,92,246,0.20)",
           }}
         >
-          <p className="text-white/85 text-[14px] leading-relaxed">{faq.answer}</p>
+          <p className="text-white/85 text-[14px] leading-relaxed whitespace-pre-line">{faq.answer}</p>
           <div
             className="text-[9px] uppercase tracking-[0.14em] text-white/35 mt-2"
             style={monoStyle}

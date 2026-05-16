@@ -79,10 +79,10 @@ export const FAQS: Faq[] = [
     category: "securite",
   },
   {
-    question: "Mes données client servent-elles à entraîner d'autres modèles ?",
+    question: "Qui est éligible à l'offre Pro ?",
     answer:
-      "Jamais. Aucune donnée ne quitte votre tenant pour entraîner quoi que ce soit. C'est inscrit dans nos CGU et techniquement garanti par l'isolation par client. Vos données restent strictement les vôtres.",
-    category: "securite",
+      "L'offre Pro est conçue pour les structures à dirigeant unique qui veulent un agent IA tout-en-un, sans complexité de configuration. Sont éligibles :\n\n— Les indépendants en professions libérales réglementées : avocats, médecins, kinés, architectes, experts-comptables, notaires, psychologues, ostéopathes, dentistes, vétérinaires…\n— Les artisans : plombiers, électriciens, menuisiers, peintres, paysagistes, carreleurs…\n— Les entrepreneurs solos et freelances : consultants, coachs, designers, développeurs…\n\nSi vous êtes plusieurs ou si votre activité demande des agents spécialisés (commercial dédié, ADV avec reporting financier, marketing avancé, etc.), l'offre Founder ou Sur-mesure sera plus adaptée.",
+    category: "engagement",
   },
   {
     question: "Mon équipe va-t-elle craindre d'être remplacée ?",
