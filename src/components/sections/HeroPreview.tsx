@@ -47,7 +47,7 @@ export function HeroPreview({
       <nav className="relative z-20 mx-auto flex w-full max-w-[1200px] items-center justify-between px-6 py-5 sm:px-12 lg:px-20">
         <a href="#" className="inline-flex items-center" aria-label="Vtensor">
           <Image
-            src="/logos/vtensor-wordmark-white.svg"
+            src="/logos/vtensor.svg"
             alt="Vtensor"
             width={104}
             height={26}

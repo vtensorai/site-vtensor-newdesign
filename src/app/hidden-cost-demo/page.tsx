@@ -84,7 +84,7 @@ function PageHeader() {
     <header className="relative z-50 w-full max-w-[1200px] mx-auto px-8 sm:px-12 py-6 flex items-center justify-between">
       <Link href="/" className="inline-flex items-center" aria-label="Vtensor">
         <Image
-          src="/logos/vtensor-wordmark-white.svg"
+          src="/logos/vtensor.svg"
           alt="Vtensor"
           width={112}
           height={28}

@@ -107,7 +107,7 @@ function HeroShell({ children }: { children: ReactNode }) {
       <nav className="relative z-30 w-full max-w-[1200px] mx-auto px-8 sm:px-12 lg:px-20 py-6 flex items-center justify-between">
         <a href="/" className="inline-flex items-center" aria-label="Vtensor">
           <Image
-            src="/logos/vtensor-wordmark-white.svg"
+            src="/logos/vtensor.svg"
             alt="Vtensor"
             width={112}
             height={28}

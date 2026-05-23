@@ -334,7 +334,7 @@ export function StaticFallback() {
         <div className="flex flex-col items-center gap-3 mb-12">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/logos/vtensor-wordmark-white.svg"
+            src="/logos/vtensor.svg"
             alt="Vtensor"
             className="h-12 sm:h-16 md:h-20 w-auto select-none"
             draggable={false}

@@ -72,7 +72,7 @@ function MiniNav({ rightLabel }: { rightLabel: string }) {
     <nav className="absolute top-0 inset-x-0 z-30 px-8 sm:px-12 py-6 flex items-center justify-between">
       <a href="/" className="inline-flex items-center" aria-label="Vtensor">
         <Image
-          src="/logos/vtensor-wordmark-white.svg"
+          src="/logos/vtensor.svg"
           alt="Vtensor"
           width={112}
           height={28}
