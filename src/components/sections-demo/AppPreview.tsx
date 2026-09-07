@@ -10,6 +10,7 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { DashboardMockup } from "./DashboardMockup";
+import { MockupScaler } from "./MockupScaler";
 
 type Props = {
   /** Chemin vers la capture d'écran (default: /screenshots/app-vtensor.png si présent) */
@@ -129,7 +130,10 @@ export function AppPreview({
 
             {/* Zone capture d'écran ou DashboardMockup */}
             {useMockup ? (
-              <DashboardMockup />
+              /* < lg : mock à taille desktop (1200 px) mis à l'échelle du conteneur */
+              <MockupScaler>
+                <DashboardMockup />
+              </MockupScaler>
             ) : (
               <div className="relative bg-[#06060A] aspect-[16/10] w-full">
                 {/* eslint-disable-next-line @next/next/no-img-element */}

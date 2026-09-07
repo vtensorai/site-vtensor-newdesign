@@ -13,10 +13,30 @@ const fontInter = Inter({
   display: "swap",
 });
 
+const SITE_TITLE = "Vtensor — Agence d'agents IA";
+const SITE_DESCRIPTION =
+  "Une agence d'agents IA qui automatisent vos opérations métier — SAV, devis, relances, contenus — sans que vous touchiez à un outil. RGPD-first, hébergé en Allemagne.";
+
 export const metadata: Metadata = {
-  title: "Vtensor — Agence d'agents IA",
-  description:
-    "Une agence d'agents IA qui automatisent vos opérations métier — SAV, devis, relances, contenus — sans que vous touchiez à un outil. RGPD-first, hébergé en Allemagne.",
+  metadataBase: new URL("https://vtensor.ai"),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: "/",
+    siteName: "Vtensor",
+    locale: "fr_FR",
+    type: "website",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Vtensor — Agence d'agents IA" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: ["/og.png"],
+  },
 };
 
 export default function RootLayout({

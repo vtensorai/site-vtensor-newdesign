@@ -251,6 +251,7 @@ export function SolutionV3Tabs({
                         ref={(el) => {
                           itemRefs.current[i] = el;
                         }}
+                        type="button"
                         role="tab"
                         aria-selected={isActive}
                         aria-controls="agent-panel"
@@ -264,7 +265,7 @@ export function SolutionV3Tabs({
                           "transition-all duration-200",
                           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22D3EE]/40",
                           isActive
-                            ? "bg-gradient-to-r from-[#8B5CF6]/15 to-[#22D3EE]/10 border border-[#22D3EE]/40"
+                            ? "bg-gradient-to-r from-[#8B5CF6]/15 to-[#22D3EE]/10 border border-[#22D3EE]/40 hover:border-[#22D3EE]/70"
                             : "border border-transparent hover:bg-white/[0.06] hover:border-white/10 hover:translate-x-0.5",
                         ].join(" ")}
                       >

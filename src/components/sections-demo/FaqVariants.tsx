@@ -259,11 +259,12 @@ function VariantC() {
                     <button
                       type="button"
                       onClick={() => setActiveIdx(i)}
-                      className="w-full flex items-start gap-3 px-3 py-2.5 text-left transition-colors"
-                      style={{
-                        background: isActive ? "rgba(34,211,238,0.06)" : "rgba(8,8,12,1)",
-                        borderLeft: `2px solid ${isActive ? "#22D3EE" : "transparent"}`,
-                      }}
+                      className={[
+                        "w-full flex items-start gap-3 px-3 py-2.5 text-left border-l-2 transition-colors duration-150",
+                        isActive
+                          ? "bg-[#22D3EE]/[0.06] border-l-[#22D3EE] hover:bg-[#22D3EE]/[0.10]"
+                          : "bg-[#08080c] border-l-transparent hover:bg-[#131318] hover:border-l-[#22D3EE]/40",
+                      ].join(" ")}
                     >
                       <span
                         className="text-[10px] uppercase tracking-[0.18em] mt-0.5 flex-shrink-0"

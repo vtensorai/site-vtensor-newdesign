@@ -3,6 +3,7 @@ import { LegalLayout } from "@/components/sections/LegalLayout";
 import { CONTACT_EMAIL } from "@/lib/links";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/mentions-legales/" },
   title: "Mentions légales — Vtensor",
   description: "Mentions légales du site vtensor.ai, édité par V TENSOR AI SAS.",
 };

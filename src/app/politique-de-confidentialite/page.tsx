@@ -3,6 +3,7 @@ import { LegalLayout } from "@/components/sections/LegalLayout";
 import { CONTACT_EMAIL } from "@/lib/links";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/politique-de-confidentialite/" },
   title: "Politique de confidentialité — Vtensor",
   description:
     "Comment V TENSOR AI collecte, utilise et protège vos données personnelles sur vtensor.ai.",

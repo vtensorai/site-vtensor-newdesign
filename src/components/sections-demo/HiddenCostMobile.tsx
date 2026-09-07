@@ -1,7 +1,8 @@
 "use client";
 
 /**
- * HiddenCostMobile — version stack vertical pour viewports < md (≤ 767px).
+ * HiddenCostMobile — version stack vertical pour viewports < lg (≤ 1023px).
+ * (2026-09-07 : seuil md → lg, les cartes flottantes sortaient du viewport sur tablette.)
  *
  * Layout :
  *  - Compteur sticky en haut (h + €), scroll-linked sur la section

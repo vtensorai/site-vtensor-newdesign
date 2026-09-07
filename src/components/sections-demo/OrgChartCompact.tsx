@@ -104,11 +104,11 @@ function SubAgentBox({
         compact ? "gap-2 px-2.5 py-2.5 w-full" : "gap-3 px-3.5 py-2.5 w-full",
         coloredAcronyms ? "" : "rounded-xl",
         "transition-all duration-200",
+        "bg-[#08080c]/95 hover:bg-[#16161c]/95",
         "cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22D3EE]/40",
         active ? "-translate-y-0.5" : "hover:-translate-y-0.5",
       ].join(" ")}
       style={{
-        background: "rgba(8,8,12,0.95)",
         border: active
           ? coloredAcronyms
             ? `1px solid ${accent}80`
@@ -182,10 +182,10 @@ function CustomSlotBox() {
       className={[
         "relative inline-flex items-stretch gap-2 px-2.5 py-2.5 w-full group",
         "transition-all duration-200 hover:-translate-y-0.5 cursor-pointer",
+        "bg-[#08080c]/60 hover:bg-[#16161c]/70",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22D3EE]/40",
       ].join(" ")}
       style={{
-        background: "rgba(8,8,12,0.6)",
         border: "1px dashed rgba(255,255,255,0.28)",
       }}
       aria-label="Votre poste sur mesure — réserver un audit"

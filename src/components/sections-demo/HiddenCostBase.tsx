@@ -218,6 +218,9 @@ export function FloatingPill({
   fromY,
   onAppear,
   onDisappear,
+  centerPx = null,
+  contentScale = 1,
+  cardRef,
 }: {
   pain: Pain;
   progress: ReturnType<typeof useScroll>["scrollYProgress"];
@@ -226,6 +229,12 @@ export function FloatingPill({
   fromY: number;
   onAppear?: () => void;
   onDisappear?: () => void;
+  /** Centre de la carte (px) imposé par le layout anti-chevauchement desktop. `null` → position CSS naturelle (vw/vh). */
+  centerPx?: { x: number; y: number } | null;
+  /** Réduction du contenu (≤ 1) quand le viewport est trop court pour tout afficher sans chevauchement. */
+  contentScale?: number;
+  /** Ref du conteneur (mesure de la taille réelle de la carte). */
+  cardRef?: (el: HTMLDivElement | null) => void;
 }) {
   const { start, end } = chipBounds(index);
 
@@ -249,23 +258,28 @@ export function FloatingPill({
 
   return (
     <motion.div
+      ref={cardRef}
       className="absolute z-10"
       style={{
-        left: `calc(50% + ${pain.pos.x}vw)`,
-        top: `calc(50% + ${pain.pos.y}vh)`,
+        left: centerPx ? centerPx.x : `calc(50% + ${pain.pos.x}vw)`,
+        top: centerPx ? centerPx.y : `calc(50% + ${pain.pos.y}vh)`,
         x: tx,
         y: ty,
         scale,
         opacity,
         translateX: "-50%",
         translateY: "-50%",
-        width: "min(360px, 88vw)",
+        // 360 px dès 1200 px de large ; plus étroit entre 1024 et 1199 px pour que
+        // les trois cartes du bas tiennent côte à côte (2026-09-07).
+        width: "min(360px, 30vw)",
         willChange: "transform, opacity",
       }}
     >
       <div
         className="relative overflow-hidden px-7 py-7 text-left hover:scale-[1.04] hover:border-[#22D3EE]/45 transition-all duration-200 cursor-pointer"
         style={{
+          transform: contentScale < 1 ? `scale(${contentScale})` : undefined,
+          transformOrigin: "center",
           background: "rgba(10,10,15,0.94)",
           border: "1px solid rgba(34,211,238,0.20)",
           boxShadow:
@@ -382,15 +396,22 @@ export function StaticFallback() {
 export function CenterTitle({
   opacity,
   hideKickerLabel = false,
+  centerY = null,
+  ref,
 }: {
   opacity: MotionValue<number> | number;
   /** Cache le label `// ce que vous vivez` (utile quand un SectionDivider amont rend déjà ce label). */
   hideKickerLabel?: boolean;
+  /** Centre vertical (px) imposé par le layout anti-chevauchement desktop. `null` → 50 %. */
+  centerY?: number | null;
+  /** Ref du conteneur (mesure de la taille réelle du titre). */
+  ref?: React.Ref<HTMLDivElement>;
 }) {
   return (
     <motion.div
+      ref={ref}
       className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-full max-w-[480px] px-4 text-center pointer-events-none flex flex-col items-center gap-3"
-      style={{ opacity }}
+      style={{ opacity, top: centerY ?? undefined }}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img

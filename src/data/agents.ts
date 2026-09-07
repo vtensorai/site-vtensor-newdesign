@@ -60,7 +60,7 @@ export const AGENTS: readonly Agent[] = [
     price: "100 € HT / mois",
     priceAnnual: "1 000 € HT / an",
     incoming: true,
-    user: "De pierre@xxxx.fr (client final) — Bonjour, je n'arrive plus à exporter mes données depuis ce matin. Le bouton « Exporter » donne une page blanche. Pouvez-vous m'aider rapidement ? Pierre, Acme.",
+    user: "De pierre@acme-industrie.fr (client final) — Bonjour, je n'arrive plus à exporter mes données depuis ce matin. Le bouton « Exporter » donne une page blanche. Pouvez-vous m'aider rapidement ? Pierre, Acme.",
     agent:
       "✓ Répondu à Pierre en 47 secondes : workaround envoyé (utiliser Chrome au lieu de Safari iOS), excuses, ETA fix < 24 h. Ticket ouvert côté tech. Pierre a confirmé que ça fonctionne. **Tu n'as rien à faire.**",
     acronym: "SAV",
