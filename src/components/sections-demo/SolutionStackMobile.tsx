@@ -1,25 +1,38 @@
 "use client";
 
 /**
- * SolutionStackMobile — rendu mobile de la section "Vos 7 agents".
+ * SolutionStackMobile — rendu mobile du catalogue des agents.
  *
  * Stack vertical des 7 agents — chaque agent a sa propre card pleine largeur
  * qui se découvre au scroll naturel. Pas de pills horizontales, pas de tabs.
  * L'utilisateur scrolle de manière classique pour voir chaque agent.
+ *
+ * `customFraming` (2026-09-07) : les 7 agents sont présentés comme des
+ * EXEMPLES de postes, chaque agent étant développé sur mesure. Ajoute une
+ * card en pointillés « Votre poste sur mesure » en fin de liste.
  */
 
 import { motion, useReducedMotion } from "motion/react";
-import { CheckCircle, Star } from "@phosphor-icons/react/dist/ssr";
+import { CheckCircle, Star, Plus } from "@phosphor-icons/react/dist/ssr";
 import { AGENTS } from "@/data/agents";
+import { AUDIT_URL } from "@/lib/links";
 import { AgentChatPreview } from "./AgentChatPreview";
 
-export function SolutionStackMobile() {
+const mono = {
+  fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)",
+};
+
+export function SolutionStackMobile({
+  customFraming = false,
+}: {
+  customFraming?: boolean;
+} = {}) {
   const reduce = useReducedMotion();
 
   return (
     <section
       className="relative text-white py-16 px-5"
-      aria-label="Catalogue des 7 agents Vtensor — version mobile"
+      aria-label="Catalogue des agents Vtensor — version mobile"
     >
       {/* Section header */}
       <div className="text-center mb-12">
@@ -27,14 +40,28 @@ export function SolutionStackMobile() {
           className="font-display font-bold leading-[1.1] tracking-[-0.02em]"
           style={{ fontSize: "clamp(28px, 7vw, 40px)" }}
         >
-          Nos{" "}
-          <span className="bg-gradient-to-r from-[#8B5CF6] to-[#22D3EE] bg-clip-text text-transparent">
-            7 modèles d&apos;agents
-          </span>
-          , prêts à travailler pour vous.
+          {customFraming ? (
+            <>
+              Six exemples de postes,{" "}
+              <span className="bg-gradient-to-r from-[#8B5CF6] to-[#22D3EE] bg-clip-text text-transparent">
+                pour vous donner des idées
+              </span>
+              .
+            </>
+          ) : (
+            <>
+              Nos{" "}
+              <span className="bg-gradient-to-r from-[#8B5CF6] to-[#22D3EE] bg-clip-text text-transparent">
+                7 modèles d&apos;agents
+              </span>
+              , prêts à travailler pour vous.
+            </>
+          )}
         </h2>
         <p className="mt-4 text-white/60 text-base">
-          Une équipe complète, sous votre supervision.
+          {customFraming
+            ? "Chaque agent est développé sur mesure pour votre entreprise, vos outils et vos process. Choisissez un poste, adaptez-le, ou inventez celui qui vous manque."
+            : "Une équipe complète, sous votre supervision."}
         </p>
       </div>
 
@@ -162,6 +189,51 @@ export function SolutionStackMobile() {
             />
           </motion.article>
         ))}
+
+        {/* Card « Votre poste sur mesure » — agents développés à la demande */}
+        {customFraming && (
+          <a
+            href={AUDIT_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative rounded-3xl px-5 py-6 border border-dashed border-white/25 bg-[#0E0E13]/60 hover:border-[#22D3EE]/50 transition-colors group"
+          >
+            <div className="flex items-start gap-3">
+              <span
+                aria-hidden="true"
+                className="shrink-0 inline-flex items-center justify-center text-white/70 group-hover:text-[#22D3EE] transition-colors"
+                style={{
+                  width: 36,
+                  height: 36,
+                  border: "1px dashed rgba(255,255,255,0.3)",
+                }}
+              >
+                <Plus size={14} weight="bold" />
+              </span>
+              <div className="min-w-0 flex-1">
+                <h3
+                  className="font-display text-white font-bold leading-tight"
+                  style={{ fontSize: "17px", letterSpacing: "-0.01em" }}
+                >
+                  Votre poste sur mesure
+                </h3>
+                <p className="text-[11px] uppercase tracking-[0.12em] text-white/50 mt-1 font-medium">
+                  Un besoin qui n&apos;est pas dans la liste ?
+                </p>
+              </div>
+            </div>
+            <p className="text-white/70 text-[14px] leading-relaxed mt-3">
+              Décrivez-nous le poste qu&apos;il vous manque : chaque agent est développé
+              sur mesure pour votre entreprise, vos outils et vos process.
+            </p>
+            <span
+              className="mt-4 inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.06em] font-semibold text-[#22D3EE] group-hover:translate-x-0.5 transition-transform"
+              style={mono}
+            >
+              Réserver un audit gratuit →
+            </span>
+          </a>
+        )}
       </div>
     </section>
   );

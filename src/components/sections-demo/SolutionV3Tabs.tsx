@@ -47,12 +47,15 @@ export function SolutionV3Tabs({
   compactTop = false,
   compactBottom = false,
   coloredAcronyms = false,
+  customFraming = false,
 }: {
   withGrid?: boolean;
   compactTop?: boolean;
   compactBottom?: boolean;
   /** Sidebar : afficher les acronymes (CEO/SAV/ATC/...) en couleur d'accent par agent, au lieu du numéro en gradient. */
   coloredAcronyms?: boolean;
+  /** Recadrage 2026-09-07 : les 7 agents sont des EXEMPLES, chaque agent est développé sur mesure. Ajoute une case « Votre poste » à l'organigramme. */
+  customFraming?: boolean;
 } = {}) {
   const reduce = useReducedMotion();
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -71,7 +74,7 @@ export function SolutionV3Tabs({
       ref={sectionRef}
       id="agents"
       className="relative text-white solutionv3-section"
-      aria-label="Catalogue des 7 agents Vtensor"
+      aria-label="Catalogue des agents Vtensor"
     >
       <style jsx>{`
         .solutionv3-section {
@@ -81,7 +84,7 @@ export function SolutionV3Tabs({
 
       {/* Mobile : 7 cards en stack vertical (rendu séparé) */}
       <div className="lg:hidden">
-        <SolutionStackMobile />
+        <SolutionStackMobile customFraming={customFraming} />
       </div>
 
       {/* Desktop : tabs interactif (sidebar + zone agent) */}
@@ -112,14 +115,28 @@ export function SolutionV3Tabs({
             className="font-display font-bold leading-[1.05] tracking-[-0.02em]"
             style={{ fontSize: "clamp(32px, 4vw, 56px)" }}
           >
-            Nos{" "}
-            <span className="bg-gradient-to-r from-[#8B5CF6] to-[#22D3EE] bg-clip-text text-transparent">
-              7 modèles d&apos;agents
-            </span>
-            , prêts à travailler pour vous.
+            {customFraming ? (
+              <>
+                Six exemples de postes,{" "}
+                <span className="bg-gradient-to-r from-[#8B5CF6] to-[#22D3EE] bg-clip-text text-transparent">
+                  pour vous donner des idées
+                </span>
+                .
+              </>
+            ) : (
+              <>
+                Nos{" "}
+                <span className="bg-gradient-to-r from-[#8B5CF6] to-[#22D3EE] bg-clip-text text-transparent">
+                  7 modèles d&apos;agents
+                </span>
+                , prêts à travailler pour vous.
+              </>
+            )}
           </h2>
-          <p className="mt-5 text-white/60 text-base sm:text-lg max-w-[55ch] mx-auto">
-            Une équipe complète, sous votre supervision.
+          <p className="mt-5 text-white/60 text-base sm:text-lg max-w-[60ch] mx-auto">
+            {customFraming
+              ? "Chaque agent est développé sur mesure pour votre entreprise, vos outils et vos process. Choisissez un poste, adaptez-le, ou inventez celui qui vous manque."
+              : "Une équipe complète, sous votre supervision."}
           </p>
           {/* Pill 24/7 — signature dashboard "service live" */}
           <div className="mt-5 flex justify-center">
@@ -151,6 +168,7 @@ export function SolutionV3Tabs({
             activeIdx={activeIdx}
             onAgentClick={handleSelectAgent}
             coloredAcronyms={coloredAcronyms}
+            showCustomSlot={customFraming}
           />
         </div>
 
@@ -450,6 +468,9 @@ export function SolutionV3Tabs({
                         </span>
                         <span className="text-sm font-semibold text-white">
                           {active.price}
+                          {active.priceAnnual && (
+                            <span className="text-white/45 font-normal"> · {active.priceAnnual}</span>
+                          )}
                         </span>
                       </div>
                     </div>

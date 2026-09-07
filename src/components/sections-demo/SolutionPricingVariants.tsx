@@ -47,7 +47,7 @@ const FEATURES: Feature[] = [
   {
     icon: Users,
     title: "Une équipe à la carte",
-    desc: "Composez votre équipe IA selon vos besoins — du Directeur Exécutif au Standardiste, choisissez les postes qui vous manquent.",
+    desc: "Composez votre équipe IA selon vos besoins — du SAV au Standardiste, choisissez les postes qui vous manquent.",
   },
 ];
 
@@ -179,12 +179,12 @@ export function SolutionFeaturesSection() {
                   border: "1px solid rgba(34,211,238,0.20)",
                 }}
               >
-                {/* Label mono `// pillier_NN` (cyan, cohérence Section 2 chips) */}
+                {/* Label mono `// pilier_NN` (cyan, cohérence Section 2 chips) */}
                 <div
                   className="text-[10px] uppercase tracking-[0.22em] text-[#22D3EE] mb-4"
                   style={{ fontFamily: "var(--font-mono, 'JetBrains Mono', ui-monospace, monospace)" }}
                 >
-                  // pillier_{idx}
+                  // pilier_{idx}
                 </div>
                 {/* Icon cyan flat */}
                 <div

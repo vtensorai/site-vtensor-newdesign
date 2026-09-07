@@ -173,7 +173,7 @@ export function Hero() {
               <ArrowRight size={12} weight="bold" />
             </a>
             <a
-              href="https://cal.com/vtensor/audi-30min"
+              href="https://cal.com/vtensor/audit-30min"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-xs uppercase tracking-wider text-white hover:opacity-90 transition-all"
@@ -259,7 +259,7 @@ export function Hero() {
                 ))}
               </ul>
               <a
-                href="https://cal.com/vtensor/audi-30min"
+                href="https://cal.com/vtensor/audit-30min"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMenuOpen(false)}
@@ -371,7 +371,7 @@ export function Hero() {
           <motion.div variants={itemVariants} className="mb-8 md:mb-10 w-full">
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full">
               <a
-                href="https://cal.com/vtensor/audi-30min"
+                href="https://cal.com/vtensor/audit-30min"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group/cta inline-flex w-full sm:w-auto justify-center items-center gap-2 px-7 py-3.5 text-white text-sm transition-all hover:scale-[1.03] active:scale-[0.98]"

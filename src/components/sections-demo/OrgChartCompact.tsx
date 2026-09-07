@@ -1,120 +1,81 @@
 "use client";
 
 /**
- * OrgChartCompact — vue organigramme animée (variante D — Animated Beams).
+ * OrgChartCompact — organigramme animé (variante D — Animated Beams).
  *
- * Layout vertical hiérarchique :
- *   - Directeur Exécutif en haut (box plus grande, accent ambre)
- *   - 6 sub-agents en row (grid 6 colonnes égales)
+ * Layout vertical (2026-09-07, plus de Directeur Exécutif) :
+ *   - « Vous » (le dirigeant) en haut : vous parlez à chaque agent en direct
+ *   - Les agents en row (grid N colonnes égales) + case « Votre poste »
  *
- * Connecteurs en SVG :
- *   - Lignes statiques fines (rgba blanc 15%)
- *   - Beam horizontal animé (gradient cyan qui circule sur la barre)
- *   - Particule cyan qui descend en boucle sur le trait DE
+ * Connecteurs SVG : lignes statiques fines, beam horizontal animé cyan,
+ * particule qui descend de « Vous » vers les agents.
  *
- * Cliquer sur une box change l'`activeIdx` (synchronisation avec les tabs).
+ * Cliquer sur une box agent change l'`activeIdx` (synchronisation avec les tabs).
  * Caché sur mobile (lg:flex hidden).
  */
 
-import { Star } from "@phosphor-icons/react/dist/ssr";
+import { Plus, User } from "@phosphor-icons/react/dist/ssr";
 import type { Agent } from "@/data/agents";
+import { AUDIT_URL } from "@/lib/links";
 
 type Props = {
   agents: readonly Agent[];
   activeIdx: number;
   onAgentClick?: (idx: number) => void;
-  /** Mode dashboard : acronymes colorés (CEO/SAV/ATC/...) en couleur d'accent par agent, au lieu du numéro cyan. */
+  /** Mode dashboard : acronymes colorés (SAV/ATC/...) en couleur d'accent par agent, au lieu du numéro cyan. */
   coloredAcronyms?: boolean;
+  /** Ajoute une case en pointillés « Votre poste » (agents développés sur mesure). */
+  showCustomSlot?: boolean;
 };
 
 const METIERS_COURTS: Record<string, string> = {
-  "01": "Directeur Exécutif",
-  "02": "Service après-vente",
-  "03": "Commercial",
-  "04": "Administration des ventes",
-  "05": "Webmaster",
-  "06": "Marketing",
-  "07": "Standardiste",
+  "01": "Service après-vente",
+  "02": "Commercial",
+  "03": "Administration des ventes",
+  "04": "Webmaster",
+  "05": "Marketing",
+  "06": "Standardiste",
 };
 
 const TRAIT_HEIGHT = 70;
 
-function MasterBox({
-  agent,
-  active,
-  onClick,
-  coloredAcronyms = false,
-}: {
-  agent: Agent;
-  active: boolean;
-  onClick?: () => void;
-  coloredAcronyms?: boolean;
-}) {
+/** Box du haut : le dirigeant. Non cliquable — c'est le lecteur. */
+function YouBox() {
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={[
-        "relative overflow-hidden inline-flex items-center gap-3",
-        "px-6 py-4",
-        coloredAcronyms ? "" : "rounded-2xl",
-        "transition-all duration-200",
-        "cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FBBF24]/40",
-        active ? "-translate-y-0.5" : "hover:-translate-y-0.5",
-      ].join(" ")}
+    <div
+      className="relative inline-flex items-center gap-3 px-6 py-4"
       style={{
         background: "rgba(8,8,12,0.95)",
-        border: active
-          ? "1px solid rgba(251,191,36,0.65)"
-          : "1px solid rgba(251,191,36,0.4)",
-        boxShadow: active
-          ? "0 0 40px -8px rgba(251,191,36,0.45), inset 0 0 20px rgba(251,191,36,0.06)"
-          : "0 0 30px -10px rgba(251,191,36,0.30), inset 0 0 16px rgba(34,211,238,0.04)",
+        border: "1px solid rgba(139,92,246,0.55)",
+        boxShadow:
+          "0 0 40px -8px rgba(139,92,246,0.45), inset 0 0 20px rgba(139,92,246,0.06)",
       }}
+      aria-label="Vous, le dirigeant"
     >
-      {/* Acronyme / Numéro */}
-      {coloredAcronyms && agent.acronym ? (
-        <span
-          className="inline-flex items-center justify-center font-mono font-bold leading-none"
-          style={{
-            minWidth: 46,
-            padding: "6px 10px",
-            fontSize: "13px",
-            color: agent.accent || "#22D3EE",
-            background: `${agent.accent || "#22D3EE"}10`,
-            border: `1px solid ${agent.accent || "#22D3EE"}40`,
-          }}
-        >
-          {agent.acronym}
-        </span>
-      ) : (
-        <span
-          className="font-mono font-bold leading-none text-[#22D3EE]"
-          style={{ fontSize: "20px" }}
-        >
-          01
-        </span>
-      )}
-
-      <span className="w-px self-stretch bg-[#22D3EE]/25" aria-hidden />
-
-      {/* Bloc texte 2 lignes */}
-      <span className="flex flex-col items-start gap-1 text-left">
-        <span className="text-[10px] uppercase tracking-[0.18em] text-[#FBBF24] font-semibold leading-none flex items-center gap-1">
-          Agent maître
-        </span>
-        <span className="font-display font-bold text-white text-[17px] leading-tight tracking-[-0.01em] whitespace-nowrap">
-          {METIERS_COURTS[agent.num] ?? agent.name}
-        </span>
+      <span
+        className="inline-flex items-center justify-center"
+        style={{
+          minWidth: 46,
+          padding: "6px 10px",
+          color: "#8B5CF6",
+          background: "rgba(139,92,246,0.10)",
+          border: "1px solid rgba(139,92,246,0.4)",
+        }}
+      >
+        <User size={16} weight="bold" />
       </span>
 
-      <Star
-        size={13}
-        weight="fill"
-        className="text-[#FBBF24] ml-2 shrink-0"
-        aria-label="Agent maître"
-      />
-    </button>
+      <span className="w-px self-stretch bg-[#8B5CF6]/25" aria-hidden />
+
+      <span className="flex flex-col items-start gap-1 text-left">
+        <span className="text-[10px] uppercase tracking-[0.18em] text-[#8B5CF6] font-semibold leading-none">
+          Votre entreprise
+        </span>
+        <span className="font-display font-bold text-white text-[17px] leading-tight tracking-[-0.01em] whitespace-nowrap">
+          Vous
+        </span>
+      </span>
+    </div>
   );
 }
 
@@ -123,11 +84,14 @@ function SubAgentBox({
   active,
   onClick,
   coloredAcronyms = false,
+  compact = false,
 }: {
   agent: Agent;
   active: boolean;
   onClick?: () => void;
   coloredAcronyms?: boolean;
+  /** 7 colonnes (case « Votre poste ») : paddings/gaps réduits pour que les libellés tiennent. */
+  compact?: boolean;
 }) {
   const num = parseInt(agent.num, 10);
   const accent = agent.accent || "#22D3EE";
@@ -136,8 +100,8 @@ function SubAgentBox({
       type="button"
       onClick={onClick}
       className={[
-        "relative overflow-hidden inline-flex items-stretch gap-3",
-        "px-3.5 py-2.5 w-full",
+        "relative overflow-hidden inline-flex items-stretch",
+        compact ? "gap-2 px-2.5 py-2.5 w-full" : "gap-3 px-3.5 py-2.5 w-full",
         coloredAcronyms ? "" : "rounded-xl",
         "transition-all duration-200",
         "cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22D3EE]/40",
@@ -166,8 +130,8 @@ function SubAgentBox({
         <span
           className="inline-flex items-center justify-center font-mono font-bold leading-none self-center"
           style={{
-            minWidth: 38,
-            padding: "4px 6px",
+            minWidth: compact ? 32 : 38,
+            padding: compact ? "4px 4px" : "4px 6px",
             fontSize: "10px",
             color: accent,
             background: `${accent}10`,
@@ -195,7 +159,13 @@ function SubAgentBox({
         <span className="text-[9px] uppercase tracking-[0.18em] text-white/45 font-semibold leading-none">
           Agent
         </span>
-        <span className="font-display font-semibold text-white text-[12.5px] leading-tight tracking-[-0.005em]">
+        <span
+          className={[
+            "font-display font-semibold text-white leading-tight tracking-[-0.005em] break-words [hyphens:auto]",
+            compact ? "text-[12px]" : "text-[12.5px]",
+          ].join(" ")}
+          lang="fr"
+        >
           {METIERS_COURTS[agent.num] ?? agent.name}
         </span>
       </span>
@@ -203,11 +173,56 @@ function SubAgentBox({
   );
 }
 
-export function OrgChartCompact({ agents, activeIdx, onAgentClick, coloredAcronyms = false }: Props) {
-  const master = agents[0];
-  const subs = agents.slice(1);
-  const n = subs.length;
-  const subCenters = subs.map((_, i) => ((i + 0.5) / n) * 100);
+function CustomSlotBox() {
+  return (
+    <a
+      href={AUDIT_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={[
+        "relative inline-flex items-stretch gap-2 px-2.5 py-2.5 w-full group",
+        "transition-all duration-200 hover:-translate-y-0.5 cursor-pointer",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22D3EE]/40",
+      ].join(" ")}
+      style={{
+        background: "rgba(8,8,12,0.6)",
+        border: "1px dashed rgba(255,255,255,0.28)",
+      }}
+      aria-label="Votre poste sur mesure — réserver un audit"
+    >
+      <span
+        className="inline-flex items-center justify-center font-mono font-bold leading-none self-center text-white/70 group-hover:text-[#22D3EE] transition-colors"
+        style={{ minWidth: 32, padding: "4px 4px", fontSize: "10px", border: "1px dashed rgba(255,255,255,0.3)" }}
+      >
+        <Plus size={11} weight="bold" />
+      </span>
+      <span className="w-px self-stretch" style={{ background: "rgba(255,255,255,0.15)" }} aria-hidden />
+      <span className="flex flex-col items-start gap-0.5 text-left min-w-0 flex-1">
+        <span className="text-[9px] uppercase tracking-[0.18em] text-white/45 font-semibold leading-none">
+          Sur mesure
+        </span>
+        <span className="font-display font-semibold text-white/85 group-hover:text-white text-[12.5px] leading-tight tracking-[-0.005em] transition-colors">
+          Votre poste
+        </span>
+      </span>
+    </a>
+  );
+}
+
+export function OrgChartCompact({
+  agents,
+  activeIdx,
+  onAgentClick,
+  coloredAcronyms = false,
+  showCustomSlot = false,
+}: Props) {
+  const n = agents.length + (showCustomSlot ? 1 : 0);
+  const weights = Array.from({ length: n }, (_, i) => (showCustomSlot && i === n - 1 ? 0.85 : 1));
+  const totalW = weights.reduce((a, b) => a + b, 0);
+  const subCenters = weights.map((w, i) => {
+    const before = weights.slice(0, i).reduce((a, b) => a + b, 0);
+    return ((before + w / 2) / totalW) * 100;
+  });
   const firstCx = subCenters[0];
   const lastCx = subCenters[subCenters.length - 1];
   const yMid = TRAIT_HEIGHT / 2;
@@ -215,22 +230,13 @@ export function OrgChartCompact({ agents, activeIdx, onAgentClick, coloredAcrony
   return (
     <div
       className="hidden lg:flex flex-col items-center mb-14 w-full max-w-[1100px] mx-auto"
-      aria-label="Organigramme de l'équipe Vtensor"
+      aria-label="Organigramme de votre équipe IA"
     >
-      {/* DE en haut */}
-      <MasterBox
-        agent={master}
-        active={activeIdx === 0}
-        onClick={() => onAgentClick?.(0)}
-        coloredAcronyms={coloredAcronyms}
-      />
+      {/* Vous en haut */}
+      <YouBox />
 
       {/* Zone des connecteurs animés */}
-      <div
-        className="relative w-full"
-        style={{ height: TRAIT_HEIGHT }}
-        aria-hidden
-      >
+      <div className="relative w-full" style={{ height: TRAIT_HEIGHT }} aria-hidden>
         <svg width="100%" height={TRAIT_HEIGHT} preserveAspectRatio="none" className="block">
           {/* Lignes statiques en arrière-plan (blanc 15%) */}
           <line
@@ -284,8 +290,8 @@ export function OrgChartCompact({ agents, activeIdx, onAgentClick, coloredAcrony
             strokeLinecap="round"
           />
 
-          {/* Particule cyan qui descend en boucle sur le trait DE */}
-          <circle r="2.5" fill="#22D3EE">
+          {/* Particule qui descend en boucle de « Vous » vers les agents */}
+          <circle r="2.5" fill="#8B5CF6">
             <animate attributeName="cx" values="50%;50%" dur="2s" repeatCount="indefinite" />
             <animate attributeName="cy" from="0" to={yMid} dur="2s" repeatCount="indefinite" />
             <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite" />
@@ -293,23 +299,26 @@ export function OrgChartCompact({ agents, activeIdx, onAgentClick, coloredAcrony
         </svg>
       </div>
 
-      {/* Row des sub-agents */}
+      {/* Row des agents (+ case « Votre poste ») */}
       <div
-        className="grid w-full gap-2.5"
-        style={{ gridTemplateColumns: `repeat(${n}, 1fr)` }}
+        className={showCustomSlot ? "grid w-full gap-2" : "grid w-full gap-2.5"}
+        style={{
+          gridTemplateColumns: showCustomSlot
+            ? `repeat(${agents.length}, 1fr) 0.85fr`
+            : `repeat(${n}, 1fr)`,
+        }}
       >
-        {subs.map((agent, i) => {
-          const realIdx = i + 1;
-          return (
-            <SubAgentBox
-              key={agent.num}
-              agent={agent}
-              active={activeIdx === realIdx}
-              onClick={() => onAgentClick?.(realIdx)}
-              coloredAcronyms={coloredAcronyms}
-            />
-          );
-        })}
+        {agents.map((agent, i) => (
+          <SubAgentBox
+            key={agent.num}
+            agent={agent}
+            active={activeIdx === i}
+            onClick={() => onAgentClick?.(i)}
+            coloredAcronyms={coloredAcronyms}
+            compact={showCustomSlot}
+          />
+        ))}
+        {showCustomSlot && <CustomSlotBox />}
       </div>
     </div>
   );

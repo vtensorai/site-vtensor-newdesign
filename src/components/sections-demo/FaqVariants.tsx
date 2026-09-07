@@ -235,9 +235,9 @@ function VariantC() {
   const [activeIdx, setActiveIdx] = useState(0);
   const active = FAQS[activeIdx];
   return (
-    <section className="relative py-20 md:py-28">
+    <section className="relative py-20 md:py-28" id="faq">
       <div className="max-w-[1200px] mx-auto px-6 sm:px-10">
-        <FaqHeader subtitle="Sélectionnez une question dans la liste à gauche." />
+        <FaqHeader subtitle="Sélectionnez une question pour afficher la réponse." />
 
         <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-8 items-start">
           {/* Sidebar Q */}

@@ -108,9 +108,9 @@ const ACTIVITY: Array<{
     tools: "3 tool_calls",
   },
   {
-    acr: "CEO",
-    accent: { bg: "rgba(139,92,246,0.10)", fg: "#8B5CF6", border: "rgba(139,92,246,0.30)" },
-    text: "WhatsApp — Briefing du matin envoyé",
+    acr: "ATC",
+    accent: { bg: "rgba(59,130,246,0.12)", fg: "#3b82f6", border: "rgba(59,130,246,0.35)" },
+    text: "Email — relance devis #00412 envoyée",
     age: "il y a 6h",
     tools: "1 tool_call",
   },
@@ -158,15 +158,15 @@ const ACTIVITY: Array<{
     age: "il y a 2j",
   },
   {
-    acr: "CEO",
-    accent: { bg: "rgba(139,92,246,0.10)", fg: "#8B5CF6", border: "rgba(139,92,246,0.30)" },
-    text: "Synthèse rapport trimestriel — PDF prêt",
+    acr: "ADV",
+    accent: { bg: "rgba(16,185,129,0.12)", fg: "#10b981", border: "rgba(16,185,129,0.35)" },
+    text: "Rapport trésorerie hebdo — PDF prêt",
     age: "il y a 2j",
     tools: "5 tool_calls",
   },
 ];
 
-// 7 agents (couleurs officielles agent-colors.ts)
+// 6 agents (couleurs officielles agent-colors.ts)
 const AGENTS_LIST: Array<{
   acr: string;
   bg: string;
@@ -176,7 +176,6 @@ const AGENTS_LIST: Array<{
   role: string;
   auto?: boolean;
 }> = [
-  { acr: "CEO", bg: "rgba(139,92,246,0.10)", fg: "#8B5CF6", border: "rgba(139,92,246,0.30)", name: "Directeur Exécutif", role: "strategie.orchestration.conseil" },
   { acr: "SAV", bg: "rgba(34,211,238,0.10)", fg: "#22D3EE", border: "rgba(34,211,238,0.30)", name: "Agent SAV", role: "email.kb.tickets", auto: true },
   { acr: "ATC", bg: "rgba(59,130,246,0.12)", fg: "#3b82f6", border: "rgba(59,130,246,0.35)", name: "Agent Commercial", role: "email.crm.devis.appels_d_offres", auto: true },
   { acr: "ADV", bg: "rgba(16,185,129,0.12)", fg: "#10b981", border: "rgba(16,185,129,0.35)", name: "Agent ADV", role: "devis.suivi_commande.facturation", auto: true },
@@ -496,11 +495,11 @@ function KpiRow() {
   );
 }
 
-// Grid 3 cards : Mon CEO / Activité / Agents
+// Grid 3 cards : Conversations / Activité / Agents
 function CardGrid() {
   return (
     <div className="grid grid-cols-3 gap-2.5 flex-1 min-h-0 overflow-hidden">
-      <CeoCard />
+      <ChatCard />
       <ActivityCard />
       <AgentsCard />
     </div>
@@ -555,10 +554,10 @@ function CardShell({
   );
 }
 
-// Mon CEO Card
-function CeoCard() {
+// Conversations Card — on choisit l'agent à qui parler
+function ChatCard() {
   return (
-    <CardShell title="mon ceo" subtitle="12" actionLabel="étendre">
+    <CardShell title="conversations" subtitle="12" actionLabel="étendre">
       <div className="h-full flex flex-col">
         {/* Toolbar : historique + nouvelle */}
         <div
@@ -605,14 +604,30 @@ function CeoCard() {
           </span>
         </div>
 
-        {/* Zone chat (vide / accueil) — logo du tenant (fictif Acme Studio) */}
+        {/* Zone chat (accueil) — choix de l'interlocuteur */}
         <div className="flex-1 flex flex-col items-center justify-center gap-2 px-2">
           <AcmeStudioLogo />
           <div style={{ ...monoStyle, fontSize: 8, color: C.cyan, letterSpacing: "0.16em", textTransform: "uppercase" }}>
-            // directeur exécutif
+            // à qui voulez-vous parler ?
           </div>
-          <div className="text-[10px] text-center mt-1" style={{ color: C.textMuted }}>
-            Sur quoi veux-tu qu&apos;on avance ?
+          <div className="flex flex-wrap justify-center gap-1 mt-0.5">
+            {AGENTS_LIST.map((a, i) => (
+              <span
+                key={a.acr}
+                className="font-bold"
+                style={{
+                  ...monoStyle,
+                  fontSize: 8,
+                  padding: "1.5px 5px",
+                  background: i === 0 ? a.bg : "transparent",
+                  color: i === 0 ? a.fg : C.textFaint,
+                  border: `1px solid ${i === 0 ? a.border : C.border}`,
+                  letterSpacing: "0.04em",
+                }}
+              >
+                {a.acr}
+              </span>
+            ))}
           </div>
         </div>
 
@@ -623,7 +638,7 @@ function CeoCard() {
         >
           <span style={{ color: C.cyan, fontSize: 9 }}>$</span>
           <span style={{ fontSize: 8.5, color: C.textFaint, flex: 1 }} className="truncate">
-            Posez-moi votre question...
+            Écrire à l&apos;Agent SAV...
           </span>
           <span style={{ ...monoStyle, fontSize: 7, color: C.textMuted, letterSpacing: "0.12em", textTransform: "uppercase" }}>
             envoyer ↑
@@ -632,7 +647,7 @@ function CeoCard() {
 
         {/* Suggestions */}
         <div className="mt-1.5 flex flex-wrap gap-1">
-          {["Briefing du matin", "Statut SAV"].map((s) => (
+          {["Tickets en attente", "Dernières réponses"].map((s) => (
             <span
               key={s}
               className="px-1.5 py-0.5"
@@ -709,7 +724,7 @@ function ActivityCard() {
 // Agents Card
 function AgentsCard() {
   return (
-    <CardShell title="agents" subtitle="7/7" actionLabel="catalogue">
+    <CardShell title="agents" subtitle="6/6" actionLabel="catalogue">
       <ul className="space-y-0 -mx-2.5 overflow-hidden">
         {AGENTS_LIST.map((a, i) => (
           <li

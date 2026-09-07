@@ -29,7 +29,7 @@ export const PAINS = [
     num: "01",
     label: "Capacité",
     title: "L'équipe que vous ne pouviez pas vous offrir",
-    desc: "Vous savez précisément ce que votre entreprise pourrait accomplir avec un service client, un commercial et une équipe marketing dédiés à plein temps. Recruter ces profils représente un investissement souvent hors de portée. Vtensor vous donne accès à cette équipe complète pour le coût d'un stagiaire.",
+    desc: "Vous savez précisément ce que votre entreprise pourrait accomplir avec un service client, un commercial et une équipe marketing dédiés à plein temps. Recruter ces profils représente un investissement souvent hors de portée. Vtensor vous donne accès à cette équipe complète, pour une fraction du coût d'un recrutement.",
     pos: { x: -32, y: -26 },
   },
   {

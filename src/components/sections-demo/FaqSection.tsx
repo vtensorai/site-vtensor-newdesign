@@ -33,19 +33,19 @@ export const FAQS: Faq[] = [
   {
     question: "En quoi c'est différent de ChatGPT ou d'un chatbot classique ?",
     answer:
-      "Vos agents Vtensor connaissent votre business sur le bout des doigts : mémoire persistante, contexte entreprise, accès à vos outils existants (ERP, CRM, messagerie). Ils exécutent des tâches concrètes — envoyer un email, créer un devis dans votre ERP, lancer une campagne — pas juste répondre à une question. Et ils travaillent en équipe coordonnée par le Directeur Exécutif, qui dispatche chaque demande au bon poste.",
+      "Vos agents Vtensor connaissent votre business sur le bout des doigts : mémoire persistante, contexte entreprise, accès à vos outils existants (ERP, CRM, messagerie). Ils exécutent des tâches concrètes — envoyer un email, créer un devis dans votre ERP, lancer une campagne — pas juste répondre à une question. Et vous vous adressez directement à l'agent concerné, par email ou depuis l'application.",
     category: "differentiation",
   },
   {
     question: "Comment se passe l'intégration ?",
     answer:
-      "On commence par un audit gratuit de 30 minutes pour cartographier vos outils et vos chronophages. Ensuite, notre équipe technique configure vos agents, les connecte à vos systèmes (Odoo, HubSpot, Pennylane, votre messagerie…) et les forme sur vos documents et vos process. Vous validez chaque agent en live avant la mise en production. Aucune ligne de code à écrire de votre côté.",
+      "On commence par un audit gratuit de 30 minutes pour cartographier vos outils et vos chronophages. Ensuite, notre équipe technique configure vos agents, les connecte à vos systèmes (ERP, messagerie, site web, téléphonie…) et les forme sur vos documents et vos process. Vous validez chaque agent en live avant la mise en production. Aucune ligne de code à écrire de votre côté.",
     category: "integration",
   },
   {
     question: "Combien de temps avant que mes agents soient opérationnels ?",
     answer:
-      "Quelques jours pour un agent autonome simple (SAV ou ADV). 1 à 2 semaines pour une équipe complète avec intégrations métiers. Les Founders bénéficient d'un onboarding prioritaire mené directement par notre équipe technique.",
+      "Quelques jours pour un agent autonome simple (SAV ou ADV). 1 à 2 semaines pour une équipe complète avec intégrations métiers.",
     category: "integration",
   },
   {
@@ -63,7 +63,7 @@ export const FAQS: Faq[] = [
   {
     question: "Suis-je engagé sur une durée ?",
     answer:
-      "Non. Abonnement mensuel, sans engagement, résiliation possible à tout moment avec un préavis de 30 jours. Nous voulons que vous restiez parce que ça marche, pas parce que vous êtes coincé.",
+      "En mensuel, non : sans engagement, résiliation possible à tout moment avec un préavis de 30 jours. En annuel, l'abonnement est réglé d'avance pour 12 mois, avec 2 mois offerts. Nous voulons que vous restiez parce que ça marche, pas parce que vous êtes coincé.",
     category: "engagement",
   },
   {
@@ -79,9 +79,9 @@ export const FAQS: Faq[] = [
     category: "securite",
   },
   {
-    question: "Qui est éligible à l'offre Pro ?",
+    question: "Comment fonctionne la tarification ?",
     answer:
-      "L'offre Pro est conçue pour les structures à dirigeant unique qui veulent un agent IA tout-en-un, sans complexité de configuration. Sont éligibles :\n\n— Les indépendants en professions libérales réglementées : avocats, médecins, kinés, architectes, experts-comptables, notaires, psychologues, ostéopathes, dentistes, vétérinaires…\n— Les artisans : plombiers, électriciens, menuisiers, peintres, paysagistes, carreleurs…\n— Les entrepreneurs solos et freelances : consultants, coachs, designers, développeurs…\n\nSi vous êtes plusieurs ou si votre activité demande des agents spécialisés (commercial dédié, ADV avec reporting financier, marketing avancé, etc.), l'offre Founder ou Sur-mesure sera plus adaptée.",
+      "Un prix par agent, sans palier caché : 100 € HT par agent et par mois, ou 1 000 € HT par agent et par an si vous réglez à l'année (2 mois offerts). Vous composez votre équipe librement, avec des postes de notre catalogue ou des postes créés pour vous.\n\nÀ cela s'ajoutent des frais d'intégration uniques, à partir de 1 000 € HT, qui dépendent des outils à connecter et des process à modéliser. Le montant exact est fixé sur devis après l'audit gratuit. Les organisations qui ont des besoins spécifiques (hébergement chez elles, applications dédiées, intégration ERP lourde) relèvent de l'offre Sur-mesure, sur devis.",
     category: "engagement",
   },
   {
