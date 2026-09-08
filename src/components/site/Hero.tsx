@@ -78,7 +78,7 @@ export function Hero() {
                 style={{ opacity: i === index ? 1 : 0, zIndex: i === index ? 1 : 0 }}
                 aria-hidden={i !== index}
               >
-                <Photo name={s.photo} alt={s.alt} width={1400} height={1875} priority={i === 0} className="photo h-full" />
+                <Photo name={s.photo} alt={s.alt} width={896} height={1200} priority={i === 0} className="photo h-full" />
               </div>
             ))}
           </div>

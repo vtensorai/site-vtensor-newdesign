@@ -15,7 +15,7 @@ export function HowItWorks() {
     <section className="section" id="comment-ca-marche">
       <div className="container flex flex-col gap-10 lg:gap-12">
         <SectionHead kicker="Comment ça marche" title="De l'audit à la production, en quatre étapes." lead="Tout commence par une visio de trente minutes. Aucune ligne de code de votre côté." />
-        <Photo name="visio" alt="Un dirigeant en visio dans un bureau lumineux" width={1400} height={781} className="photo h-[260px] sm:h-[340px] lg:h-[440px]" />
+        <Photo name="visio" alt="Un dirigeant en visio dans un bureau lumineux" width={1376} height={768} className="photo h-[260px] sm:h-[340px] lg:h-[440px]" />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {STEPS.map((s) => (
             <div key={s.title} className="flex flex-col gap-3 pt-6 border-t border-ink">

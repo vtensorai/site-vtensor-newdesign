@@ -84,6 +84,9 @@ export function Footer() {
           <a href="/mentions-legales/" className={link}>
             Mentions légales
           </a>
+          <a href="/conditions-generales/" className={link}>
+            Conditions générales
+          </a>
           <a href="/politique-de-confidentialite/" className={link}>
             Politique de confidentialité
           </a>

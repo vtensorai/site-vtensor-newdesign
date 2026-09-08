@@ -17,6 +17,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.3,
     },
     {
+      url: `${BASE}/conditions-generales/`,
+      lastModified: new Date("2026-09-08"),
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
       url: `${BASE}/politique-de-confidentialite/`,
       lastModified: LEGAL_UPDATED,
       changeFrequency: "yearly",
