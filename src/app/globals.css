@@ -195,6 +195,20 @@ body {
 .thumbs { display: flex; gap: 6px; } .thumbs span { display: block; width: 34px; height: 34px; background: linear-gradient(135deg, var(--app-violet), var(--app-cyan)); opacity: 0.85; }
 .thumbs span:nth-child(2) { background: linear-gradient(135deg, var(--app-pink), var(--app-violet)); } .thumbs span:nth-child(4) { background: linear-gradient(135deg, var(--app-amber), var(--app-pink)); } .thumbs span:nth-child(6) { background: linear-gradient(135deg, var(--app-cyan), var(--app-green)); }
 
+/* ── FAQ en accordéon ─────────────────────────────────────────────── */
+.qa { display: grid; grid-template-columns: 40px 1fr 24px; gap: 16px; align-items: start; padding: 24px 0; background: none; border: 0; color: var(--ink); font: inherit; }
+.qa-q { transition: color 150ms; }
+.qa:hover .qa-q { color: var(--accent); }
+.qa-icon { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; margin-top: 4px; color: var(--muted); border: 1px solid var(--rule); transition: color 150ms, border-color 150ms; }
+.qa:hover .qa-icon { color: var(--accent); border-color: var(--accent); }
+.qa[aria-expanded="true"] .qa-icon { color: var(--on-accent); background: var(--accent); border-color: var(--accent); }
+.qa-v { transition: opacity 200ms; }
+.qa[aria-expanded="true"] .qa-v { opacity: 0; }
+.qa-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 280ms ease; }
+.qa-panel[data-open="true"] { grid-template-rows: 1fr; }
+.qa-panel-inner { overflow: hidden; padding-left: 56px; padding-right: 40px; }
+@media (prefers-reduced-motion: reduce) { .qa-panel { transition: none; } }
+
 /* ── Pages légales ────────────────────────────────────────────────── */
 .legal { font-size: 15px; line-height: 1.65; color: var(--muted); }
 .legal h2 { font-family: var(--font-display); font-weight: 400; color: var(--ink); font-size: 26px; margin: 40px 0 12px; }

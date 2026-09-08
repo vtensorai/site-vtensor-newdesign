@@ -84,7 +84,7 @@ export function Hero() {
           </div>
           <div
             key={slide.id + "-card"}
-            className="box fade-in lg:absolute lg:-left-[72px] lg:bottom-0 lg:w-[360px] mt-4 lg:mt-0 p-6 lg:p-7 flex flex-col gap-3.5"
+            className="box fade-in relative z-10 lg:absolute lg:-left-[72px] lg:bottom-0 lg:w-[360px] mt-4 lg:mt-0 p-6 lg:p-7 flex flex-col gap-3.5"
             style={{ boxShadow: "var(--shadow-card)" }}
           >
             <div className="flex justify-between items-baseline">

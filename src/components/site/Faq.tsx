@@ -1,9 +1,20 @@
+"use client";
+
+/**
+ * FAQ en accordéon : toutes les réponses repliées au chargement, une question
+ * s'ouvre au clic (une seule ouverte à la fois). Les données structurées
+ * FAQPage restent complètes pour les moteurs de recherche.
+ */
+
+import { useState } from "react";
 import { FAQS } from "@/data/faq";
 import { CONTACT_EMAIL } from "@/lib/links";
 
-const NB = " ";
+const NB = " ";
 
 export function Faq() {
+  const [open, setOpen] = useState<number | null>(null);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -30,15 +41,35 @@ export function Faq() {
           </p>
         </div>
         <div className="lg:col-start-6 lg:col-span-7 flex flex-col">
-          {FAQS.map((f, i) => (
-            <div key={f.question} className="grid grid-cols-[40px_1fr] gap-4 py-7 border-t border-rule last:border-b">
-              <span className="num pt-1.5">{String(i + 1).padStart(2, "0")}</span>
-              <div className="flex flex-col gap-2.5">
-                <h3 className="serif text-[22px] md:text-[24px] leading-[1.2] m-0">{f.question}</h3>
-                <p className="p text-[15px]">{f.answer}</p>
+          {FAQS.map((f, i) => {
+            const isOpen = open === i;
+            const panelId = `faq-a-${i}`;
+            return (
+              <div key={f.question} className="border-t border-rule last:border-b">
+                <button
+                  type="button"
+                  className="qa w-full text-left cursor-pointer"
+                  aria-expanded={isOpen}
+                  aria-controls={panelId}
+                  onClick={() => setOpen(isOpen ? null : i)}
+                >
+                  <span className="num pt-1.5">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="qa-q serif text-[21px] md:text-[24px] leading-[1.2]">{f.question}</span>
+                  <span className="qa-icon" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                      <path d="M5 12h14" />
+                      <path d="M12 5v14" className="qa-v" />
+                    </svg>
+                  </span>
+                </button>
+                <div id={panelId} className="qa-panel" data-open={isOpen} role="region">
+                  <div className="qa-panel-inner">
+                    <p className="p text-[15px] pb-7">{f.answer}</p>
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
