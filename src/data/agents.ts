@@ -4,6 +4,7 @@
  *
  * Depuis le 2026-09-07 il n'y a plus d'agent maître : le client s'adresse
  * directement à chaque agent (email, application, WhatsApp, téléphone).
+ * Ce sont des exemples de postes : chaque agent est développé sur mesure.
  *
  * Stack :
  *   01 Agent SAV (sav)                   — autonome multi-canal
@@ -12,182 +13,147 @@
  *   04 Agent Webmaster (webmaster)       — CMS + SEO + acquisition payante
  *   05 Agent Marketing (marketing)       — contenu + visuels + publication
  *   06 Agent Standardiste (standardiste) — voix téléphonique 24/7
- *
- * `incoming: true` → la bubble user de l'AgentChatPreview est formatée comme un
- * mail/appel externe entrant (préfixe "📨 De …", fond légèrement teinté cyan).
  */
 
 export type Channel = "web" | "email" | "whatsapp" | "telegram" | "phone";
 
+export const CHANNEL_LABEL: Record<Channel, string> = {
+  web: "Application",
+  email: "Email",
+  whatsapp: "WhatsApp",
+  telegram: "Telegram",
+  phone: "Téléphone",
+};
+
 export type Agent = {
   num: string;
+  /** Identifiant technique (= clé agent_config). */
+  slug: string;
   name: string;
+  /** Acronyme 3 lettres, comme dans le tableau de bord (SAV/ATC/ADV/WEB/MKT/STA). */
+  acronym: string;
+  /** Mission en une ligne (liste du catalogue). */
   metier: string;
+  /** Promesse en une phrase (titre de la fiche). */
+  headline: string;
+  /** Détail de la fiche. */
   description: string;
   capabilities: readonly string[];
-  price: string;
-  /** Tarif annuel optionnel (2 mois offerts) — affiché à côté du mensuel. */
-  priceAnnual?: string;
-  user: string;
-  agent: string;
-  flagship?: boolean;
-  incoming?: boolean;
-  /** Canaux par lesquels le Founder peut joindre cet agent. */
-  channels?: readonly Channel[];
-  /** Acronyme 3 lettres affiché en badge style dashboard (SAV/ATC/ADV/WEB/MKT/STA). */
-  acronym?: string;
-  /** Couleur d'accent hex pour l'acronyme + le glow (palette dashboard). */
-  accent?: string;
-  /** Marqué autonome (badge AUTO style dashboard sur les agents qui tournent en boucle). */
+  /** Canaux par lesquels le client joint cet agent. */
+  channels: readonly Channel[];
+  /** Tourne en boucle sans sollicitation (badge « autonome »). */
   autonomous?: boolean;
+  /** Exemple d'échange. `from` renseigné = message externe entrant (client final, appel). */
+  example: { from?: string; user: string; agent: string };
 };
 
 export const AGENTS: readonly Agent[] = [
   {
     num: "01",
+    slug: "sav",
     name: "Agent SAV",
-    metier: "Service après-vente multi-canal",
-    description:
-      "Répond directement à vos clients en moins d'une minute, 24h/24, dans votre ton, sur tous les canaux : email, WhatsApp, chat. Escalade vers un humain quand c'est nécessaire. La base de connaissances métier s'auto-enrichit à mesure que les questions arrivent.",
-    capabilities: [
-      "Agent 100 % autonome",
-      "Multi-canal (email, WhatsApp, chat)",
-      "Base de connaissances métier",
-      "Gestion de tickets",
-      "Escalade humaine intelligente",
-      "FAQ auto-enrichie",
-    ],
-    price: "100 € HT / mois",
-    priceAnnual: "1 000 € HT / an",
-    incoming: true,
-    user: "De pierre@acme-industrie.fr (client final) — Bonjour, je n'arrive plus à exporter mes données depuis ce matin. Le bouton « Exporter » donne une page blanche. Pouvez-vous m'aider rapidement ? Pierre, Acme.",
-    agent:
-      "✓ Répondu à Pierre en 47 secondes : workaround envoyé (utiliser Chrome au lieu de Safari iOS), excuses, ETA fix < 24 h. Ticket ouvert côté tech. Pierre a confirmé que ça fonctionne. **Tu n'as rien à faire.**",
     acronym: "SAV",
-    channels: ["web", "email", "whatsapp"],
-    accent: "#22D3EE",
+    metier: "Service après-vente multicanal",
+    headline: "Répond à vos clients en moins d'une minute, dans votre ton.",
+    description:
+      "Sur tous les canaux : email, WhatsApp, application. Escalade vers un humain quand c'est nécessaire. La base de connaissances métier s'enrichit à mesure que les questions arrivent.",
+    capabilities: ["Multicanal", "Base de connaissances métier", "Gestion de tickets", "Escalade humaine", "FAQ auto-enrichie"],
+    channels: ["email", "whatsapp", "web"],
     autonomous: true,
+    example: {
+      from: "pierre@acme-industrie.fr",
+      user: "Bonjour, je n'arrive plus à exporter mes données depuis ce matin. Le bouton « Exporter » donne une page blanche. Pouvez-vous m'aider rapidement ?",
+      agent:
+        "Répondu à Pierre en 47 secondes : solution de contournement envoyée, excuses, correctif annoncé sous 24 h. Ticket ouvert côté technique. Pierre a confirmé que ça fonctionne. **Vous n'avez rien à faire.**",
+    },
   },
   {
     num: "02",
+    slug: "commercial",
     name: "Agent Commercial",
-    metier: "Prospection, appels d'offres et qualification",
-    description:
-      "Prospecte vos futurs clients à grande échelle (intelligence LinkedIn, Apollo, Clay), qualifie les leads entrants, rédige vos réponses aux appels d'offres en PDF brandé, et prépare vos devis. Vous gardez la main sur la signature, il s'occupe de toute la machinerie commerciale.",
-    capabilities: [
-      "Agent 100 % autonome",
-      "Prospection (LinkedIn, Apollo, Clay)",
-      "Qualification de leads entrants",
-      "Réponse aux appels d'offres (PDF brandé)",
-      "Préparation de devis",
-      "Relances séquencées",
-      "Suivi pipeline et opportunities",
-    ],
-    price: "100 € HT / mois",
-    priceAnnual: "1 000 € HT / an",
-    user: "On veut entrer chez les 50 plus grosses ETI industrielles en Auvergne-Rhône-Alpes. Tu peux me préparer une liste qualifiée et la séquence de prospection ?",
-    agent:
-      "✓ 47 ETI identifiées (croisé Apollo + Clay + signaux d'intent). Pour chacune : décideur cible, taille équipe, stack tech, événements récents (recrutements, levées, presse). Messages personnalisés rédigés sur tes 3 angles de positionnement. CSV prêt à importer dans ton Waalaxy. Estimation : ~12 RDV qualifiés sur 2 semaines.",
     acronym: "ATC",
-    channels: ["web", "email"],
-    accent: "#3B82F6",
+    metier: "Prospection, appels d'offres et qualification",
+    headline: "Prospecte, qualifie et prépare vos devis. Vous signez.",
+    description:
+      "Prospection à grande échelle (LinkedIn, Apollo, Clay), qualification des leads entrants, réponses aux appels d'offres en PDF à votre marque, préparation des devis. Vous gardez la main sur la signature.",
+    capabilities: ["Prospection (LinkedIn, Apollo, Clay)", "Qualification des leads entrants", "Réponses aux appels d'offres", "Préparation de devis", "Relances séquencées", "Suivi du pipeline"],
+    channels: ["email", "web"],
     autonomous: true,
+    example: {
+      user: "Nous voulons entrer chez les 50 plus grosses ETI industrielles d'Auvergne-Rhône-Alpes. Pouvez-vous me préparer une liste qualifiée et la séquence de prospection ?",
+      agent:
+        "47 ETI identifiées (croisement Apollo, Clay et signaux d'intention). Pour chacune : décideur cible, taille d'équipe, outils, actualité récente. Messages personnalisés rédigés sur vos 3 angles de positionnement. Fichier prêt à importer dans votre outil LinkedIn. **Estimation : une douzaine de rendez-vous qualifiés sur 2 semaines.**",
+    },
   },
   {
     num: "03",
+    slug: "adv",
     name: "Agent ADV",
-    metier: "Administration des ventes, facturation et trésorerie",
-    description:
-      "Saisit vos commandes, prépare vos devis, émet vos factures, relance les impayés, suit la logistique et gère les litiges. Connecté à votre comptabilité (Pennylane, Sage, Cegid) et à votre banque (Bridge, Powens) : reporting de trésorerie hebdo, P&L mensuel et rapports PDF brandés pour banquier ou expert-comptable.",
-    capabilities: [
-      "Agent 100 % autonome",
-      "Saisie commandes et facturation",
-      "Préparation de devis",
-      "Relances impayés (J+1, J+15, J+30)",
-      "Suivi logistique et livraisons",
-      "Gestion des litiges clients",
-      "Reporting cash hebdomadaire",
-      "P&L mensuel et rapports PDF brandés",
-    ],
-    price: "100 € HT / mois",
-    priceAnnual: "1 000 € HT / an",
-    user: "Où on en est sur les impayés et la trésorerie ?",
-    agent:
-      "✓ **Impayés** : 4 factures +30 j (total 8 720 € HT). Toutes relancées. Camille Roux confirme virement vendredi, Marc Lefèvre demande échéancier 3 mois → je te le passe si OK. **Trésorerie** : position cash 87 540 €, runway 6,2 mois, DSO 47 j (vs objectif 35 j). Rapport PDF brandé prêt pour ton banquier si besoin.",
     acronym: "ADV",
-    channels: ["web", "email"],
-    accent: "#10B981",
+    metier: "Administration des ventes, facturation et trésorerie",
+    headline: "Facture, relance les impayés et suit votre trésorerie.",
+    description:
+      "Saisie des commandes, devis, factures, litiges et logistique. Connecté à votre comptabilité (Pennylane, Sage, Cegid) et à votre banque : reporting de trésorerie hebdomadaire, P&L mensuel, rapports PDF pour votre banquier ou votre expert-comptable.",
+    capabilities: ["Commandes et facturation", "Préparation de devis", "Relances impayés (J+1, J+15, J+30)", "Suivi logistique", "Gestion des litiges", "Reporting trésorerie et P&L"],
+    channels: ["email", "web"],
     autonomous: true,
+    example: {
+      user: "Où en sommes-nous sur les impayés et la trésorerie ?",
+      agent:
+        "**Impayés** : 4 factures à plus de 30 jours (8 720 € HT), toutes relancées. Camille Roux confirme un virement vendredi ; Marc Lefèvre demande un échéancier sur 3 mois, je vous le soumets. **Trésorerie** : position 87 540 €, 6,2 mois d'autonomie, délai de paiement moyen 47 jours (objectif 35). Rapport PDF prêt pour votre banquier.",
+    },
   },
   {
     num: "04",
+    slug: "webmaster",
     name: "Agent Webmaster",
-    metier: "Site web, SEO et acquisition payante",
-    description:
-      "Tout ce qui touche à votre site et à votre acquisition payante. Édition de pages no-code (Framer, Webflow, WordPress), rédaction et publication d'articles SEO, SEO technique (schema, sitemaps, performance), suivi Search Console, et gestion complète de vos campagnes Google Ads, Meta Ads et LinkedIn Ads.",
-    capabilities: [
-      "Édition site no-code (Framer, Webflow, WordPress)",
-      "Rédaction et publication d'articles SEO",
-      "SEO technique (schema, sitemaps, performance)",
-      "Suivi Google Search Console",
-      "Google Ads, Meta Ads, LinkedIn Ads",
-      "A/B testing et reporting",
-    ],
-    price: "100 € HT / mois",
-    priceAnnual: "1 000 € HT / an",
-    user: "Pourquoi mon site n'a pas beaucoup de trafic organique, et est-ce que ma campagne Google Ads est bien calibrée ?",
-    agent:
-      "✓ Audit complet. **SEO** : 3 problèmes — H1 sans mots-clés recherchés (12 propositions calibrées), meta descriptions absentes sur 8 pages, contenu trop pauvre sur les pages produit. Plus 14 backlinks toxiques à désavouer. **Google Ads** : ton CPA est 2,4× au-dessus du benchmark secteur. 3 mots-clés cannibalisent 67 % du budget pour 12 % des conversions. Je redistribue les enchères et je publie 4 articles SEO cette semaine ?",
     acronym: "WEB",
+    metier: "Site web, SEO et acquisition payante",
+    headline: "Fait vivre votre site et vos campagnes.",
+    description:
+      "Édition de pages (Framer, Webflow, WordPress), rédaction et publication d'articles SEO, SEO technique, suivi Search Console, gestion de vos campagnes Google Ads, Meta Ads et LinkedIn Ads.",
+    capabilities: ["Édition de site (Framer, Webflow, WordPress)", "Articles SEO", "SEO technique", "Search Console", "Google, Meta et LinkedIn Ads", "Tests A/B et reporting"],
     channels: ["web"],
-    accent: "#F59E0B",
+    example: {
+      user: "Pourquoi mon site a-t-il si peu de trafic organique, et ma campagne Google Ads est-elle bien calibrée ?",
+      agent:
+        "Audit complet. **SEO** : titres sans les mots-clés recherchés (12 propositions), meta descriptions absentes sur 8 pages, pages produit trop pauvres, 14 liens toxiques à désavouer. **Google Ads** : coût par acquisition 2,4 fois au-dessus du secteur ; 3 mots-clés absorbent 67 % du budget pour 12 % des conversions. Je redistribue les enchères et je publie 4 articles cette semaine ?",
+    },
   },
   {
     num: "05",
+    slug: "marketing",
     name: "Agent Marketing",
-    metier: "Contenu, visuels et publication",
-    description:
-      "Programme vos publications LinkedIn, Instagram, X et Facebook, monitore l'engagement et répond aux commentaires en votre nom. Rédige et envoie vos newsletters via Brevo ou Mailchimp. En version Pro, génère vos images, vidéos et logos et déploie une identité visuelle cohérente sur tous vos supports.",
-    capabilities: [
-      "Programmation posts (LinkedIn, Instagram, X, Facebook)",
-      "Monitoring engagement et réponses commentaires",
-      "Newsletters (Brevo, Mailchimp)",
-      "Génération d'images, vidéos et logos (version Pro)",
-      "Identité visuelle (version Pro)",
-    ],
-    price: "100 € HT / mois",
-    priceAnnual: "1 000 € HT / an",
-    user: "Génère un carrousel LinkedIn sur les 3 erreurs d'automation que les PME font le plus.",
-    agent:
-      "✓ Carrousel 8 slides posé en draft (titre + 3 erreurs + 3 fixes + CTA). Tonalité directe, hook validé. Visuels générés en cohérence avec ta charte. Tu veux 3 variantes de thumbnail ?",
     acronym: "MKT",
+    metier: "Contenu, visuels et publication",
+    headline: "Publie, anime et mesure votre présence en ligne.",
+    description:
+      "Programmation des publications LinkedIn, Instagram, X et Facebook, réponses aux commentaires en votre nom, newsletters via Brevo ou Mailchimp. En version Pro : images, vidéos, logos et identité visuelle cohérente sur tous vos supports.",
+    capabilities: ["Publications LinkedIn, Instagram, X, Facebook", "Suivi de l'engagement", "Newsletters (Brevo, Mailchimp)", "Images et vidéos (Pro)", "Identité visuelle (Pro)"],
     channels: ["web"],
-    accent: "#EC4899",
+    example: {
+      user: "Préparez un carrousel LinkedIn sur les 3 erreurs d'automatisation que les PME font le plus.",
+      agent:
+        "Carrousel de 8 visuels en brouillon : accroche, 3 erreurs, 3 correctifs, appel à l'action. Visuels générés dans votre charte. **Voulez-vous 3 variantes de couverture ?**",
+    },
   },
   {
     num: "06",
+    slug: "standardiste",
     name: "Agent Standardiste",
-    metier: "Accueil téléphonique et prise de messages",
-    description:
-      "Décroche votre standard 24h/24 d'une voix française naturelle. Qualifie l'appel, prend des messages structurés, transfère vers la bonne personne, escalade vers vous quand c'est urgent. Reconnaît votre voix : quand vous l'appelez, c'est elle qui dispatche vos demandes à l'équipe.",
-    capabilities: [
-      "Agent 100 % autonome",
-      "Accueil téléphonique 24/7",
-      "Voix française naturelle",
-      "Prise de messages structurés",
-      "Transferts d'appel intelligents",
-      "Escalade urgence",
-      "Dispatch vocal du dirigeant",
-    ],
-    price: "100 € HT / mois",
-    priceAnnual: "1 000 € HT / an",
-    incoming: true,
-    user: "📞 De Pierre Lambert, Acme Industries — Bonjour, je voulais parler à Sophie au commercial pour discuter d'un partenariat possible.",
-    agent:
-      "✓ Appel reçu. Pierre Lambert identifié comme nouveau prospect (premier contact). Message structuré transmis à l'Agent Commercial : « Partenariat — Acme Industries, Pierre Lambert cherche Sophie ». ETA rappel : 24 h. SMS de confirmation envoyé à Pierre.",
     acronym: "STA",
+    metier: "Accueil téléphonique et prise de messages",
+    headline: "Décroche votre standard 24h/24, d'une voix française naturelle.",
+    description:
+      "Qualifie l'appel, prend des messages structurés, transfère vers la bonne personne, vous alerte quand c'est urgent. Reconnaît votre voix : quand vous l'appelez, elle dispatche vos demandes à l'équipe.",
+    capabilities: ["Accueil téléphonique 24/7", "Voix française naturelle", "Messages structurés", "Transferts d'appel", "Escalade des urgences", "Dispatch vocal du dirigeant"],
     channels: ["phone", "web"],
-    accent: "#67E8F9",
     autonomous: true,
+    example: {
+      from: "Pierre Lambert, Acme Industries · appel entrant",
+      user: "Bonjour, je voulais parler à Sophie, au commercial, pour discuter d'un partenariat possible.",
+      agent:
+        "Appel reçu. Pierre Lambert identifié comme nouveau prospect. Message structuré transmis à l'Agent Commercial : « Partenariat, Acme Industries, Pierre Lambert cherche Sophie ». Rappel prévu sous 24 h. SMS de confirmation envoyé à Pierre.",
+    },
   },
-] as const;
+];

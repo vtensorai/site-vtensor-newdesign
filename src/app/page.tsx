@@ -1,39 +1,39 @@
 /**
- * Home — V2 (2026-09-07).
+ * Home — V3 « Cabinet / Infrastructure » (2026-09-08).
  *
- * Flux : Hero → blocages → piliers → catalogue (6 exemples de postes, sur mesure)
- *        → comment ça marche → aperçu app → tarifs par agent → sécurité → FAQ
- *        → CTA final → footer.
- * Plus d'agent maître : le client parle à chaque agent en direct.
+ * Flux : nav → hero (carrousel métiers) → ce que ça change → agents (6 postes,
+ * sur mesure) → comment ça marche → aperçu application → tarifs → sécurité
+ * → FAQ → CTA final → footer. Plus d'agent maître : le client parle à chaque
+ * agent en direct.
  */
 
-import { Hero } from "@/components/sections/Hero";
-import { HiddenCostB } from "@/components/sections-demo/HiddenCostB";
-import { SolutionV3Tabs } from "@/components/sections-demo/SolutionV3Tabs";
-import { SolutionFeaturesSection } from "@/components/sections-demo/SolutionPricingVariants";
-import { PricingV2 } from "@/components/sections-demo/PricingV2";
-import { AppPreview } from "@/components/sections-demo/AppPreview";
-import { SectionDivider } from "@/components/sections-demo/SectionDivider";
-import { FaqSplitSection } from "@/components/sections-demo/FaqVariants";
-import { HowItWorks } from "@/components/sections/HowItWorks";
-import { SecuritySection } from "@/components/sections/SecuritySection";
-import { FinalCta, SiteFooter } from "@/components/sections/SiteFooter";
+import { Agents } from "@/components/site/Agents";
+import { AppPreview } from "@/components/site/AppPreview";
+import { ChangeSection } from "@/components/site/ChangeSection";
+import { Faq } from "@/components/site/Faq";
+import { FinalCta, Footer } from "@/components/site/Footer";
+import { Hero } from "@/components/site/Hero";
+import { HowItWorks } from "@/components/site/HowItWorks";
+import { Nav } from "@/components/site/Nav";
+import { Pricing } from "@/components/site/Pricing";
+import { Security } from "@/components/site/Security";
 
 export default function Home() {
   return (
-    <main className="flex flex-col">
-      <Hero />
-      <SectionDivider label="ce que vous vivez" />
-      <HiddenCostB withGrid hideKickerLabel />
-      <SolutionFeaturesSection />
-      <SolutionV3Tabs withGrid compactTop compactBottom coloredAcronyms customFraming />
-      <HowItWorks />
-      <AppPreview compactTop compactBottom useMockup />
-      <PricingV2 compactTop />
-      <SecuritySection />
-      <FaqSplitSection />
-      <FinalCta />
-      <SiteFooter />
-    </main>
+    <>
+      <Nav />
+      <main className="flex flex-col flex-1">
+        <Hero />
+        <ChangeSection />
+        <Agents />
+        <HowItWorks />
+        <AppPreview />
+        <Pricing />
+        <Security />
+        <Faq />
+        <FinalCta />
+      </main>
+      <Footer />
+    </>
   );
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { LegalLayout } from "@/components/sections/LegalLayout";
+import { LegalLayout } from "@/components/site/LegalLayout";
 import { CONTACT_EMAIL } from "@/lib/links";
 
 export const metadata: Metadata = {
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function MentionsLegalesPage() {
   return (
-    <LegalLayout kicker="// mentions légales" title="Mentions légales" updated="7 septembre 2026">
+    <LegalLayout kicker="Mentions légales" title="Mentions légales" updated="7 septembre 2026">
       <p>
         Conformément à la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l&apos;économie
         numérique, voici les informations relatives à l&apos;éditeur et à l&apos;hébergeur du site
@@ -46,7 +46,7 @@ export default function MentionsLegalesPage() {
       </p>
       <p>
         La prise de rendez-vous (« audit gratuit ») est opérée par le service tiers{" "}
-        <strong>Cal.com, Inc.</strong> et s&apos;ouvre dans une page distincte du site.
+        <strong>Cal.com, Inc.</strong>{" "}et s&apos;ouvre dans une page distincte du site.
       </p>
 
       <h2>Propriété intellectuelle</h2>

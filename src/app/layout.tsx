@@ -1,21 +1,27 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Geist, JetBrains_Mono, Newsreader } from "next/font/google";
 import "./globals.css";
-import { LenisProvider } from "@/components/providers/LenisProvider";
 
-// V0.18.2 — Cohérence avec app.vtensor.ai après redesign : Inter partout (sans
-// + display via alias CSS dans globals.css). Le site reflète exactement
-// l'expérience que le client aura dans l'app.
-const fontInter = Inter({
-  variable: "--font-sans",
+// V3 (2026-09-08) — Newsreader (titres) · Geist (texte) · JetBrains Mono (logo, repères).
+const fontGeist = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
+const fontNewsreader = Newsreader({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500"],
+  style: ["normal", "italic"],
+  variable: "--font-newsreader",
+  display: "swap",
+});
+const fontMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-jetbrains",
   display: "swap",
 });
 
 const SITE_TITLE = "Vtensor — Agence d'agents IA";
 const SITE_DESCRIPTION =
-  "Une agence d'agents IA qui automatisent vos opérations métier — SAV, devis, relances, contenus — sans que vous touchiez à un outil. RGPD-first, hébergé en Allemagne.";
+  "Des agents IA développés sur mesure pour votre entreprise : SAV, commercial, ADV, webmaster, marketing, standard. Vous leur parlez en direct. Hébergés en Allemagne, conçus en France.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://vtensor.ai"),
@@ -39,19 +45,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+/** Applique le thème mémorisé avant le premier rendu (pas de flash). Sans choix mémorisé : préférence système via CSS. */
+const THEME_SCRIPT = `(function(){try{var t=localStorage.getItem('vt-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();`;
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang="fr"
-      className={`dark ${fontInter.variable} h-full antialiased`}
+      suppressHydrationWarning
+      className={`${fontGeist.variable} ${fontNewsreader.variable} ${fontMono.variable} h-full`}
     >
-      <body className="min-h-full flex flex-col bg-[#0A0A0F] text-white">
-        <LenisProvider>{children}</LenisProvider>
-      </body>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
+      <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
 }

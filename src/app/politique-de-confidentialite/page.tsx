@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { LegalLayout } from "@/components/sections/LegalLayout";
+import { LegalLayout } from "@/components/site/LegalLayout";
 import { CONTACT_EMAIL } from "@/lib/links";
 
 export const metadata: Metadata = {
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function PolitiqueConfidentialitePage() {
   return (
     <LegalLayout
-      kicker="// politique de confidentialité"
+      kicker="Politique de confidentialité"
       title="Politique de confidentialité"
       updated="7 septembre 2026"
     >
