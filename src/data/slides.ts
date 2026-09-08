@@ -51,4 +51,7 @@ export const SLIDES: readonly Slide[] = [
 
 export const PRICE_PER_AGENT = 100;
 export const PRICE_PER_AGENT_YEAR = 1000;
-export const INTEGRATION_FROM = 1000;
+/** Frais d'intégration : à partir de 500 € HT par agent, une fois (décision Victor 2026-09-08). */
+export const INTEGRATION_PER_AGENT = 500;
+/** Offre de lancement : frais d'intégration offerts pour les 10 premiers clients (décision Victor 2026-09-08). */
+export const LAUNCH_FIRST_CLIENTS = 10;

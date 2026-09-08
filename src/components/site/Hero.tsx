@@ -8,7 +8,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { AUDIT_URL } from "@/lib/links";
-import { INTEGRATION_FROM, PRICE_PER_AGENT, SLIDES } from "@/data/slides";
+import { INTEGRATION_PER_AGENT, LAUNCH_FIRST_CLIENTS, PRICE_PER_AGENT, SLIDES } from "@/data/slides";
 import { Photo } from "./Photo";
 
 const NB = " ";
@@ -103,9 +103,12 @@ export function Hero() {
                 <span>Abonnement</span>
                 <span className="mono text-[13px]">{eur(total)}{NB}HT / mois</span>
               </div>
-              <div className="flex justify-between pt-1 text-[12px] text-muted">
-                <span>Intégration</span>
-                <span className="mono">à partir de {eur(INTEGRATION_FROM)}{NB}HT</span>
+              <div className="flex justify-between items-baseline gap-3 pt-1 text-[12px] text-muted">
+                <span>Intégration · {LAUNCH_FIRST_CLIENTS} premiers clients</span>
+                <span className="mono whitespace-nowrap">
+                  <s className="text-faint">{eur(INTEGRATION_PER_AGENT * slide.agents.length)}{NB}HT</s>{" "}
+                  <span className="text-accent font-semibold">offerte</span>
+                </span>
               </div>
             </div>
           </div>

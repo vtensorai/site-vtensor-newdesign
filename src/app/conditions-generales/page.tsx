@@ -95,8 +95,9 @@ export default function ConditionsGeneralesPage() {
           règlement annuel d&apos;avance (soit deux mois offerts par rapport au règlement mensuel).
         </li>
         <li>
-          <strong>Frais d&apos;intégration</strong>{NB}: facturés une seule fois, à partir de 1{NB}000{NB}€ hors taxes, selon les outils à
-          connecter et les processus à modéliser. Leur montant exact figure au Devis.
+          <strong>Frais d&apos;intégration</strong>{NB}: facturés une seule fois, à partir de 500{NB}€ hors taxes par Agent, selon les
+          outils à connecter et les processus à modéliser. Leur montant exact figure au Devis. Le Prestataire peut proposer des offres
+          de lancement, notamment la prise en charge des frais d&apos;intégration{NB}; leurs conditions figurent au Devis.
         </li>
         <li>
           <strong>Sur-mesure</strong>{NB}: les besoins spécifiques (hébergement chez le Client ou dans un pays déterminé, applications

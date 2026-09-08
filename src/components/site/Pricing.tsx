@@ -7,7 +7,7 @@
 
 import { useState } from "react";
 import { AUDIT_URL, CONTACT_EMAIL } from "@/lib/links";
-import { INTEGRATION_FROM, PRICE_PER_AGENT, PRICE_PER_AGENT_YEAR } from "@/data/slides";
+import { INTEGRATION_PER_AGENT, LAUNCH_FIRST_CLIENTS, PRICE_PER_AGENT, PRICE_PER_AGENT_YEAR } from "@/data/slides";
 import { Icon } from "./Icons";
 
 const NB = " ";
@@ -28,6 +28,7 @@ export function Pricing() {
   const monthly = n * PRICE_PER_AGENT;
   const yearly = n * PRICE_PER_AGENT_YEAR;
   const saved = monthly * 12 - yearly;
+  const integration = n * INTEGRATION_PER_AGENT;
 
   return (
     <section className="section" id="tarifs">
@@ -36,6 +37,10 @@ export function Pricing() {
           <div className="kicker">Tarifs</div>
           <h2 className="h2">Un prix simple, par agent.</h2>
           <span className="mono text-[12px] tracking-[0.14em] uppercase text-muted">Hors taxes · B2B France</span>
+          <span className="inline-flex flex-wrap items-center gap-x-3 gap-y-1.5 self-start border border-accent px-3.5 py-2 text-[14px] text-ink">
+            <span className="badge">Offre de lancement</span>
+            Frais d&apos;intégration offerts pour les {LAUNCH_FIRST_CLIENTS} premiers clients
+          </span>
         </div>
 
         <div className="lg:col-span-7 flex flex-col gap-7">
@@ -60,7 +65,8 @@ export function Pricing() {
               : `ou ${eur(PRICE_PER_AGENT_YEAR)}${NB}HT par agent et par an, deux mois offerts. Mensuel sans engagement, préavis de 30${NB}jours.`}
           </p>
 
-          <div className="box flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5" style={{ padding: "20px 24px" }}>
+          <div className="box flex flex-col gap-4" style={{ padding: "20px 24px" }}>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
             <div className="flex flex-col gap-2.5">
               <span className="mono text-[11px] tracking-[0.14em] uppercase text-muted">Simulez votre équipe</span>
               <div className="stepper">
@@ -89,11 +95,21 @@ export function Pricing() {
               )}
             </div>
           </div>
+          <div className="flex flex-wrap justify-between items-baseline gap-x-4 gap-y-1 pt-3 border-t border-rule-2 text-[14px]">
+            <span className="text-muted">Intégration, une fois</span>
+            <span className="mono">
+              <s className="text-faint">à partir de {eur(integration)}{NB}HT</s>{" "}
+              <span className="text-accent font-semibold">offerte</span>
+              <span className="text-muted"> · {LAUNCH_FIRST_CLIENTS} premiers clients</span>
+            </span>
+          </div>
+          </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-2 sm:gap-5 py-4 border-t border-ink border-b border-b-rule text-[15px]">
             <span className="font-medium">Frais d&apos;intégration</span>
             <span className="p text-[15px]">
-              <span className="mono text-ink">à partir de {eur(INTEGRATION_FROM)}{NB}HT</span>, une fois, selon vos outils. Devis précis à l&apos;issue de l&apos;audit.
+              <span className="mono text-ink">à partir de {eur(INTEGRATION_PER_AGENT)}{NB}HT par agent</span>, une fois, selon vos outils. Devis précis à l&apos;issue de l&apos;audit.{" "}
+              <span className="text-accent font-medium">Offerts pour les {LAUNCH_FIRST_CLIENTS} premiers clients.</span>
             </span>
           </div>
 
