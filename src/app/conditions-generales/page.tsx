@@ -35,7 +35,7 @@ export default function ConditionsGeneralesPage() {
       <ul>
         <li>
           <strong>Agent</strong>{NB}: programme d&apos;intelligence artificielle conçu par le Prestataire pour le Client afin d&apos;exécuter
-          un ensemble de tâches définies (service après-vente, administration des ventes, accueil téléphonique, etc.), connecté aux
+          un ensemble de tâches définies (service après-vente, gestion administrative et facturation, accueil téléphonique, etc.), connecté aux
           outils du Client et joignable par les canaux convenus (email, application, messagerie, téléphone).
         </li>
         <li>

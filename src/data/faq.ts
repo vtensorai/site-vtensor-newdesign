@@ -21,7 +21,7 @@ export const FAQS: readonly Faq[] = [
   {
     question: "Combien de temps avant que mes agents soient opérationnels ?",
     answer:
-      "Quelques jours pour un agent autonome simple (SAV ou ADV). Une à deux semaines pour une équipe complète avec intégrations métier.",
+      "Quelques jours pour un agent autonome simple (SAV ou administratif). Une à deux semaines pour une équipe complète avec intégrations métier.",
   },
   {
     question: "Est-il possible d'apporter des modifications à mes agents ?",

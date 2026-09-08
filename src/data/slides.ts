@@ -21,7 +21,7 @@ export const SLIDES: readonly Slide[] = [
     alt: "Une dirigeante dans son atelier de menuiserie, tablette à la main",
     word: "votre temps",
     company: "Atelier de menuiserie",
-    agents: ["Agent SAV", "Agent ADV", "Agent Standardiste"],
+    agents: ["Agent SAV", "Agent Administratif", "Agent Standardiste"],
   },
   {
     id: "architecture",
@@ -37,7 +37,7 @@ export const SLIDES: readonly Slide[] = [
     alt: "Une fondatrice de boutique en ligne dans sa réserve",
     word: "votre quotidien",
     company: "Boutique en ligne",
-    agents: ["Agent SAV", "Agent Marketing", "Agent ADV"],
+    agents: ["Agent SAV", "Agent Marketing", "Agent Administratif"],
   },
   {
     id: "garage",
@@ -45,7 +45,7 @@ export const SLIDES: readonly Slide[] = [
     alt: "Un garagiste indépendant devant un véhicule sur pont",
     word: "vos journées",
     company: "Garage indépendant",
-    agents: ["Agent Standardiste", "Agent ADV"],
+    agents: ["Agent Standardiste", "Agent Administratif"],
   },
 ];
 

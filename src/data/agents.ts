@@ -9,7 +9,7 @@
  * Stack :
  *   01 Agent SAV (sav)                   — autonome multi-canal
  *   02 Agent Commercial (commercial)     — autonome prospection + AO + devis
- *   03 Agent ADV (adv)                   — autonome facturation + trésorerie
+ *   03 Agent Administratif (adv)         — autonome facturation + trésorerie (renommé « ADV » → « Administratif » le 2026-09-08)
  *   04 Agent Webmaster (webmaster)       — CMS + SEO + acquisition payante
  *   05 Agent Marketing (marketing)       — contenu + visuels + publication
  *   06 Agent Standardiste (standardiste) — voix téléphonique 24/7
@@ -30,7 +30,7 @@ export type Agent = {
   /** Identifiant technique (= clé agent_config). */
   slug: string;
   name: string;
-  /** Acronyme 3 lettres, comme dans le tableau de bord (SAV/ATC/ADV/WEB/MKT/STA). */
+  /** Acronyme 3 lettres, comme dans le tableau de bord (SAV/ATC/ADM/WEB/MKT/STA). */
   acronym: string;
   /** Mission en une ligne (liste du catalogue). */
   metier: string;
@@ -88,9 +88,9 @@ export const AGENTS: readonly Agent[] = [
   {
     num: "03",
     slug: "adv",
-    name: "Agent ADV",
-    acronym: "ADV",
-    metier: "Administration des ventes, facturation et trésorerie",
+    name: "Agent Administratif",
+    acronym: "ADM",
+    metier: "Facturation, relances et trésorerie",
     headline: "Facture, relance les impayés et suit votre trésorerie.",
     description:
       "Saisie des commandes, devis, factures, litiges et logistique. Connecté à votre comptabilité (Pennylane, Sage, Cegid) et à votre banque : reporting de trésorerie hebdomadaire, P&L mensuel, rapports PDF pour votre banquier ou votre expert-comptable.",

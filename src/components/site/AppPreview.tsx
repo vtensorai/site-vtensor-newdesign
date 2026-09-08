@@ -14,22 +14,22 @@ import { Scaler } from "./Scaler";
 import { SectionHead } from "./SectionHead";
 
 const NB = " ";
-const TAG: Record<string, string> = { SAV: "var(--app-cyan)", ATC: "var(--app-blue)", ADV: "var(--app-green)", WEB: "var(--app-amber)", MKT: "var(--app-pink)", STA: "var(--app-indigo)" };
+const TAG: Record<string, string> = { SAV: "var(--app-cyan)", ATC: "var(--app-blue)", ADM: "var(--app-green)", WEB: "var(--app-amber)", MKT: "var(--app-pink)", STA: "var(--app-indigo)" };
 
 const ACTIVITY: [string, string, string, string?][] = [
   ["STA", `Appel (37${NB}s) de +33 6 12 34 56 78 — Devis demandé sur la gamme produit`, `il y a 1${NB}h`],
   ["SAV", `Ticket #1024 résolu — contournement envoyé en 47${NB}s`, `il y a 2${NB}h`],
-  ["ADV", `Import facture #00427 — Atelier Lumière 173,60${NB}€`, `il y a 3${NB}h`, "3 tool_calls"],
+  ["ADM", `Import facture #00427 — Atelier Lumière 173,60${NB}€`, `il y a 3${NB}h`, "3 tool_calls"],
   ["ATC", "Email — relance devis #00412 envoyée", `il y a 6${NB}h`, "1 tool_call"],
   ["MKT", "Carrousel LinkedIn en brouillon — 3 erreurs d'automatisation en PME", `il y a 8${NB}h`],
   ["WEB", "Article SEO publié — Audit Google Ads PME", `il y a 1${NB}j`],
-  ["ADV", "Relance impayé #00385 J+30 envoyée", `il y a 1${NB}j`, "2 tool_calls"],
+  ["ADM", "Relance impayé #00385 J+30 envoyée", `il y a 1${NB}j`, "2 tool_calls"],
 ];
 
 const ROLES: Record<string, string> = {
   SAV: "email.kb.tickets",
   ATC: "email.crm.devis.appels_d_offres",
-  ADV: "devis.suivi_commande.facturation",
+  ADM: "devis.suivi_commande.facturation",
   WEB: "cms.seo.search_console",
   MKT: "contenu.visuels.publication",
   STA: "accueil_telephonique.messages.escalation",
@@ -55,7 +55,7 @@ const NAV: [keyof typeof Icon, string][] = [
 const REPLIES: Record<string, [string, string]> = {
   SAV: [`Où en est le ticket de Pierre${NB}?`, `Résolu en 47${NB}s : contournement envoyé, correctif sous 24${NB}h. Pierre a confirmé.`],
   ATC: [`Des nouvelles du devis #00412${NB}?`, `Relance envoyée ce matin. Le prospect a ouvert le devis deux fois ; je vous propose un appel jeudi.`],
-  ADV: [`Combien d'impayés à plus de 30 jours${NB}?`, `4 factures, 8 720${NB}€${NB}HT au total. Toutes relancées, un virement confirmé pour vendredi.`],
+  ADM: [`Combien d'impayés à plus de 30 jours${NB}?`, `4 factures, 8 720${NB}€${NB}HT au total. Toutes relancées, un virement confirmé pour vendredi.`],
   WEB: [`L'article sur Google Ads est publié${NB}?`, `Publié hier, indexé ce matin. 3 requêtes déjà positionnées en page 2.`],
   MKT: [`Le carrousel LinkedIn est prêt${NB}?`, `En brouillon, 8 visuels. Dites-moi si vous validez l'accroche et je programme la publication.`],
   STA: [`Qui a appelé ce matin${NB}?`, `Un appel à 9h12 : demande de devis sur la gamme produit. Message transmis à l'Agent Commercial.`],
