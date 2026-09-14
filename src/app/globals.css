@@ -209,6 +209,15 @@ body {
 .qa-panel-inner { overflow: hidden; padding-left: 56px; padding-right: 40px; }
 @media (prefers-reduced-motion: reduce) { .qa-panel { transition: none; } }
 
+/* ── Logos partenaires : une version par thème ────────────────────── */
+.logo-dark { display: none; }
+html[data-theme="dark"] .logo-light { display: none; }
+html[data-theme="dark"] .logo-dark { display: block; }
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) .logo-light { display: none; }
+  html:not([data-theme="light"]) .logo-dark { display: block; }
+}
+
 /* ── Pages légales ────────────────────────────────────────────────── */
 .legal { font-size: 15px; line-height: 1.65; color: var(--muted); }
 .legal h2 { font-family: var(--font-display); font-weight: 400; color: var(--ink); font-size: 26px; margin: 40px 0 12px; }

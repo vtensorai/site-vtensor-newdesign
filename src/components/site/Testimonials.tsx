@@ -32,6 +32,26 @@ function Portrait({ t, size = 48 }: { t: Testimonial; size?: number }) {
   );
 }
 
+function CompanyLogo({ t, height }: { t: Testimonial; height: number }) {
+  if (!t.logo) return null;
+  const img = (src: string, cls: string) => (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src={src} alt={t.logo!.alt} className={cls} style={{ height, width: "auto" }} loading="lazy" decoding="async" />
+  );
+  const inner = (
+    <>
+      {img(t.logo.light, "logo-light")}
+      {img(t.logo.dark ?? t.logo.light, "logo-dark")}
+    </>
+  );
+  if (!t.url) return <span className="inline-flex">{inner}</span>;
+  return (
+    <a href={t.url} target="_blank" rel="noopener noreferrer" className="inline-flex opacity-90 hover:opacity-100 transition-opacity" aria-label={`Site de ${t.company}`}>
+      {inner}
+    </a>
+  );
+}
+
 function Company({ t }: { t: Testimonial }) {
   const cls = "mono text-[11px] tracking-[0.14em] uppercase text-accent";
   if (!t.url) return <span className={cls}>{t.company}</span>;
@@ -68,9 +88,12 @@ export function Testimonials() {
                 <span className="small">{featured.role}</span>
               </div>
             </div>
-            <div className="flex flex-col gap-1.5 pt-4 border-t border-rule-2">
-              <Company t={featured} />
-              <span className="small">{featured.sector}</span>
+            <div className="flex flex-col gap-3 pt-4 border-t border-rule-2">
+              <CompanyLogo t={featured} height={72} />
+              <div className="flex flex-col gap-1.5">
+                <Company t={featured} />
+                <span className="small">{featured.sector}</span>
+              </div>
             </div>
             {featured.agents.length > 0 && (
               <div className="flex flex-col gap-1.5 pt-4 border-t border-rule-2">
@@ -89,10 +112,13 @@ export function Testimonials() {
           <div className={`grid grid-cols-1 gap-8 ${others.length >= 2 ? "md:grid-cols-2" : ""}`}>
             {others.map((t) => (
               <figure key={t.id} className="flex flex-col gap-5 pt-6 border-t border-ink m-0">
-                <span className="flex flex-wrap items-baseline gap-x-2">
-                  <Company t={t} />
-                  <span className="mono text-[11px] tracking-[0.14em] uppercase text-muted">· {t.sector}</span>
-                </span>
+                <div className="flex flex-col gap-3">
+                  <CompanyLogo t={t} height={48} />
+                  <span className="flex flex-wrap items-baseline gap-x-2">
+                    <Company t={t} />
+                    <span className="mono text-[11px] tracking-[0.14em] uppercase text-muted">· {t.sector}</span>
+                  </span>
+                </div>
                 <blockquote className="m-0 serif text-ink text-[21px] md:text-[23px] leading-[1.3]" style={{ textWrap: "pretty" }}>
                   «{" "}{t.quote}{" "}»
                 </blockquote>

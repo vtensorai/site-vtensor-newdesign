@@ -19,6 +19,8 @@ export type Testimonial = {
   photo?: string;
   /** Site de l'entreprise. */
   url?: string;
+  /** Logo dans /public/logos : version pour fond clair, et pour fond sombre (sinon la même). */
+  logo?: { light: string; dark?: string; alt: string };
   /** Mis en avant (bloc large). */
   featured?: boolean;
   /** Visible sur le site. */
@@ -37,6 +39,7 @@ export const TESTIMONIALS: readonly Testimonial[] = [
     agents: ["SAV", "Administratif", "Commercial", "Standardiste", "Marketing", "Webmaster"],
     photo: "victor",
     url: "https://www.3dnum.fr",
+    logo: { light: "/logos/3dnum-gradient.svg", dark: "/logos/3dnum-blanc.svg", alt: "Logo 3D NUM" },
     featured: true,
     published: true,
   },
