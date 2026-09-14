@@ -36,6 +36,7 @@ export function FinalCta() {
 const NAV = [
   ["Agents", "/#agents"],
   ["Comment ça marche", "/#comment-ca-marche"],
+  ["Témoignages", "/#temoignages"],
   ["Tarifs", "/#tarifs"],
   ["Sécurité", "/#securite"],
   ["FAQ", "/#faq"],
