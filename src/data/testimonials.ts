@@ -35,11 +35,11 @@ export const TESTIMONIALS: readonly Testimonial[] = [
     person: "Victor Arnoul",
     role: "Dirigeant de 3D NUM, fondateur de Vtensor",
     quote:
-      "J'ai commencé par développer un agent pour gérer le service après-vente de mes clients, à l'autre bout du monde. Puis j'ai automatisé, une par une, toutes mes tâches non productives : factures, relances, devis. J'ai trouvé ça tellement révolutionnaire que je me suis dit qu'il fallait pouvoir proposer ces agents aux entrepreneurs comme moi. Vtensor est né comme ça.",
+      "J'ai commencé par développer un agent pour gérer mon service après-vente, en particulier pour mes clients à l'autre bout du monde. Puis j'ai automatisé, une par une, toutes mes tâches non productives : factures, relances, devis. J'ai trouvé ça tellement révolutionnaire que je me suis dit qu'il fallait pouvoir proposer ces agents aux entrepreneurs comme moi. C'est ainsi qu'est né Vtensor.",
     agents: ["SAV", "Administratif", "Commercial", "Standardiste", "Marketing", "Webmaster"],
     photo: "victor",
     url: "https://www.3dnum.fr",
-    logo: { light: "/logos/3dnum-gradient.svg", dark: "/logos/3dnum-blanc.svg", alt: "Logo 3D NUM" },
+    logo: { light: "/logos/3dnum-gradient.svg", alt: "Logo 3D NUM" },
     featured: true,
     published: true,
   },
