@@ -24,7 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${BASE}/politique-de-confidentialite/`,
-      lastModified: LEGAL_UPDATED,
+      lastModified: new Date("2026-09-14"),
       changeFrequency: "yearly",
       priority: 0.3,
     },

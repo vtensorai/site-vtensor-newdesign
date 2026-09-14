@@ -14,7 +14,7 @@ export default function PolitiqueConfidentialitePage() {
     <LegalLayout
       kicker="Politique de confidentialité"
       title="Politique de confidentialité"
-      updated="7 septembre 2026"
+      updated="14 septembre 2026"
     >
       <p>
         Cette politique décrit les données personnelles collectées lorsque vous utilisez le site
@@ -50,8 +50,11 @@ export default function PolitiqueConfidentialitePage() {
       </p>
       <p>
         <strong>Le site n&apos;utilise aucun cookie de mesure d&apos;audience ni traceur
-        publicitaire.</strong> Aucune bannière de consentement n&apos;est donc nécessaire.
-        Si cela devait évoluer, cette politique serait mise à jour avant toute mise en place.
+        publicitaire.</strong> La fréquentation est mesurée avec Cloudflare Web Analytics, un
+        outil sans cookie ni identifiant individuel, qui ne suit pas les visiteurs d&apos;un site
+        à l&apos;autre et ne fournit que des statistiques agrégées (pages vues, pays, type
+        d&apos;appareil). Aucune bannière de consentement n&apos;est donc nécessaire. Si cela
+        devait évoluer, cette politique serait mise à jour avant toute mise en place.
       </p>
 
       <h2>Finalités et bases légales</h2>

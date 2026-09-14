@@ -15,6 +15,10 @@ export type Testimonial = {
   role: string;
   quote: string;
   agents: readonly string[];
+  /** Portrait dans /public/photos (sans extension), carré. Sinon monogramme. */
+  photo?: string;
+  /** Site de l'entreprise. */
+  url?: string;
   /** Mis en avant (bloc large). */
   featured?: boolean;
   /** Visible sur le site. */
@@ -29,8 +33,10 @@ export const TESTIMONIALS: readonly Testimonial[] = [
     person: "Victor Arnoul",
     role: "Dirigeant de 3D NUM, fondateur de Vtensor",
     quote:
-      "J'ai commencé par développer un agent pour gérer le service après-vente de mes clients, à l'autre bout du monde. Puis j'ai automatisé, une par une, toutes mes tâches non productives : factures, relances, standard téléphonique. J'ai trouvé ça tellement révolutionnaire que je me suis dit qu'il fallait proposer ces agents aux entrepreneurs comme moi. Vtensor est né comme ça.",
+      "J'ai commencé par développer un agent pour gérer le service après-vente de mes clients, à l'autre bout du monde. Puis j'ai automatisé, une par une, toutes mes tâches non productives : factures, relances, devis. J'ai trouvé ça tellement révolutionnaire que je me suis dit qu'il fallait pouvoir proposer ces agents aux entrepreneurs comme moi. Vtensor est né comme ça.",
     agents: ["SAV", "Administratif", "Commercial", "Standardiste", "Marketing", "Webmaster"],
+    photo: "victor",
+    url: "https://www.3dnum.fr",
     featured: true,
     published: true,
   },
