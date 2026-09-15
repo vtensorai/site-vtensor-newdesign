@@ -142,9 +142,17 @@ body {
 .stepper button:disabled { opacity: 0.35; cursor: not-allowed; }
 
 /* Lignes du catalogue d'agents */
-.arow { display: grid; grid-template-columns: 36px 1fr auto; gap: 12px; align-items: baseline; padding: 16px 10px; border-top: 1px solid var(--rule); width: 100%; text-align: left; transition: background-color 150ms; cursor: pointer; }
-.arow > :last-child { justify-self: end; }
-@media (min-width: 768px) { .arow { grid-template-columns: 48px 1fr 1.2fr 150px; gap: 20px; padding: 20px 16px; } }
+.arow { display: grid; grid-template-columns: 36px 1fr auto 24px; gap: 12px; align-items: baseline; padding: 16px 10px; border-top: 1px solid var(--rule); width: 100%; text-align: left; transition: background-color 150ms; cursor: pointer; }
+.arow-price { justify-self: end; }
+/* + / − à droite de chaque ligne (mobile, tablette) : même dessin que la FAQ */
+.arow-icon { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; align-self: center; color: var(--muted); border: 1px solid var(--rule); transition: color 150ms, border-color 150ms, background-color 150ms; }
+.arow:hover .arow-icon { color: var(--accent); border-color: var(--accent); }
+.arow[data-open="true"] .arow-icon { color: var(--on-accent); background: var(--accent); border-color: var(--accent); }
+.arow-v { transition: opacity 200ms; }
+.arow[data-open="true"] .arow-v { opacity: 0; }
+@media (max-width: 1023.98px) { .arow[data-open="true"] { background: var(--accent-soft); box-shadow: inset 2px 0 0 var(--accent); } }
+@media (min-width: 768px) { .arow { grid-template-columns: 48px 1fr 1.2fr 150px 24px; gap: 20px; padding: 20px 16px; } }
+@media (min-width: 1024px) { .arow { grid-template-columns: 48px 1fr 1.2fr 150px; } .arow-icon { display: none; } .arow[data-current="true"] { background: var(--accent-soft); box-shadow: inset 2px 0 0 var(--accent); } }
 /* Fiche dépliée sous la ligne (mobile / tablette) */
 .fiche-panel { display: none; }
 @media (max-width: 1023.98px) {
@@ -154,7 +162,6 @@ body {
 }
 @media (prefers-reduced-motion: reduce) { .fiche-panel { transition: none; } }
 .arow:hover { background: var(--bg-3); }
-.arow[aria-selected="true"] { background: var(--accent-soft); box-shadow: inset 2px 0 0 var(--accent); }
 .arow-plus { border-top: 1px dashed var(--faint); border-bottom: 1px dashed var(--faint); }
 
 /* Onglets du carrousel */

@@ -76,8 +76,14 @@ function Fiche({ a, id, role }: { a: Agent; id: string; role?: string }) {
 }
 
 export function Agents() {
-  const [selected, setSelected] = useState(0);
-  const a = AGENTS[selected];
+  /** Mobile / tablette : ligne dépliée (null = tout replié). Desktop : agent affiché en colonne (null → le premier). */
+  const [selected, setSelected] = useState<number | null>(null);
+  const current = selected ?? 0;
+  const a = AGENTS[current];
+  const onRow = (i: number) => {
+    const desktop = typeof window !== "undefined" && window.matchMedia("(min-width: 1024px)").matches;
+    setSelected((prev) => (desktop ? i : prev === i ? null : i));
+  };
 
   return (
     <section className="section" id="agents">
@@ -98,15 +104,24 @@ export function Agents() {
                   <button
                     type="button"
                     role="tab"
-                    aria-selected={open}
+                    aria-selected={i === current}
+                    aria-expanded={open}
                     aria-controls={`agent-fiche agent-fiche-${ag.slug}`}
                     className="arow"
-                    onClick={() => setSelected(i)}
+                    data-open={open}
+                    data-current={i === current}
+                    onClick={() => onRow(i)}
                   >
                     <span className="num">{ag.num}</span>
                     <span className="text-[16px] md:text-[18px] font-medium text-ink">{ag.name}</span>
                     <span className="hidden md:block text-[14px] text-muted">{ag.metier}</span>
-                    <span className="mono text-[12px] md:text-[13px] text-right text-muted whitespace-nowrap">{PRICE_PER_AGENT}{NB}€{NB}HT / mois</span>
+                    <span className="arow-price mono text-[12px] md:text-[13px] text-right text-muted whitespace-nowrap">{PRICE_PER_AGENT}{NB}€{NB}HT / mois</span>
+                    <span className="arow-icon" aria-hidden="true">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+                        <path d="M5 12h14" />
+                        <path d="M12 5v14" className="arow-v" />
+                      </svg>
+                    </span>
                   </button>
                   <div className="fiche-panel lg:hidden" data-open={open} aria-hidden={!open}>
                     <div className="fiche-panel-inner">
@@ -122,7 +137,10 @@ export function Agents() {
               <span className="num text-accent">+</span>
               <span className="text-[16px] md:text-[18px] font-medium">Votre poste</span>
               <span className="hidden md:block text-[14px] text-muted">Un besoin qui n&apos;est pas dans la liste{NB}? On le développe.</span>
-              <span className="mono text-[12px] md:text-[13px] text-right whitespace-nowrap">sur devis</span>
+              <span className="arow-price mono text-[12px] md:text-[13px] text-right whitespace-nowrap">sur devis</span>
+              <span className="arow-icon" aria-hidden="true">
+                <Icon.arrow size={13} />
+              </span>
             </a>
           </div>
 
