@@ -8,6 +8,7 @@
 
 import { useState } from "react";
 import { FAQS } from "@/data/faq";
+import { LAUNCH_OFFER_ACTIVE } from "@/data/slides";
 import { CONTACT_EMAIL } from "@/lib/links";
 
 const NB = " ";
@@ -64,7 +65,15 @@ export function Faq() {
                 </button>
                 <div id={panelId} className="qa-panel" data-open={isOpen} role="region">
                   <div className="qa-panel-inner">
-                    <p className="p text-[15px] pb-7">{f.answer}</p>
+                    <p className="p text-[15px] pb-7">
+                      {f.answer}
+                      {f.offer && LAUNCH_OFFER_ACTIVE && (
+                        <>
+                          {" "}
+                          <span className="text-offer font-medium">{f.offer}</span>
+                        </>
+                      )}
+                    </p>
                   </div>
                 </div>
               </div>

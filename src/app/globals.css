@@ -19,6 +19,7 @@
   --color-ink: var(--ink); --color-muted: var(--muted); --color-faint: var(--faint);
   --color-rule: var(--rule); --color-rule-2: var(--rule-2);
   --color-accent: var(--accent); --color-accent-soft: var(--accent-soft); --color-on-accent: var(--on-accent);
+  --color-offer: var(--offer);
   --color-strong-bg: var(--strong-bg); --color-strong-ink: var(--strong-ink); --color-strong-muted: var(--strong-muted); --color-strong-accent: var(--strong-accent);
 }
 
@@ -31,6 +32,7 @@
   --accent: #4C3FA8; --accent-soft: #EEEBF7; --on-accent: #F6F4EF;
   --strong-bg: #16151A; --strong-ink: #F6F4EF; --strong-muted: #D8D4CB; --strong-accent: #B9B3E8;
   --logo-v: #4C3FA8;
+  --offer: #B4433A;
   /* aperçu application (fond blanc, bandeaux papier) */
   --app-bg: #FFFFFF; --app-card: #FFFFFF; --app-band: #EFECE4; --app-border: #DCD8CE;
   --app-text: #16151A; --app-muted: #6A6774;
@@ -47,6 +49,7 @@ html[data-theme="dark"] {
   --accent: #22D3EE; --accent-soft: rgba(34, 211, 238, 0.08); --on-accent: #0B0D10;
   --strong-bg: #F2F4F7; --strong-ink: #0B0D10; --strong-muted: #4B5563; --strong-accent: #4C3FA8;
   --logo-v: #22D3EE;
+  --offer: #F0625A;
   --app-bg: #0A0A0F; --app-card: #0E0E13; --app-band: #111119; --app-border: #1E1E28;
   --app-text: #F2F4F7; --app-muted: #8A8A9A;
   --app-violet: #A78BFA; --app-cyan: #22D3EE; --app-green: #10B981; --app-blue: #3B82F6;
@@ -63,6 +66,7 @@ html[data-theme="dark"] {
     --accent: #22D3EE; --accent-soft: rgba(34, 211, 238, 0.08); --on-accent: #0B0D10;
     --strong-bg: #F2F4F7; --strong-ink: #0B0D10; --strong-muted: #4B5563; --strong-accent: #4C3FA8;
     --logo-v: #22D3EE;
+    --offer: #F0625A;
     --app-bg: #0A0A0F; --app-card: #0E0E13; --app-band: #111119; --app-border: #1E1E28;
     --app-text: #F2F4F7; --app-muted: #8A8A9A;
     --app-violet: #A78BFA; --app-cyan: #22D3EE; --app-green: #10B981; --app-blue: #3B82F6;
@@ -130,6 +134,7 @@ body {
 .seg button:hover { color: var(--ink); }
 .seg button[aria-selected="true"] { background: var(--ink); color: var(--bg); }
 .badge { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 6px; border: 1px solid var(--accent); color: var(--accent); }
+.badge-offer { border-color: var(--offer); color: var(--offer); }
 .seg button[aria-selected="true"] .badge { border-color: var(--bg); color: var(--bg); }
 .stepper { display: inline-flex; align-items: center; border: 1px solid var(--rule); background: var(--bg-2); }
 .stepper button { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; color: var(--muted); transition: background-color 150ms, color 150ms; cursor: pointer; }

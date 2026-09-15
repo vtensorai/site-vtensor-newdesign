@@ -8,7 +8,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { AUDIT_URL } from "@/lib/links";
-import { INTEGRATION_PER_AGENT, LAUNCH_FIRST_CLIENTS, PRICE_PER_AGENT, SLIDES } from "@/data/slides";
+import { INTEGRATION_PER_AGENT, LAUNCH_OFFER_ACTIVE, LAUNCH_OFFER_END_SHORT, PRICE_PER_AGENT, SLIDES } from "@/data/slides";
 import { Photo } from "./Photo";
 
 const NB = " ";
@@ -103,13 +103,20 @@ export function Hero() {
                 <span>Abonnement</span>
                 <span className="mono text-[13px]">{eur(total)}{NB}HT / mois</span>
               </div>
-              <div className="flex justify-between items-baseline gap-3 pt-1 text-[12px] text-muted">
-                <span>Intégration · {LAUNCH_FIRST_CLIENTS} premiers clients</span>
-                <span className="mono whitespace-nowrap">
-                  <s className="text-faint">{eur(INTEGRATION_PER_AGENT * slide.agents.length)}{NB}HT</s>{" "}
-                  <span className="text-accent font-semibold">offerte</span>
-                </span>
-              </div>
+              {LAUNCH_OFFER_ACTIVE ? (
+                <div className="flex justify-between items-baseline gap-3 pt-1 text-[12px] text-muted">
+                  <span>Intégration</span>
+                  <span className="mono whitespace-nowrap">
+                    <s className="text-faint">{eur(INTEGRATION_PER_AGENT * slide.agents.length)}{NB}HT</s>{" "}
+                    <span className="text-offer font-semibold">offerte jusqu&apos;au {LAUNCH_OFFER_END_SHORT}</span>
+                  </span>
+                </div>
+              ) : (
+                <div className="flex justify-between items-baseline gap-3 pt-1 text-[12px] text-muted">
+                  <span>Intégration</span>
+                  <span className="mono whitespace-nowrap">à partir de {eur(INTEGRATION_PER_AGENT * slide.agents.length)}{NB}HT</span>
+                </div>
+              )}
             </div>
           </div>
         </div>

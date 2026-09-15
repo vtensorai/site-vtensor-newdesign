@@ -7,7 +7,7 @@
 
 import { useState } from "react";
 import { AUDIT_URL, CONTACT_EMAIL } from "@/lib/links";
-import { INTEGRATION_PER_AGENT, LAUNCH_FIRST_CLIENTS, PRICE_PER_AGENT, PRICE_PER_AGENT_YEAR } from "@/data/slides";
+import { INTEGRATION_PER_AGENT, LAUNCH_OFFER_ACTIVE, LAUNCH_OFFER_END, PRICE_PER_AGENT, PRICE_PER_AGENT_YEAR } from "@/data/slides";
 import { Icon } from "./Icons";
 
 const NB = " ";
@@ -37,10 +37,12 @@ export function Pricing() {
           <div className="kicker">Tarifs</div>
           <h2 className="h2">Un prix simple, par agent.</h2>
           <span className="mono text-[12px] tracking-[0.14em] uppercase text-muted">Hors taxes · B2B France</span>
-          <span className="inline-flex flex-wrap items-center gap-x-3 gap-y-1.5 self-start border border-accent px-3.5 py-2 text-[14px] text-ink">
-            <span className="badge">Offre de lancement</span>
-            Frais d&apos;intégration offerts pour les {LAUNCH_FIRST_CLIENTS} premiers clients
-          </span>
+          {LAUNCH_OFFER_ACTIVE && (
+            <span className="inline-flex flex-wrap items-center gap-x-3 gap-y-1.5 self-start border border-offer px-3.5 py-2 text-[14px] text-offer">
+              <span className="badge badge-offer">Offre de lancement</span>
+              Frais d&apos;intégration offerts jusqu&apos;au {LAUNCH_OFFER_END}
+            </span>
+          )}
         </div>
 
         <div className="lg:col-span-7 flex flex-col gap-7">
@@ -97,19 +99,27 @@ export function Pricing() {
           </div>
           <div className="flex flex-wrap justify-between items-baseline gap-x-4 gap-y-1 pt-3 border-t border-rule-2 text-[14px]">
             <span className="text-muted">Intégration, une fois</span>
-            <span className="mono">
-              <s className="text-faint">à partir de {eur(integration)}{NB}HT</s>{" "}
-              <span className="text-accent font-semibold">offerte</span>
-              <span className="text-muted"> · {LAUNCH_FIRST_CLIENTS} premiers clients</span>
-            </span>
+            {LAUNCH_OFFER_ACTIVE ? (
+              <span className="mono">
+                <s className="text-faint">à partir de {eur(integration)}{NB}HT</s>{" "}
+                <span className="text-offer font-semibold">offerte jusqu&apos;au {LAUNCH_OFFER_END}</span>
+              </span>
+            ) : (
+              <span className="mono">à partir de {eur(integration)}{NB}HT</span>
+            )}
           </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-2 sm:gap-5 py-4 border-t border-ink border-b border-b-rule text-[15px]">
             <span className="font-medium">Frais d&apos;intégration</span>
             <span className="p text-[15px]">
-              <span className="mono text-ink">à partir de {eur(INTEGRATION_PER_AGENT)}{NB}HT par agent</span>, une fois, selon vos outils. Devis précis à l&apos;issue de l&apos;audit.{" "}
-              <span className="text-accent font-medium">Offerts pour les {LAUNCH_FIRST_CLIENTS} premiers clients.</span>
+              <span className="mono text-ink">à partir de {eur(INTEGRATION_PER_AGENT)}{NB}HT par agent</span>, une fois, selon vos outils. Devis précis à l&apos;issue de l&apos;audit.
+              {LAUNCH_OFFER_ACTIVE && (
+                <>
+                  {" "}
+                  <span className="text-offer font-medium">Offre de lancement : offerts pour toute commande passée jusqu&apos;au {LAUNCH_OFFER_END}.</span>
+                </>
+              )}
             </span>
           </div>
 

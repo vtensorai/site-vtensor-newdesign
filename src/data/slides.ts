@@ -53,5 +53,8 @@ export const PRICE_PER_AGENT = 100;
 export const PRICE_PER_AGENT_YEAR = 1000;
 /** Frais d'intégration : à partir de 500 € HT par agent, une fois (décision Victor 2026-09-08). */
 export const INTEGRATION_PER_AGENT = 500;
-/** Offre de lancement : frais d'intégration offerts pour les 10 premiers clients (décision Victor 2026-09-08). */
-export const LAUNCH_FIRST_CLIENTS = 10;
+/** Offre de lancement : frais d'intégration offerts jusqu'au 30 septembre 2026 (décision Victor 2026-09-15 ; remplace « 10 premiers clients »).
+ *  Passer LAUNCH_OFFER_ACTIVE à false et redéployer à la fin de l'offre. */
+export const LAUNCH_OFFER_ACTIVE = true;
+export const LAUNCH_OFFER_END = "30 septembre 2026";
+export const LAUNCH_OFFER_END_SHORT = "30 sept.";
