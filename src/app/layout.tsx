@@ -46,6 +46,8 @@ export const metadata: Metadata = {
 };
 
 /** Applique le thème mémorisé avant le premier rendu (pas de flash). Sans choix mémorisé : préférence système via CSS. */
+const BUILD_STAMP = new Date().toISOString().slice(0, 16).replace("T", " ") + " UTC";
+
 const THEME_SCRIPT = `(function(){try{var t=localStorage.getItem('vt-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();`;
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -56,6 +58,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       className={`${fontGeist.variable} ${fontNewsreader.variable} ${fontMono.variable} h-full`}
     >
       <head>
+        <meta name="build" content={BUILD_STAMP} />
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
       <body className="min-h-full flex flex-col">{children}</body>
