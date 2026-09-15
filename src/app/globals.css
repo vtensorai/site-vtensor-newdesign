@@ -105,7 +105,7 @@ body {
 /* ── Boutons ──────────────────────────────────────────────────────── */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--accent); color: var(--on-accent); padding: 15px 22px; font-size: 15px; font-weight: 500; line-height: 1.2; transition: background-color 150ms, color 150ms, transform 150ms; cursor: pointer; }
 .btn:hover { background: var(--ink); color: var(--bg); }
-.btn-sm { padding: 11px 18px; font-size: 14px; }
+.btn-sm { padding: 11px 18px; font-size: 14px; white-space: nowrap; }
 .btn-ghost { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); padding: 15px 8px; font-size: 15px; font-weight: 500; border-bottom: 1px solid var(--ink); transition: color 150ms, border-color 150ms; cursor: pointer; }
 .btn-ghost:hover { color: var(--accent); border-color: var(--accent); }
 .btn-inv { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--strong-accent); color: var(--strong-bg); padding: 14px 20px; font-size: 14px; font-weight: 500; transition: background-color 150ms, color 150ms; cursor: pointer; }
@@ -142,8 +142,17 @@ body {
 .stepper button:disabled { opacity: 0.35; cursor: not-allowed; }
 
 /* Lignes du catalogue d'agents */
-.arow { display: grid; grid-template-columns: 40px 1fr 150px; gap: 16px; align-items: baseline; padding: 18px 12px; border-top: 1px solid var(--rule); width: 100%; text-align: left; transition: background-color 150ms; cursor: pointer; }
+.arow { display: grid; grid-template-columns: 36px 1fr auto; gap: 12px; align-items: baseline; padding: 16px 10px; border-top: 1px solid var(--rule); width: 100%; text-align: left; transition: background-color 150ms; cursor: pointer; }
+.arow > :last-child { justify-self: end; }
 @media (min-width: 768px) { .arow { grid-template-columns: 48px 1fr 1.2fr 150px; gap: 20px; padding: 20px 16px; } }
+/* Fiche dépliée sous la ligne (mobile / tablette) */
+.fiche-panel { display: none; }
+@media (max-width: 1023.98px) {
+  .fiche-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 300ms ease; }
+  .fiche-panel[data-open="true"] { grid-template-rows: 1fr; }
+  .fiche-panel-inner { overflow: hidden; }
+}
+@media (prefers-reduced-motion: reduce) { .fiche-panel { transition: none; } }
 .arow:hover { background: var(--bg-3); }
 .arow[aria-selected="true"] { background: var(--accent-soft); box-shadow: inset 2px 0 0 var(--accent); }
 .arow-plus { border-top: 1px dashed var(--faint); border-bottom: 1px dashed var(--faint); }

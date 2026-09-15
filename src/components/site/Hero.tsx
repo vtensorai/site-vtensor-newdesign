@@ -104,12 +104,12 @@ export function Hero() {
                 <span className="mono text-[13px]">{eur(total)}{NB}HT / mois</span>
               </div>
               {LAUNCH_OFFER_ACTIVE ? (
-                <div className="flex justify-between items-baseline gap-3 pt-1 text-[12px] text-muted">
-                  <span>Intégration</span>
-                  <span className="mono whitespace-nowrap">
-                    <s className="text-faint">{eur(INTEGRATION_PER_AGENT * slide.agents.length)}{NB}HT</s>{" "}
-                    <span className="text-offer font-semibold">offerte jusqu&apos;au {LAUNCH_OFFER_END_SHORT}</span>
-                  </span>
+                <div className="flex flex-col gap-0.5 pt-1 text-[12px] text-muted">
+                  <div className="flex justify-between items-baseline gap-3">
+                    <span>Intégration</span>
+                    <s className="mono text-faint">{eur(INTEGRATION_PER_AGENT * slide.agents.length)}{NB}HT</s>
+                  </div>
+                  <div className="mono text-right text-offer font-semibold">offerte jusqu&apos;au {LAUNCH_OFFER_END_SHORT}</div>
                 </div>
               ) : (
                 <div className="flex justify-between items-baseline gap-3 pt-1 text-[12px] text-muted">
