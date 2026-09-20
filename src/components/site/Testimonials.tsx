@@ -102,7 +102,7 @@ function Slide({ t }: { t: Testimonial }) {
           <CompanyLogo t={t} />
         </div>
         {t.agents.length > 0 && (
-          <div className="hidden lg:flex flex-col gap-1.5 pt-4 border-t border-rule-2">
+          <div className="flex flex-col gap-1.5 pt-4 border-t border-rule-2">
             <span className="mono text-[11px] tracking-[0.14em] uppercase text-muted">Agents en place</span>
             <span className="small">{t.agents.join(" · ")}</span>
           </div>
