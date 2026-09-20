@@ -4,7 +4,9 @@
  *
  * - 3D NUM : mots de Victor (2026-09-14), fondateur de Vtensor. Publié.
  * - Bravel : accord de principe de Sébastien Brault (2026-09-14), texte à valider.
- * - Gomes SARL : accord de principe de Damien Gomes (2026-09-14), texte à écrire avec lui.
+ * - GOMES : texte, signature et portrait fournis par Damien Gomes, transmis par Victor (2026-09-20). Publié tel quel.
+ *
+ * Ordre d'affichage : les clients d'abord, le récit du fondateur (`featured`) en fin de section.
  */
 
 export type Testimonial = {
@@ -21,7 +23,7 @@ export type Testimonial = {
   url?: string;
   /** Logo dans /public/logos : version pour fond clair, et pour fond sombre (sinon la même). */
   logo?: { light: string; dark?: string; alt: string };
-  /** Mis en avant (bloc large). */
+  /** Récit du fondateur : bloc large encadré, affiché après les témoignages clients. */
   featured?: boolean;
   /** Visible sur le site. */
   published: boolean;
@@ -35,7 +37,7 @@ export const TESTIMONIALS: readonly Testimonial[] = [
     person: "Victor Arnoul",
     role: "Dirigeant de 3D NUM, fondateur de Vtensor",
     quote:
-      "J'ai commencé par développer un agent pour gérer le service après-vente de mon entreprise, en particulier pour les clients à l'autre bout du monde. Puis j'ai automatisé, une par une, toutes mes tâches non productives : factures, relances, devis, etc. Une fois tous ces agents en place, j'ai trouvé ça tellement révolutionnaire que je me suis dit qu'il fallait pouvoir proposer ces agents à tous les entrepreneurs comme moi. C'est ainsi qu'est né Vtensor.",
+      "J'ai commencé par développer un agent pour gérer le service après-vente de mon entreprise, en particulier pour les clients à l'autre bout du monde. Puis j'ai automatisé, une par une, toutes mes tâches non productives : factures, relances, devis, etc. Une fois tous ces agents en place, j'ai trouvé ça tellement révolutionnaire que je me suis dit qu'il fallait pouvoir proposer ces agents à tous les entrepreneurs comme moi. C'est ainsi qu'est né Vtensor.",
     agents: ["SAV", "Administratif", "Commercial", "Standardiste", "Marketing", "Webmaster"],
     photo: "victor",
     url: "https://www.3dnum.fr",
@@ -55,12 +57,14 @@ export const TESTIMONIALS: readonly Testimonial[] = [
   },
   {
     id: "gomes",
-    company: "Gomes SARL",
-    sector: "Construction · Bâtiment",
+    company: "GOMES",
+    sector: "Entreprise de BTP",
     person: "Damien Gomes",
-    role: "Dirigeant, Gomes SARL",
-    quote: "",
+    role: "Co-dirigeant",
+    quote:
+      "En tant que co-dirigeant de PME, on a un éventail de tâches extrêmement large. Victor m'a aidé à mettre en place des agents qui me font gagner un temps précieux au quotidien : assistant personnel, relances automatiques, agent commercial, outils personnalisés. Je peux maintenant me consacrer pleinement aux sujets stratégiques et structurants de l'entreprise.",
     agents: [],
-    published: false,
+    photo: "damien-gomes",
+    published: true,
   },
 ];
