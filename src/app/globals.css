@@ -173,6 +173,15 @@ body {
 .dot[aria-selected="true"] .dot-bar::after { content: ""; position: absolute; inset: 0; background: var(--accent); transform-origin: left; animation: dot-progress var(--dot-duration, 6s) linear forwards; }
 @media (prefers-reduced-motion: reduce) { .dot[aria-selected="true"] .dot-bar::after { animation: none; transform: none; } }
 @keyframes dot-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+/* Carrousel en pause (survol, focus, hors écran) : la barre s'arrête où elle en est. Choix du visiteur : barre pleine, plus de minuteur. */
+.dots[data-paused="true"] .dot[aria-selected="true"] .dot-bar::after { animation-play-state: paused; }
+.dots[data-auto="false"] .dot[aria-selected="true"] .dot-bar::after { animation: none; transform: none; }
+
+/* Témoignages : slides empilés dans la même cellule, le cadre garde la hauteur du plus long (aucun saut de page à la bascule) */
+.tcar-stage { display: grid; touch-action: pan-y; }
+.tcar-slide { grid-area: 1 / 1; min-width: 0; opacity: 0; visibility: hidden; transition: opacity 500ms ease, visibility 0s linear 500ms; }
+.tcar-slide[data-active="true"] { opacity: 1; visibility: visible; transition: opacity 500ms ease, visibility 0s; }
+@media (prefers-reduced-motion: reduce) { .tcar-slide, .tcar-slide[data-active="true"] { transition: none; } }
 
 /* Fondu des slides */
 .fade-in { animation: fade-in 500ms ease-out both; }
