@@ -66,6 +66,8 @@ export const TESTIMONIALS: readonly Testimonial[] = [
       "En tant que co-dirigeant de PME, on a un éventail de tâches extrêmement large. Victor m'a aidé à mettre en place des agents qui me font gagner un temps précieux au quotidien\u00a0: assistant personnel, relances automatiques, agent commercial, outils personnalisés. Je peux maintenant me consacrer pleinement aux sujets stratégiques et structurants de l'entreprise.",
     agents: ["Administratif", "Commercial", "Métier sur mesure"],
     photo: "damien-gomes",
+    // Logo fourni par Damien Gomes (2026-09-21), retracé en SVG depuis son image ; variante à lettres blanches pour le thème sombre.
+    logo: { light: "/logos/gomes.svg", dark: "/logos/gomes-dark.svg", alt: "Logo GOMES" },
     published: true,
   },
 ];
