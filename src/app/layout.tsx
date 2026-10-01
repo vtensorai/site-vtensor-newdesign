@@ -50,13 +50,6 @@ const BUILD_STAMP = new Date().toISOString().slice(0, 16).replace("T", " ") + " 
 
 const THEME_SCRIPT = `(function(){try{var t=localStorage.getItem('vt-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();`;
 
-/** Mesure d'audience : Cloudflare Web Analytics, sans cookie (cf. politique de confidentialité).
- *  Balise posée ici plutôt qu'injectée par Cloudflare : l'injection automatique couvre toute la zone
- *  (application, aperçus clients…) et le plan gratuit n'autorise aucune règle par hôte.
- *  Identifiant public du site, visible dans le HTML servi. */
-const CF_BEACON = JSON.stringify({ token: "85a5a9242cf4490e82dd8d0a9f0eed76" });
-const ANALYTICS_ON = process.env.NODE_ENV === "production";
-
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
@@ -68,12 +61,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <meta name="build" content={BUILD_STAMP} />
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
-      <body className="min-h-full flex flex-col">
-        {children}
-        {ANALYTICS_ON && (
-          <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={CF_BEACON} />
-        )}
-      </body>
+      <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
 }
