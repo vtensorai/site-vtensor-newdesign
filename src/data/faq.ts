@@ -5,6 +5,8 @@
  * maître, 100 € HT par agent et par mois, 1 000 € HT par an).
  */
 
+import { LAUNCH_OFFER_END } from "@/data/slides";
+
 export type Faq = { question: string; answer: string; /** Phrase liée à l'offre limitée, affichée en rouge tant que l'offre est active. */ offer?: string };
 
 export const FAQS: readonly Faq[] = [
@@ -52,7 +54,7 @@ export const FAQS: readonly Faq[] = [
     question: "Comment fonctionne la tarification ?",
     answer:
       "Un prix par agent, sans palier caché : 100 € HT par agent et par mois, ou 1 000 € HT par agent et par an si vous réglez à l'année (2 mois offerts). Vous composez votre équipe librement, avec des postes du catalogue ou des postes créés pour vous. S'y ajoutent des frais d'intégration uniques, à partir de 500 € HT par agent, qui dépendent des outils à connecter et des process à modéliser ; le montant exact est fixé sur devis après l'audit gratuit. Les besoins spécifiques (hébergement chez vous, applications dédiées, intégration ERP lourde) relèvent de l'offre Sur-mesure.",
-    offer: "Offre de lancement : les frais d'intégration sont offerts pour toute commande passée jusqu'au 30 septembre 2026.",
+    offer: `Offre de lancement : les frais d'intégration sont offerts pour toute commande passée jusqu'au ${LAUNCH_OFFER_END}.`,
   },
   {
     question: "Mon équipe va-t-elle craindre d'être remplacée ?",
