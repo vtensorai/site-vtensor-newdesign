@@ -76,7 +76,7 @@ export function AppPreview() {
 
   return (
     <section className="section" id="application">
-      <div className="container flex flex-col gap-10">
+      <div className="shell flex flex-col gap-10">
         <SectionHead kicker="Application" title="Une interface pour piloter vos agents." lead="Suivez leurs actions, validez les brouillons en attente, ajustez leurs instructions, retrouvez leurs fichiers. Depuis un seul endroit." />
         <div className="flex flex-col gap-2.5">
           <Scaler width={1200}>

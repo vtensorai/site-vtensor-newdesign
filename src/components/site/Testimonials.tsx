@@ -33,6 +33,8 @@ function Portrait({ t, size = 64 }: { t: Testimonial; size?: number }) {
           alt={`Portrait de ${t.person}`}
           width={640}
           height={640}
+          widths={[128, 192]}
+          sizes={`${size}px`}
           className="rounded-full object-cover"
           style={{ width: size, height: size, border: "1px solid var(--rule)" }}
         />
@@ -169,7 +171,7 @@ export function Testimonials() {
 
   return (
     <section className="section" id="temoignages">
-      <div className="container flex flex-col gap-10 lg:gap-12">
+      <div className="shell flex flex-col gap-10 lg:gap-12">
         <SectionHead
           kicker="Témoignages"
           title="Ils travaillent déjà avec des agents."

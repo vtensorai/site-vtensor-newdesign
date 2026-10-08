@@ -13,12 +13,12 @@ const GUARDS: { icon: keyof typeof Icon; title: string; text: string }[] = [
 export function Security() {
   return (
     <section className="section" id="securite">
-      <div className="container grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+      <div className="shell grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-start">
         <div className="lg:col-span-5 flex flex-col gap-6">
           <div className="kicker">Sécurité</div>
           <h2 className="h2">Vos données restent dans leur périmètre.</h2>
           <p className="p">Quatre garde-fous, actifs sur chaque agent.</p>
-          <Photo name="datacenter" alt="Baie de serveurs dans un centre de données" width={1400} height={1738} className="photo mt-2" style={{ aspectRatio: "1 / 1" }} />
+          <Photo name="datacenter" alt="Baie de serveurs dans un centre de données" width={1400} height={1738} widths={[700]} sizes="(min-width: 1024px) 462px, 100vw" className="photo mt-2" style={{ aspectRatio: "1 / 1" }} />
         </div>
         <div className="lg:col-start-7 lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10 lg:pt-2">
           {GUARDS.map((g) => {

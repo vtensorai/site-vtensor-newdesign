@@ -87,7 +87,7 @@ export function Agents() {
 
   return (
     <section className="section" id="agents">
-      <div className="container flex flex-col gap-10 lg:gap-12">
+      <div className="shell flex flex-col gap-10 lg:gap-12">
         <SectionHead
           kicker="Agents"
           title="Six postes, développés sur mesure."
@@ -96,7 +96,8 @@ export function Agents() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Liste (+ fiche dépliée sous la ligne choisie en dessous de lg) */}
-          <div className="lg:col-span-7 flex flex-col" role="tablist" aria-label="Postes du catalogue">
+          <div className="lg:col-span-7 flex flex-col">
+          <div className="flex flex-col" role="tablist" aria-label="Postes du catalogue">
             {AGENTS.map((ag, i) => {
               const open = i === selected;
               return (
@@ -133,6 +134,7 @@ export function Agents() {
                 </div>
               );
             })}
+          </div>
             <a href="#tarifs" className="arow arow-plus text-accent" style={{ cursor: "pointer" }}>
               <span className="num text-accent">+</span>
               <span className="text-[16px] md:text-[18px] font-medium">Votre poste</span>

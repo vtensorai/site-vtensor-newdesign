@@ -32,7 +32,7 @@ export function Pricing() {
 
   return (
     <section className="section" id="tarifs">
-      <div className="container grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8">
+      <div className="shell grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8">
         <div className="lg:col-span-12 flex flex-col gap-5 lg:mb-6">
           <div className="kicker">Tarifs</div>
           <h2 className="h2">Un prix simple, par agent.</h2>

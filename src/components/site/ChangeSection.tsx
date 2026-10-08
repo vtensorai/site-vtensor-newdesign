@@ -35,12 +35,12 @@ const PILLARS = [
 export function ChangeSection() {
   return (
     <section className="section" id="ce-que-ca-change">
-      <div className="container grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8">
+      <div className="shell grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8">
         <div className="lg:col-span-4 flex flex-col gap-6">
           <div className="kicker">Ce que ça change</div>
           <h2 className="h2">Cinq situations que vous reconnaissez.</h2>
           <p className="p">Et ce qu&apos;une équipe d&apos;agents y change, concrètement.</p>
-          <Photo name="dirigeant" alt="Un dirigeant de PME à son bureau, face à ses factures" width={896} height={1200} className="photo hidden lg:block mt-4" style={{ aspectRatio: "4 / 5" }} />
+          <Photo name="dirigeant" alt="Un dirigeant de PME à son bureau, face à ses factures" width={896} height={1200} widths={[480]} sizes="364px" className="photo hidden lg:block mt-4" style={{ aspectRatio: "4 / 5" }} />
         </div>
         <div className="lg:col-start-6 lg:col-span-7 flex flex-col">
           {ITEMS.map((it, i) => (

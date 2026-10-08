@@ -31,7 +31,7 @@ export function Nav() {
 
   return (
     <header className="sticky top-0 z-50 bg-paper/95 backdrop-blur border-b border-rule" style={{ background: "color-mix(in srgb, var(--bg) 92%, transparent)" }}>
-      <div className="container flex items-center justify-between gap-6 py-4 xl:py-5">
+      <div className="shell flex items-center justify-between gap-6 py-4 xl:py-5">
         <a href="/" className="inline-flex items-center text-ink" aria-label="Vtensor — accueil">
           <Logo id="nav" height={36} />
         </a>
@@ -48,7 +48,7 @@ export function Nav() {
           <a href={APP_URL} target="_blank" rel="noopener noreferrer" className="hidden md:inline text-[15px] text-muted hover:text-ink transition-colors">
             Accéder à l&apos;app
           </a>
-          <a href={AUDIT_URL} target="_blank" rel="noopener noreferrer" className="btn btn-sm hidden sm:inline-flex">
+          <a href={AUDIT_URL} target="_blank" rel="noopener noreferrer" className="btn btn-sm">
             Audit gratuit
           </a>
           <ThemeToggle />
@@ -68,7 +68,7 @@ export function Nav() {
 
       {open && (
         <div className="xl:hidden border-t border-rule bg-paper" style={{ background: "var(--bg)" }}>
-          <nav className="container flex flex-col py-4" aria-label="Navigation mobile">
+          <nav className="shell flex flex-col py-4" aria-label="Navigation mobile">
             {LINKS.map((l) => (
               <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="py-3.5 text-[17px] text-ink border-b border-rule-2 hover:text-accent transition-colors">
                 {l.label}

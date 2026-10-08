@@ -21,7 +21,15 @@ function eur(n: number) {
 export function Hero() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  /** Photos montées : la première au chargement, la suivante 2 s après chaque bascule (pas 4 téléchargements d'emblée). */
+  const [mounted, setMounted] = useState<ReadonlySet<number>>(() => new Set([0]));
   const manual = useRef(false);
+
+  useEffect(() => {
+    const next = (index + 1) % SLIDES.length;
+    const t = window.setTimeout(() => setMounted((m) => (m.has(next) ? m : new Set(m).add(next))), 2000);
+    return () => window.clearTimeout(t);
+  }, [index]);
 
   useEffect(() => {
     if (paused || manual.current) return;
@@ -34,10 +42,10 @@ export function Hero() {
   const total = PRICE_PER_AGENT * slide.agents.length;
 
   return (
-    <section className="container grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center pt-14 pb-16 lg:pt-24 lg:pb-28">
+    <section className="shell grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center pt-8 pb-14 lg:pt-12 lg:pb-20">
       {/* Texte */}
       <div className="lg:col-span-7 flex flex-col gap-7 lg:gap-8 lg:pr-6">
-        <div className="kicker">Agence d&apos;agents IA · France</div>
+        <div className="kicker">Agents IA sur mesure · France</div>
         <h1 className="h1">
           Reprenez le contrôle de{" "}
           <span key={slide.id} className="text-accent fade-in inline-block">
@@ -69,16 +77,16 @@ export function Hero() {
         onMouseLeave={() => setPaused(false)}
       >
         <div className="relative lg:pb-14">
-          {/* Les quatre photos sont empilées et fondues : pas de chargement à la bascule. */}
+          {/* Photos empilées et fondues ; chacune est montée avant son tour (voir `mounted`). */}
           <div className="relative h-[440px] sm:h-[520px] lg:h-[640px]">
-            {SLIDES.map((s, i) => (
+            {SLIDES.map((s, i) => (mounted.has(i) || i === index) && (
               <div
                 key={s.id}
                 className="absolute inset-0 transition-opacity duration-500"
                 style={{ opacity: i === index ? 1 : 0, zIndex: i === index ? 1 : 0 }}
                 aria-hidden={i !== index}
               >
-                <Photo name={s.photo} alt={s.alt} width={896} height={1200} priority={i === 0} className="photo h-full" />
+                <Photo name={s.photo} alt={s.alt} width={896} height={1200} priority={i === 0} widths={[480]} sizes="(min-width: 1024px) 462px, (min-width: 640px) 560px, 100vw" className="photo h-full" />
               </div>
             ))}
           </div>

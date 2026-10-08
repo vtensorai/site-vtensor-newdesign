@@ -29,7 +29,7 @@ export function Faq() {
   return (
     <section className="section" id="faq">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <div className="container grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8">
+      <div className="shell grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8">
         <div className="lg:col-span-4 flex flex-col gap-5">
           <div className="kicker">FAQ</div>
           <h2 className="h2">Vos questions, nos réponses.</h2>
@@ -49,6 +49,7 @@ export function Faq() {
               <div key={f.question} className="border-t border-rule last:border-b">
                 <button
                   type="button"
+                  id={`faq-q-${i}`}
                   className="qa w-full text-left cursor-pointer"
                   aria-expanded={isOpen}
                   aria-controls={panelId}
@@ -63,7 +64,7 @@ export function Faq() {
                     </svg>
                   </span>
                 </button>
-                <div id={panelId} className="qa-panel" data-open={isOpen} role="region">
+                <div id={panelId} className="qa-panel" data-open={isOpen} role="region" aria-labelledby={`faq-q-${i}`}>
                   <div className="qa-panel-inner">
                     <p className="p text-[15px] pb-7">
                       {f.answer}

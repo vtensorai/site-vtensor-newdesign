@@ -11,7 +11,7 @@ export default function NotFound() {
     <>
       <Nav />
       <main className="flex-1 flex items-center justify-center py-24 md:py-32">
-        <div className="container max-w-[720px] flex flex-col gap-6">
+        <div className="shell max-w-[720px] flex flex-col gap-6">
           <div className="kicker">Erreur 404</div>
           <h1 className="h2">Page introuvable.</h1>
           <p className="lead">L&apos;adresse demandée n&apos;existe pas ou a été déplacée.</p>

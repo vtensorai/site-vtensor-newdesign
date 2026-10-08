@@ -10,7 +10,7 @@ export function LegalLayout({ kicker, title, updated, children }: { kicker: stri
     <>
       <Nav />
       <main className="flex-1">
-        <article className="container max-w-[860px] py-16 md:py-24">
+        <article className="shell max-w-[860px] py-16 md:py-24">
           <div className="kicker mb-5">{kicker}</div>
           <h1 className="h2 mb-3">{title}</h1>
           <p className="mono text-[12px] tracking-[0.14em] uppercase text-faint mb-12">Dernière mise à jour : {updated}</p>
