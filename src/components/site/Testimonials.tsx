@@ -117,7 +117,8 @@ function Slide({ t }: { t: Testimonial }) {
   );
 }
 
-export function Testimonials() {
+/** `intro` : bloc optionnel entre l'en-tête et le carrousel (chiffres réels de l'aperçu V4). `title` : titre de section. */
+export function Testimonials({ intro, title = "Ils travaillent déjà avec des agents." }: { intro?: React.ReactNode; title?: string } = {}) {
   const published = TESTIMONIALS.filter((t) => t.published);
   // Les clients d'abord, le récit du fondateur en dernier.
   const items = [...published.filter((t) => !t.featured), ...published.filter((t) => t.featured)];
@@ -174,9 +175,10 @@ export function Testimonials() {
       <div className="shell flex flex-col gap-10 lg:gap-12">
         <SectionHead
           kicker="Témoignages"
-          title="Ils travaillent déjà avec des agents."
+          title={title}
           lead="Des dirigeants qui parlent en leur nom, de ce que les agents ont changé dans leur entreprise."
         />
+        {intro}
 
         <div
           ref={root}

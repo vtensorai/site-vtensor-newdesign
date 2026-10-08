@@ -11,15 +11,17 @@ import { Logo } from "./Logo";
 import { ThemeToggle } from "./ThemeToggle";
 
 const LINKS = [
-  { label: "Agents", href: "/#agents" },
-  { label: "Comment ça marche", href: "/#comment-ca-marche" },
-  { label: "Témoignages", href: "/#temoignages" },
-  { label: "Tarifs", href: "/#tarifs" },
-  { label: "Sécurité", href: "/#securite" },
-  { label: "FAQ", href: "/#faq" },
-];
+  { label: "Agents", href: "#agents" },
+  { label: "Comment ça marche", href: "#comment-ca-marche" },
+  { label: "Témoignages", href: "#temoignages" },
+  { label: "Tarifs", href: "#tarifs" },
+  { label: "Sécurité", href: "#securite" },
+  { label: "FAQ", href: "#faq" },
+].map((l) => ({ ...l, href: "/" + l.href }));
 
-export function Nav() {
+/** `base` : page qui porte les ancres (« / » en ligne, « /apercu/ » pour l'aperçu V4). */
+export function Nav({ base = "/" }: { base?: string } = {}) {
+  const links = LINKS.map((l) => ({ ...l, href: base + l.href.slice(1) }));
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -37,7 +39,7 @@ export function Nav() {
         </a>
 
         <nav className="hidden xl:flex items-center gap-8" aria-label="Navigation principale">
-          {LINKS.map((l) => (
+          {links.map((l) => (
             <a key={l.href} href={l.href} className="text-[15px] text-ink hover:text-accent transition-colors">
               {l.label}
             </a>
@@ -69,7 +71,7 @@ export function Nav() {
       {open && (
         <div className="xl:hidden border-t border-rule bg-paper" style={{ background: "var(--bg)" }}>
           <nav className="shell flex flex-col py-4" aria-label="Navigation mobile">
-            {LINKS.map((l) => (
+            {links.map((l) => (
               <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="py-3.5 text-[17px] text-ink border-b border-rule-2 hover:text-accent transition-colors">
                 {l.label}
               </a>
