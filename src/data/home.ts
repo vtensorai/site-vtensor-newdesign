@@ -1,15 +1,17 @@
 /**
- * Contenus de l'aperçu V4 (route /apercu/, non indexée) — 2026-10-08.
+ * Contenus de la page d'accueil (refonte du 2026-10-08, validée par Victor).
  *
  * Écrits pour la cible de la prospection : TPE dont le dirigeant gère encore
  * l'opérationnel. Les missions et exemples sont des idées de ce qu'un agent
  * peut faire (développement sur mesure, consigne de Victor du 08/10) ; les
  * personnes et entreprises citées sont fictives et marquées « exemple ».
+ * Pas d'acronymes dans le texte visible (consigne de Victor du 08/10) : les clés
+ * techniques (SAV, COM…) ne s'affichent jamais.
  */
 
 export type AgentKey = "SAV" | "COM" | "ADM" | "WEB" | "MKT" | "STA";
 
-/** Couleur d'agent = jetons de l'aperçu app (mêmes teintes que dans l'application). */
+/** Couleur d'agent = jetons --app-* (mêmes teintes que dans l'application). */
 export const AGENT_COLOR: Record<AgentKey, string> = {
   SAV: "var(--app-cyan)",
   COM: "var(--app-blue)",
@@ -19,7 +21,7 @@ export const AGENT_COLOR: Record<AgentKey, string> = {
   STA: "var(--app-indigo)",
 };
 
-export type AgentV4 = {
+export type Agent = {
   key: AgentKey;
   name: string;
   short: string;
@@ -33,11 +35,11 @@ export type AgentV4 = {
   example: { from?: string; user: string; agent: string };
 };
 
-export const AGENTS_V4: readonly AgentV4[] = [
+export const AGENTS: readonly Agent[] = [
   {
     key: "SAV",
-    name: "Agent SAV",
-    short: "SAV",
+    name: "Agent Service après-vente",
+    short: "Service après-vente",
     metier: "Répond à vos clients",
     headline: "Répond à vos clients en quelques minutes, dans votre ton.",
     description:
@@ -84,15 +86,15 @@ export const AGENTS_V4: readonly AgentV4[] = [
     key: "WEB",
     name: "Agent Webmaster",
     short: "Webmaster",
-    metier: "Site web et Google",
-    headline: "Fait vivre votre site et le fait remonter sur Google.",
+    metier: "Référencement Google et site web",
+    headline: "Fait remonter votre entreprise sur Google, et fait vivre votre site.",
     description:
-      "Articles, pages, actualités de vos chantiers : l'agent rédige, publie et suit ce que Google en fait. Il surveille vos positions et vous propose les pages à améliorer.",
-    missions: ["Articles et actualités", "Mise à jour des pages", "Référencement local", "Suivi Search Console et Analytics", "Campagnes Google Ads", "WordPress, Webflow, Framer…"],
+      "Le référencement naturel (SEO), c'est tout ce qui fait apparaître votre site dans les premiers résultats de Google quand un client cherche votre métier près de chez lui, sans payer de publicité. L'agent s'en occupe en continu : titres et descriptions de vos pages, textes écrits avec les mots que tapent vos clients, articles réguliers, fiche Google de votre entreprise, vitesse du site, et le suivi de vos positions semaine après semaine.",
+    missions: ["Référencement naturel (SEO)", "Pages et articles sur les mots de vos clients", "Fiche Google de votre entreprise", "Suivi de vos positions sur Google", "Mises à jour du site", "Campagnes Google Ads", "WordPress, Webflow, Framer…"],
     channels: ["web", "email"],
     example: {
       user: "Pourquoi mon site ne sort pas quand on cherche « menuisier Rambouillet » ?",
-      agent: "Votre page d'accueil ne cite ni « menuisier » ni « Rambouillet », et votre fiche Google ne renvoie pas vers le site. Je propose un nouveau titre, une page « Menuiserie sur mesure à Rambouillet » et deux articles sur vos derniers chantiers. **Je publie ?**",
+      agent: "Votre page d'accueil ne cite ni « menuisier » ni « Rambouillet », et votre fiche Google ne renvoie pas vers le site : Google ne peut pas deviner que vous êtes là. Je propose un nouveau titre, une page « Menuiserie sur mesure à Rambouillet » et deux articles sur vos derniers chantiers. **Je publie ?**",
     },
   },
   {
@@ -128,10 +130,10 @@ export const AGENTS_V4: readonly AgentV4[] = [
   },
 ];
 
-export const agentByKey = (k: AgentKey) => AGENTS_V4.find((a) => a.key === k)!;
+export const agentByKey = (k: AgentKey) => AGENTS.find((a) => a.key === k)!;
 
 /** Hero : la tâche du titre, la notification et l'équipe changent ensemble. */
-export type SlideV4 = {
+export type Slide = {
   id: string;
   photo: string;
   alt: string;
@@ -142,7 +144,7 @@ export type SlideV4 = {
   notif: { agent: AgentKey; time: string; text: string };
 };
 
-export const SLIDES_V4: readonly SlideV4[] = [
+export const SLIDES: readonly Slide[] = [
   {
     id: "menuiserie",
     photo: "menuiserie",
@@ -194,7 +196,7 @@ export const DAY: readonly Moment[] = [
   { time: "10:42", situation: "Le téléphone sonne pendant que vous avez les mains prises.", agent: "STA", kind: "call" },
   { time: "13:15", situation: "Des factures impayées que personne n'a relancées.", agent: "ADM", kind: "invoice" },
   { time: "16:30", situation: "Vous savez qu'il faudrait prospecter, mais vous n'avez jamais le temps.", agent: "COM", kind: "prospects" },
-  { time: "18:05", situation: "Votre site n'a pas bougé depuis des mois.", agent: "WEB", kind: "article" },
+  { time: "18:05", situation: "Quand on cherche votre métier sur Google, ce sont vos concurrents qui sortent.", agent: "WEB", kind: "article" },
 ];
 
 /** Ce que le dirigeant obtient à l'issue de l'audit gratuit. */

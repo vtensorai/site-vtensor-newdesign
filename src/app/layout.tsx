@@ -21,7 +21,7 @@ const fontMono = JetBrains_Mono({
 
 const SITE_TITLE = "Vtensor — Agents IA sur mesure";
 const SITE_DESCRIPTION =
-  "Des agents IA développés sur mesure pour votre entreprise : SAV, commercial, administratif, webmaster, marketing, standard. Vous leur parlez en direct. Hébergés en Allemagne, conçus en France.";
+  "Des agents IA développés sur mesure pour votre entreprise : service après-vente, commercial, administratif, référencement Google, marketing, standard téléphonique. Vous leur parlez en direct. Hébergés en Allemagne, conçus en France.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://vtensor.ai"),

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { LegalLayout } from "@/components/site/LegalLayout";
 import { CONTACT_EMAIL } from "@/lib/links";
+import { INTEGRATION_PER_AGENT, PRICE_PER_AGENT, PRICE_PER_AGENT_YEAR, eur } from "@/data/pricing";
 
 /**
  * Conditions générales de vente et d'utilisation — version publique (2026-09-08),
  * dérivée du brouillon CGU du 2026-05-02 (Output/legal), alignée sur l'offre
- * en vigueur : 100 € HT par agent et par mois ou 1 000 € HT par an, intégration
+ * en vigueur (prix lus dans data/pricing.ts : 99 € HT par agent et par mois depuis le 2026-10-08), intégration
  * sur devis, mensuel sans engagement, plus d'agent maître.
  */
 
@@ -19,7 +20,7 @@ const NB = " ";
 
 export default function ConditionsGeneralesPage() {
   return (
-    <LegalLayout kicker="Conditions générales" title="Conditions générales de vente et d'utilisation" updated="8 septembre 2026">
+    <LegalLayout kicker="Conditions générales" title="Conditions générales de vente et d'utilisation" updated="8 octobre 2026">
       <p>
         Les présentes conditions générales (les «{NB}Conditions{NB}») régissent la fourniture, par la société V TENSOR AI (le
         «{NB}Prestataire{NB}»), de ses services de conception, de mise en place et d&apos;exploitation d&apos;agents d&apos;intelligence
@@ -91,11 +92,11 @@ export default function ConditionsGeneralesPage() {
       <h2>4. Tarifs</h2>
       <ul>
         <li>
-          <strong>Abonnement</strong>{NB}: 100{NB}€ hors taxes par Agent et par mois, ou 1{NB}000{NB}€ hors taxes par Agent et par an en
+          <strong>Abonnement</strong>{NB}: {eur(PRICE_PER_AGENT)} hors taxes par Agent et par mois, ou {eur(PRICE_PER_AGENT_YEAR)}{" "}hors taxes par Agent et par an en
           règlement annuel d&apos;avance (soit deux mois offerts par rapport au règlement mensuel).
         </li>
         <li>
-          <strong>Frais d&apos;intégration</strong>{NB}: facturés une seule fois, à partir de 500{NB}€ hors taxes par Agent, selon les
+          <strong>Frais d&apos;intégration</strong>{NB}: facturés une seule fois, à partir de {eur(INTEGRATION_PER_AGENT)}{" "}hors taxes par Agent, selon les
           outils à connecter et les processus à modéliser. Leur montant exact figure au Devis. Le Prestataire peut proposer des offres
           de lancement, notamment la prise en charge des frais d&apos;intégration{NB}; leurs conditions figurent au Devis.
         </li>

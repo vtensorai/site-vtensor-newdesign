@@ -1,9 +1,9 @@
 "use client";
 
-/** Briques communes de l'aperçu V4 : étiquette d'agent, apparition au défilement, gras inline. */
+/** Briques communes de la page d'accueil : étiquette d'agent, apparition au défilement, gras inline. */
 
 import { useLayoutEffect, useRef } from "react";
-import { AGENT_COLOR, agentByKey, type AgentKey } from "@/data/v4";
+import { AGENT_COLOR, agentByKey, type AgentKey } from "@/data/home";
 
 export function AgentTag({ k, full = false }: { k: AgentKey; full?: boolean }) {
   return (

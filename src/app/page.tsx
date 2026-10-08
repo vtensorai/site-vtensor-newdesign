@@ -1,22 +1,22 @@
 /**
- * Home — V3 « Cabinet / Infrastructure » (2026-09-08).
+ * Accueil — refonte du 2026-10-08 (validée par Victor).
  *
- * Flux : nav → hero (carrousel métiers) → ce que ça change → agents (6 postes,
- * sur mesure) → comment ça marche → aperçu application → témoignages → tarifs → sécurité
- * → FAQ → CTA final → footer. Plus d'agent maître : le client parle à chaque
- * agent en direct.
+ * Flux : nav → hero (« Des agents IA qui [tâche] », métier, notification, équipe)
+ * → une journée avec vos agents (cinq situations et ce que l'agent produit)
+ * → agents → témoignages → application → comment ça marche → tarifs (composer
+ * son équipe) → sécurité → FAQ → qui est derrière → appel final → pied de page.
  */
 
 import { Agents } from "@/components/site/Agents";
-import { AppPreview } from "@/components/site/AppPreview";
-import { ChangeSection } from "@/components/site/ChangeSection";
+import { AppPhone } from "@/components/site/AppPhone";
+import { FinalCta, Founder, Security, StickyCta } from "@/components/site/Closing";
 import { Faq } from "@/components/site/Faq";
-import { FinalCta, Footer } from "@/components/site/Footer";
+import { Footer } from "@/components/site/Footer";
 import { Hero } from "@/components/site/Hero";
 import { HowItWorks } from "@/components/site/HowItWorks";
+import { Journee } from "@/components/site/Journee";
 import { Nav } from "@/components/site/Nav";
 import { Pricing } from "@/components/site/Pricing";
-import { Security } from "@/components/site/Security";
 import { Testimonials } from "@/components/site/Testimonials";
 
 export default function Home() {
@@ -25,17 +25,19 @@ export default function Home() {
       <Nav />
       <main className="flex flex-col flex-1">
         <Hero />
-        <ChangeSection />
+        <Journee />
         <Agents />
-        <HowItWorks />
-        <AppPreview />
         <Testimonials />
+        <AppPhone />
+        <HowItWorks />
         <Pricing />
         <Security />
         <Faq />
+        <Founder />
         <FinalCta />
       </main>
       <Footer />
+      <StickyCta />
     </>
   );
 }

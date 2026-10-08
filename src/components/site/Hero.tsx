@@ -1,35 +1,27 @@
 "use client";
 
 /**
- * Hero en carrousel : la photo, la proposition d'équipe et le mot du titre
- * changent ensemble toutes les 6 s (pause au survol, arrêt si l'utilisateur
- * choisit un onglet, respect de prefers-reduced-motion).
+ * Hero : « Des agents IA qui [tâche]. » La tâche, la photo, la notification
+ * (ce que l'agent vient de faire) et l'équipe proposée changent ensemble toutes
+ * les 6 s. Pause au survol, arrêt au clic, mouvement réduit respecté.
  */
 
 import { useEffect, useRef, useState } from "react";
 import { AUDIT_URL } from "@/lib/links";
-import { INTEGRATION_PER_AGENT, LAUNCH_OFFER_ACTIVE, LAUNCH_OFFER_END_SHORT, PRICE_PER_AGENT, SLIDES } from "@/data/slides";
+import { INTEGRATION_PER_AGENT, LAUNCH_OFFER_ACTIVE, LAUNCH_OFFER_END_SHORT, PRICE_PER_AGENT, eur } from "@/data/pricing";
+import { AGENT_COLOR, SLIDES, agentByKey } from "@/data/home";
+import { Icon } from "./Icons";
 import { Photo } from "./Photo";
+import { AgentTag } from "./Bits";
 
-const NB = " ";
+const NB = " ";
 const DURATION = 6000;
-
-function eur(n: number) {
-  return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, NB) + NB + "€";
-}
 
 export function Hero() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
-  /** Photos montées : la première au chargement, la suivante 2 s après chaque bascule (pas 4 téléchargements d'emblée). */
   const [mounted, setMounted] = useState<ReadonlySet<number>>(() => new Set([0]));
   const manual = useRef(false);
-
-  useEffect(() => {
-    const next = (index + 1) % SLIDES.length;
-    const t = window.setTimeout(() => setMounted((m) => (m.has(next) ? m : new Set(m).add(next))), 2000);
-    return () => window.clearTimeout(t);
-  }, [index]);
 
   useEffect(() => {
     if (paused || manual.current) return;
@@ -38,101 +30,104 @@ export function Hero() {
     return () => window.clearTimeout(t);
   }, [index, paused]);
 
-  const slide = SLIDES[index];
-  const total = PRICE_PER_AGENT * slide.agents.length;
+  useEffect(() => {
+    const next = (index + 1) % SLIDES.length;
+    const t = window.setTimeout(() => setMounted((m) => (m.has(next) ? m : new Set(m).add(next))), 2000);
+    return () => window.clearTimeout(t);
+  }, [index]);
+
+  const s = SLIDES[index];
+  const total = PRICE_PER_AGENT * s.agents.length;
 
   return (
-    <section className="shell grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center pt-8 pb-14 lg:pt-12 lg:pb-20">
-      {/* Texte */}
-      <div className="lg:col-span-7 flex flex-col gap-7 lg:gap-8 lg:pr-6">
+    <section className="shell grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center pt-8 pb-14 lg:pt-14 lg:pb-20" id="haut">
+      <div className="lg:col-span-6 flex flex-col gap-6 lg:gap-7">
         <div className="kicker">Agents IA sur mesure · France</div>
-        <h1 className="h1">
-          Reprenez le contrôle de{" "}
-          <span key={slide.id} className="text-accent fade-in inline-block">
-            {slide.word}
+        <h1 className="h1-hero">
+          Des agents IA qui{" "}
+          <span key={s.id} className="text-accent fade-in">
+            {s.task}
           </span>
           .
         </h1>
-        <p className="lead max-w-[600px]">
-          Des agents IA développés sur mesure pour votre entreprise. Vous leur parlez en direct, par email ou depuis l&apos;application.
+        <p className="lead max-w-[560px]">
+          Pendant que vous êtes à l&apos;atelier, sur un chantier ou en rendez-vous. Chaque agent est développé pour votre entreprise, travaille dans vos outils et vous transmet ce qui demande votre décision.
         </p>
         <div className="flex flex-wrap items-center gap-x-7 gap-y-4">
           <a href={AUDIT_URL} target="_blank" rel="noopener noreferrer" className="btn">
-            Réserver un audit gratuit · 30{NB}min
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" /></svg>
+            Réserver un audit gratuit · 30{NB}min <Icon.arrow size={16} />
           </a>
-          <a href="#tarifs" className="btn-ghost">Voir les tarifs</a>
+          <a href="#journee" className="btn-ghost">
+            Voir une journée type
+          </a>
         </div>
-        <div className="small flex flex-wrap gap-y-2">
-          <span className="pr-5 border-r border-rule">Données hébergées en Allemagne</span>
-          <span className="px-5 border-r border-rule">Sans engagement</span>
-          <span className="pl-5">Réponse sous 24{NB}h</span>
-        </div>
+        <ul className="small m-0 p-0 list-none flex flex-wrap gap-x-5 gap-y-1.5">
+          {[`${eur(PRICE_PER_AGENT)}${NB}HT par agent et par mois`, "Sans engagement", "Hébergé en Allemagne"].map((t) => (
+            <li key={t} className="inline-flex items-center gap-2">
+              <span className="text-accent"><Icon.check size={14} /></span>
+              {t}
+            </li>
+          ))}
+        </ul>
       </div>
 
-      {/* Photo + proposition d'équipe + onglets */}
-      <div
-        className="lg:col-span-5 flex flex-col gap-5"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-      >
-        <div className="relative lg:pb-14">
-          {/* Photos empilées et fondues ; chacune est montée avant son tour (voir `mounted`). */}
-          <div className="relative h-[440px] sm:h-[520px] lg:h-[640px]">
-            {SLIDES.map((s, i) => (mounted.has(i) || i === index) && (
-              <div
-                key={s.id}
-                className="absolute inset-0 transition-opacity duration-500"
-                style={{ opacity: i === index ? 1 : 0, zIndex: i === index ? 1 : 0 }}
-                aria-hidden={i !== index}
-              >
-                <Photo name={s.photo} alt={s.alt} width={896} height={1200} priority={i === 0} widths={[480]} sizes="(min-width: 1024px) 462px, (min-width: 640px) 560px, 100vw" className="photo h-full" />
+      <div className="lg:col-span-6 flex flex-col gap-5" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+        <div className="relative lg:pl-16">
+          <div className="relative h-[300px] sm:h-[420px] lg:h-[560px]">
+            {SLIDES.map(
+              (x, i) =>
+                (mounted.has(i) || i === index) && (
+                  <div key={x.id} className="absolute inset-0 transition-opacity duration-500" style={{ opacity: i === index ? 1 : 0, zIndex: i === index ? 1 : 0 }} aria-hidden={i !== index}>
+                    <Photo name={x.photo} alt={x.alt} width={896} height={1200} priority={i === 0} widths={[480]} sizes="(min-width: 1024px) 470px, 100vw" className="photo h-full" />
+                  </div>
+                ),
+            )}
+            {/* Notification : ce que l'agent vient de faire */}
+            <div key={s.id + "-n"} className="fade-in absolute z-10 left-3 right-3 bottom-3 sm:left-auto sm:right-4 sm:w-[340px] lg:right-auto lg:-left-16 lg:top-10 lg:bottom-auto box p-4 flex flex-col gap-2" style={{ boxShadow: "var(--shadow-card)" }}>
+              <div className="flex items-center justify-between gap-3">
+                <AgentTag k={s.notif.agent} full />
+                <span className="art-meta">{s.notif.time}</span>
               </div>
-            ))}
+              <p className="m-0 text-[14px] leading-[1.45] text-ink">{s.notif.text}</p>
+            </div>
           </div>
-          <div
-            key={slide.id + "-card"}
-            className="box fade-in relative z-10 lg:absolute lg:-left-[72px] lg:bottom-0 lg:w-[360px] mt-4 lg:mt-0 p-6 lg:p-7 flex flex-col gap-3.5"
-            style={{ boxShadow: "var(--shadow-card)" }}
-          >
-            <div className="flex justify-between items-baseline">
-              <span className="mono text-[11px] tracking-[0.14em] uppercase text-accent">Proposition d&apos;équipe</span>
+
+          {/* Équipe proposée pour ce métier */}
+          <div key={s.id + "-c"} className="fade-in box relative z-10 mt-4 lg:mt-0 lg:absolute lg:-left-6 lg:-bottom-8 lg:w-[310px] p-5 flex flex-col gap-3" style={{ boxShadow: "var(--shadow-card)" }}>
+            <div className="flex justify-between items-baseline gap-3">
+              <span className="serif text-[21px] leading-tight">{s.company}</span>
               <span className="mono text-[10px] text-faint">exemple</span>
             </div>
-            <div className="serif text-[24px] leading-tight">{slide.company}</div>
             <div className="flex flex-col">
-              {slide.agents.map((a) => (
-                <div key={a} className="flex justify-between py-2.5 border-t border-rule-2 text-[14px]">
-                  <span>{a}</span>
-                  <span className="mono text-[13px] text-muted">{eur(PRICE_PER_AGENT)}{NB}HT / mois</span>
+              {s.agents.map((k) => (
+                <div key={k} className="flex justify-between items-center py-2 border-t border-rule-2 text-[13.5px]">
+                  <span className="inline-flex items-center gap-2.5">
+                    <span className="w-[7px] h-[7px] rounded-full" style={{ background: AGENT_COLOR[k] }} aria-hidden="true" />
+                    {agentByKey(k).name}
+                  </span>
+                  <span className="mono text-[12px] text-muted">{eur(PRICE_PER_AGENT)}</span>
                 </div>
               ))}
-              <div className="flex justify-between pt-3 border-t border-ink text-[14px] font-semibold">
-                <span>Abonnement</span>
-                <span className="mono text-[13px]">{eur(total)}{NB}HT / mois</span>
+              <div className="flex justify-between items-baseline pt-2.5 border-t border-ink text-[13.5px] font-semibold">
+                <span>Par mois</span>
+                <span className="mono text-[13px]">{eur(total)}{NB}HT</span>
               </div>
-              {LAUNCH_OFFER_ACTIVE ? (
-                <div className="flex flex-col gap-0.5 pt-1 text-[12px] text-muted">
-                  <div className="flex justify-between items-baseline gap-3">
-                    <span>Intégration</span>
-                    <s className="mono text-faint">{eur(INTEGRATION_PER_AGENT * slide.agents.length)}{NB}HT</s>
-                  </div>
-                  <div className="mono text-right text-offer font-semibold">offerte jusqu&apos;au {LAUNCH_OFFER_END_SHORT}</div>
-                </div>
-              ) : (
-                <div className="flex justify-between items-baseline gap-3 pt-1 text-[12px] text-muted">
-                  <span>Intégration</span>
-                  <span className="mono whitespace-nowrap">à partir de {eur(INTEGRATION_PER_AGENT * slide.agents.length)}{NB}HT</span>
-                </div>
-              )}
+              <div className="flex justify-between items-baseline gap-3 pt-1.5 text-[12px] text-muted">
+                <span>Intégration</span>
+                {LAUNCH_OFFER_ACTIVE ? (
+                  <span className="mono text-offer font-semibold">offerte jusqu&apos;au {LAUNCH_OFFER_END_SHORT}</span>
+                ) : (
+                  <span className="mono">dès {eur(INTEGRATION_PER_AGENT * s.agents.length)}{NB}HT</span>
+                )}
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="dots" role="tablist" aria-label="Exemples de métiers" style={{ ["--dot-duration" as string]: `${DURATION}ms` }}>
-          {SLIDES.map((s, i) => (
+        <div className="dots lg:mt-12" role="tablist" aria-label="Exemples de métiers" style={{ ["--dot-duration" as string]: `${DURATION}ms` }}>
+          {SLIDES.map((x, i) => (
             <button
-              key={s.id}
+              key={x.id}
               type="button"
               role="tab"
               aria-selected={i === index}
@@ -143,7 +138,7 @@ export function Hero() {
               }}
             >
               <span className="dot-bar" aria-hidden="true" />
-              <span className="hidden sm:inline">{s.company}</span>
+              <span className="hidden sm:inline">{x.company}</span>
               <span className="sm:hidden">{String(i + 1).padStart(2, "0")}</span>
             </button>
           ))}

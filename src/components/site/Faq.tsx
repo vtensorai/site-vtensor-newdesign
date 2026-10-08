@@ -8,7 +8,7 @@
 
 import { useState } from "react";
 import { FAQS } from "@/data/faq";
-import { LAUNCH_OFFER_ACTIVE } from "@/data/slides";
+import { LAUNCH_OFFER_ACTIVE } from "@/data/pricing";
 import { CONTACT_EMAIL } from "@/lib/links";
 
 const NB = " ";
@@ -31,7 +31,7 @@ export function Faq() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="shell grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8">
         <div className="lg:col-span-4 flex flex-col gap-5">
-          <div className="kicker">FAQ</div>
+          <div className="kicker">Questions fréquentes</div>
           <h2 className="h2">Vos questions, nos réponses.</h2>
           <p className="p">
             Il en manque une{NB}?{" "}

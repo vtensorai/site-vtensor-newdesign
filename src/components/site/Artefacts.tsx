@@ -4,8 +4,8 @@
  * On montre le résultat, pas la technique.
  */
 
-import type { Moment } from "@/data/v4";
-import { Icon } from "../site/Icons";
+import type { Moment } from "@/data/home";
+import { Icon } from "./Icons";
 import { AgentTag } from "./Bits";
 
 const NB = " ";

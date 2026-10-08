@@ -1,153 +1,162 @@
 "use client";
 
 /**
- * Tarifs : un prix par agent, sélecteur mensuel / annuel (2 mois offerts),
- * simulateur d'équipe, frais d'intégration, offre Sur-mesure.
+ * Tarifs : le visiteur compose son équipe en cochant des postes (plutôt
+ * qu'un compteur abstrait), le reçu se met à jour, prix ramené au jour,
+ * offre de lancement dite une seule fois. Sur-mesure en bandeau.
  */
 
 import { useState } from "react";
 import { AUDIT_URL, CONTACT_EMAIL } from "@/lib/links";
-import { INTEGRATION_PER_AGENT, LAUNCH_OFFER_ACTIVE, LAUNCH_OFFER_END, PRICE_PER_AGENT, PRICE_PER_AGENT_YEAR } from "@/data/slides";
+import { INTEGRATION_PER_AGENT, LAUNCH_OFFER_ACTIVE, LAUNCH_OFFER_END, PRICE_PER_AGENT, PRICE_PER_AGENT_YEAR, PRICE_PER_DAY, eur } from "@/data/pricing";
+import { AGENT_COLOR, AGENTS, type AgentKey } from "@/data/home";
 import { Icon } from "./Icons";
 
-const NB = " ";
-const MIN = 1;
-const MAX = 12;
+const NB = " ";
 
-function eur(n: number) {
-  return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, NB) + NB + "€";
-}
-
-const FEATURES = ["Chaque agent développé sur mesure", "Évolutions et nouveaux modèles inclus", "Email, application, WhatsApp, téléphone", "Hébergement en Allemagne, isolation par client"];
-const CUSTOM = ["Hébergement chez vous ou dans le pays de votre choix", "Agents métier conçus et entraînés pour votre activité", "Applications dédiées, taillées sur vos workflows", "Intégration ERP sur mesure et conseil sécurité"];
+const INCLUDED = ["Chaque agent développé pour vous", "Évolutions et nouveaux modèles inclus", "Email, téléphone, application", "Hébergement en Allemagne", "Sans engagement en mensuel", "Intégration à vos outils"];
 
 export function Pricing() {
   const [annual, setAnnual] = useState(false);
-  const [n, setN] = useState(3);
-
+  const [team, setTeam] = useState<ReadonlySet<AgentKey>>(() => new Set<AgentKey>(["SAV", "STA", "ADM"]));
+  const n = team.size;
   const monthly = n * PRICE_PER_AGENT;
   const yearly = n * PRICE_PER_AGENT_YEAR;
-  const saved = monthly * 12 - yearly;
-  const integration = n * INTEGRATION_PER_AGENT;
+  const perDay = (annual ? yearly : monthly * 12) / 365;
+  const toggle = (k: AgentKey) =>
+    setTeam((t) => {
+      const next = new Set(t);
+      if (next.has(k)) next.delete(k);
+      else next.add(k);
+      return next;
+    });
 
   return (
     <section className="section" id="tarifs">
-      <div className="shell grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8">
-        <div className="lg:col-span-12 flex flex-col gap-5 lg:mb-6">
-          <div className="kicker">Tarifs</div>
-          <h2 className="h2">Un prix simple, par agent.</h2>
-          <span className="mono text-[12px] tracking-[0.14em] uppercase text-muted">Hors taxes · B2B France</span>
-          {LAUNCH_OFFER_ACTIVE && (
-            <span className="inline-flex flex-wrap items-center gap-x-3 gap-y-1.5 self-start border border-offer px-3.5 py-2 text-[14px] text-offer">
-              <span className="badge badge-offer">Offre de lancement</span>
-              Frais d&apos;intégration offerts jusqu&apos;au {LAUNCH_OFFER_END}
+      <div className="shell flex flex-col gap-10 lg:gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-end">
+          <div className="lg:col-span-7 flex flex-col gap-5">
+            <div className="kicker">Tarifs</div>
+            <h2 className="h2">Un prix simple, par agent.</h2>
+          </div>
+          <div className="lg:col-start-9 lg:col-span-4 flex flex-col gap-1">
+            <span className="serif text-[44px] leading-none">
+              {eur(PRICE_PER_AGENT)} <span className="font-sans text-[16px] text-muted">HT par agent et par mois</span>
             </span>
-          )}
+            <span className="small">soit environ {eur(PRICE_PER_DAY, 2)}{NB}HT par jour · ou {eur(PRICE_PER_AGENT_YEAR)}{NB}HT par an, 2 mois offerts</span>
+          </div>
         </div>
 
-        <div className="lg:col-span-7 flex flex-col gap-7">
-          <div className="seg" role="tablist" aria-label="Périodicité">
-            <button type="button" role="tab" aria-selected={!annual} onClick={() => setAnnual(false)}>
-              Mensuel
-            </button>
-            <button type="button" role="tab" aria-selected={annual} onClick={() => setAnnual(true)}>
-              Annuel <span className="badge">2 mois offerts</span>
-            </button>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* Composer */}
+          <div className="lg:col-span-7 flex flex-col gap-4">
+            <span className="mono text-[11px] tracking-[0.14em] uppercase text-muted">Composez votre équipe</span>
+            <div className="grid grid-cols-2 xl:grid-cols-3 gap-2.5 sm:gap-3">
+              {AGENTS.map((a) => {
+                const on = team.has(a.key);
+                return (
+                  <button key={a.key} type="button" className="pick" aria-pressed={on} onClick={() => toggle(a.key)}>
+                    <span className="flex items-center justify-between gap-3 w-full">
+                      <span className="inline-flex items-center gap-2.5 text-[15px] font-medium text-ink">
+                        <span className="w-[8px] h-[8px] rounded-full" style={{ background: AGENT_COLOR[a.key] }} aria-hidden="true" />
+                        {a.short}
+                      </span>
+                      <span className="pick-box" aria-hidden="true">{on && <Icon.check size={13} />}</span>
+                    </span>
+                    <span className="text-[12.5px] sm:text-[13px] text-muted leading-snug">{a.metier}</span>
+                  </button>
+                );
+              })}
+            </div>
+            <a href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Un poste sur mesure")}`} className="flex items-center justify-between gap-4 px-4 py-3.5 border border-dashed border-faint text-[14px] hover:border-accent transition-colors">
+              <span>
+                <span className="text-accent font-medium whitespace-nowrap">+ Votre poste</span> <span className="text-muted">· un besoin qui n&apos;est pas dans la liste, on le développe</span>
+              </span>
+              <Icon.arrow size={14} />
+            </a>
+            <div className="flex flex-col gap-3 pt-5">
+              <span className="mono text-[11px] tracking-[0.14em] uppercase text-muted">Inclus dans chaque abonnement</span>
+              <ul className="m-0 p-0 list-none grid grid-cols-2 gap-x-4 sm:gap-x-6 gap-y-2.5 text-[13.5px] sm:text-[14.5px]">
+                {INCLUDED.map((f) => (
+                  <li key={f} className="flex gap-2.5 items-start">
+                    <span className="text-accent pt-0.5"><Icon.check size={15} /></span> {f}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
-          <div className="flex items-baseline gap-4 flex-wrap">
-            <span className="serif leading-none" style={{ fontSize: "clamp(64px, 8vw, 96px)", letterSpacing: "-0.02em" }}>
-              {annual ? eur(PRICE_PER_AGENT_YEAR) : eur(PRICE_PER_AGENT)}
-            </span>
-            <span className="p text-[18px]">{annual ? "HT par agent et par an" : "HT par agent et par mois"}</span>
-          </div>
-          <p className="p text-[15px] -mt-3">
-            {annual
-              ? `Soit ${eur(PRICE_PER_AGENT)}${NB}HT par mois, dont deux mois offerts. Réglé d'avance pour 12${NB}mois.`
-              : `ou ${eur(PRICE_PER_AGENT_YEAR)}${NB}HT par agent et par an, deux mois offerts. Mensuel sans engagement, préavis de 30${NB}jours.`}
-          </p>
-
-          <div className="box flex flex-col gap-4" style={{ padding: "20px 24px" }}>
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
-            <div className="flex flex-col gap-2.5">
-              <span className="mono text-[11px] tracking-[0.14em] uppercase text-muted">Simulez votre équipe</span>
-              <div className="stepper">
-                <button type="button" aria-label="Un agent de moins" disabled={n <= MIN} onClick={() => setN((v) => Math.max(MIN, v - 1))}>
-                  <Icon.minus size={16} />
+          {/* Reçu */}
+          <div className="lg:col-span-5 box flex flex-col lg:sticky lg:top-24" style={{ boxShadow: "var(--shadow-soft)" }}>
+            <div className="flex items-center justify-between gap-4 px-5 py-4 border-b border-rule-2">
+              <span className="serif text-[22px]">Votre équipe</span>
+              <div className="seg" role="tablist" aria-label="Périodicité">
+                <button type="button" role="tab" aria-selected={!annual} onClick={() => setAnnual(false)}>
+                  Mensuel
                 </button>
-                <span className="mono text-[13px] font-medium text-center" style={{ minWidth: 110 }} aria-live="polite">
-                  {n} agent{n > 1 ? "s" : ""}
-                </span>
-                <button type="button" aria-label="Un agent de plus" disabled={n >= MAX} onClick={() => setN((v) => Math.min(MAX, v + 1))}>
-                  <Icon.plus size={16} />
+                <button type="button" role="tab" aria-selected={annual} onClick={() => setAnnual(true)}>
+                  Annuel
                 </button>
               </div>
             </div>
-            <div className="flex flex-col sm:items-end gap-0.5">
-              {annual ? (
-                <>
-                  <span className="mono text-[22px] font-medium">{eur(yearly)}{NB}HT / an</span>
-                  <span className="small">soit {eur(yearly / 12)}{NB}HT / mois · {eur(saved)} économisés</span>
-                </>
+            <div className="px-5 py-3 flex flex-col min-h-[132px]">
+              {n === 0 && <span className="small py-3">Cochez au moins un poste.</span>}
+              {AGENTS.filter((a) => team.has(a.key)).map((a) => (
+                <div key={a.key} className="flex justify-between items-center py-2.5 border-b border-rule-2 last:border-b-0 text-[14px]">
+                  <span className="inline-flex items-center gap-2.5">
+                    <span className="w-[7px] h-[7px] rounded-full" style={{ background: AGENT_COLOR[a.key] }} aria-hidden="true" />
+                    {a.name}
+                  </span>
+                  <span className="mono text-[13px] text-muted">{annual ? eur(PRICE_PER_AGENT_YEAR) : eur(PRICE_PER_AGENT)}</span>
+                </div>
+              ))}
+            </div>
+            <div className="px-5 py-4 border-t border-ink flex flex-col gap-1" aria-live="polite">
+              <div className="flex justify-between items-baseline gap-4">
+                <span className="font-semibold">{annual ? "Par an" : "Par mois"}</span>
+                <span className="mono text-[24px] font-medium">{eur(annual ? yearly : monthly)}{NB}HT</span>
+              </div>
+              <span className="small text-right">
+                {n > 0 ? <>soit {eur(perDay, 2)}{NB}HT par jour{annual ? ` · ${eur(monthly * 12 - yearly)} économisés` : ""}</> : " "}
+              </span>
+            </div>
+            <div className="px-5 py-3.5 border-t border-rule-2 flex justify-between items-baseline gap-4 text-[14px]">
+              <span className="text-muted">Intégration, une fois</span>
+              {LAUNCH_OFFER_ACTIVE ? (
+                <span className="mono text-right">
+                  <s className="text-faint">dès {eur(n * INTEGRATION_PER_AGENT)}</s> <span className="text-offer font-semibold">offerte</span>
+                </span>
               ) : (
-                <>
-                  <span className="mono text-[22px] font-medium">{eur(monthly)}{NB}HT / mois</span>
-                  <span className="small">ou {eur(yearly)}{NB}HT / an</span>
-                </>
+                <span className="mono">dès {eur(n * INTEGRATION_PER_AGENT)}{NB}HT</span>
               )}
             </div>
-          </div>
-          <div className="flex flex-wrap justify-between items-baseline gap-x-4 gap-y-1 pt-3 border-t border-rule-2 text-[14px]">
-            <span className="text-muted">Intégration, une fois</span>
-            {LAUNCH_OFFER_ACTIVE ? (
-              <span className="mono">
-                <s className="text-faint">à partir de {eur(integration)}{NB}HT</s>{" "}
-                <span className="text-offer font-semibold">offerte jusqu&apos;au {LAUNCH_OFFER_END}</span>
-              </span>
-            ) : (
-              <span className="mono">à partir de {eur(integration)}{NB}HT</span>
+            {LAUNCH_OFFER_ACTIVE && (
+              <div className="px-5 py-2.5 border-t border-offer text-[13px] text-offer" style={{ background: "color-mix(in srgb, var(--offer) 7%, transparent)" }}>
+                Offre de lancement : frais d&apos;intégration offerts pour toute commande passée jusqu&apos;au {LAUNCH_OFFER_END}.
+              </div>
             )}
+            <div className="px-5 py-5 border-t border-rule-2 flex flex-col">
+              <a href={AUDIT_URL} target="_blank" rel="noopener noreferrer" className="btn">
+                Réserver mon audit gratuit <Icon.arrow size={16} />
+              </a>
+            </div>
           </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-2 sm:gap-5 py-4 border-t border-ink border-b border-b-rule text-[15px]">
-            <span className="font-medium">Frais d&apos;intégration</span>
-            <span className="p text-[15px]">
-              <span className="mono text-ink">à partir de {eur(INTEGRATION_PER_AGENT)}{NB}HT par agent</span>, une fois, selon vos outils. Devis précis à l&apos;issue de l&apos;audit.
-              {LAUNCH_OFFER_ACTIVE && (
-                <>
-                  {" "}
-                  <span className="text-offer font-medium">Offre de lancement : offerts pour toute commande passée jusqu&apos;au {LAUNCH_OFFER_END}.</span>
-                </>
-              )}
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 text-[14px]">
-            {FEATURES.map((f) => (
-              <span key={f} className="flex gap-2.5 items-center">
-                <span className="text-accent"><Icon.check size={16} /></span> {f}
-              </span>
-            ))}
-          </div>
-
-          <a href={AUDIT_URL} target="_blank" rel="noopener noreferrer" className="btn self-start">
-            Réserver mon audit gratuit <Icon.arrow size={16} />
-          </a>
         </div>
 
-        <div className="strong lg:col-start-9 lg:col-span-4 flex flex-col gap-4 md:gap-[18px] p-7 md:p-9">
-          <span className="mono accent text-[11px] tracking-[0.14em] uppercase">Sur-mesure</span>
-          <span className="serif leading-none" style={{ fontSize: 40 }}>Sur devis</span>
-          <p className="muted text-[15px] leading-[1.55] m-0">Pour les besoins spécifiques et les organisations sensibles qui exigent un environnement taillé pour elles.</p>
-          <div className="flex flex-col gap-2.5 text-[14px] pt-1.5">
-            {CUSTOM.map((c) => (
-              <span key={c} className="flex gap-2.5 items-center">
-                <span className="accent"><Icon.check size={16} /></span> {c}
-              </span>
-            ))}
+        {/* Sur-mesure */}
+        <div className="strong grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center p-7 md:p-9">
+          <div className="lg:col-span-4 flex flex-col gap-2">
+            <span className="mono accent text-[11px] tracking-[0.14em] uppercase">Sur-mesure · sur devis</span>
+            <span className="serif text-[28px] leading-tight">Pour les organisations qui veulent un environnement à elles.</span>
           </div>
-          <a href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Demande de devis sur-mesure")}`} className="btn-inv self-start mt-2">
+          <ul className="lg:col-span-5 m-0 p-0 list-none grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5 text-[14px]">
+            {["Hébergement chez vous ou dans le pays de votre choix", "Agents métier conçus pour votre activité", "Applications dédiées à vos façons de travailler", "Intégration poussée à votre logiciel de gestion, conseil sécurité"].map((c) => (
+              <li key={c} className="flex gap-2.5 items-start">
+                <span className="accent pt-0.5"><Icon.check size={15} /></span> {c}
+              </li>
+            ))}
+          </ul>
+          <a href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Demande de devis sur-mesure")}`} className="btn-inv lg:col-span-3 lg:justify-self-end">
             Demander un devis <Icon.arrow size={16} />
           </a>
         </div>

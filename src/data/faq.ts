@@ -2,10 +2,10 @@
  * FAQ — 10 questions, ordre validé le 2026-05-16 (différenciation d'abord,
  * puis intégration / délai / évolution / engagement / erreurs, puis sécurité,
  * tarification, équipe). Contenu aligné sur l'offre 2026-09 (plus d'agent
- * maître, 100 € HT par agent et par mois, 1 000 € HT par an).
+ * maître ; prix lus dans data/pricing.ts). Pas d'acronymes (consigne du 08/10).
  */
 
-import { LAUNCH_OFFER_END } from "@/data/slides";
+import { INTEGRATION_PER_AGENT, LAUNCH_OFFER_END, PRICE_PER_AGENT, PRICE_PER_AGENT_YEAR, eur } from "@/data/pricing";
 
 export type Faq = { question: string; answer: string; /** Phrase liée à l'offre limitée, affichée en rouge tant que l'offre est active. */ offer?: string };
 
@@ -13,17 +13,17 @@ export const FAQS: readonly Faq[] = [
   {
     question: "En quoi c'est différent de ChatGPT ou d'un chatbot classique ?",
     answer:
-      "Vos agents Vtensor connaissent votre entreprise : mémoire persistante, contexte métier, accès à vos outils (ERP, CRM, messagerie). Ils exécutent des tâches concrètes, envoyer un email, créer un devis dans votre ERP, lancer une campagne, et pas seulement répondre à une question. Et vous vous adressez directement à l'agent concerné, par email ou depuis l'application.",
+      "Vos agents Vtensor connaissent votre entreprise : mémoire persistante, contexte métier, accès à vos outils (logiciel de gestion, fichier clients, messagerie). Ils exécutent des tâches concrètes, envoyer un email, créer un devis dans votre logiciel de gestion, lancer une campagne, et pas seulement répondre à une question. Et vous vous adressez directement à l'agent concerné, par email ou depuis l'application.",
   },
   {
     question: "Comment se passe l'intégration ?",
     answer:
-      "On commence par un audit gratuit de 30 minutes pour cartographier vos outils et vos chronophages. Ensuite, notre équipe technique configure vos agents, les connecte à vos systèmes (ERP, messagerie, site web, téléphonie…) et les forme sur vos documents et vos process. Vous validez chaque agent en conditions réelles avant la mise en production. Aucune ligne de code à écrire de votre côté.",
+      "On commence par un audit gratuit de 30 minutes pour cartographier vos outils et vos chronophages. Ensuite, notre équipe technique configure vos agents, les connecte à vos outils (logiciel de gestion, messagerie, site web, téléphonie…) et les forme sur vos documents et vos process. Vous validez chaque agent en conditions réelles avant la mise en production. Aucune ligne de code à écrire de votre côté.",
   },
   {
     question: "Combien de temps avant que mes agents soient opérationnels ?",
     answer:
-      "Quelques jours pour un agent autonome simple (SAV ou administratif). Une à deux semaines pour une équipe complète avec intégrations métier.",
+      "Quelques jours pour un agent simple (service après-vente ou administratif). Une à deux semaines pour une équipe complète avec intégrations métier.",
   },
   {
     question: "Est-il possible d'apporter des modifications à mes agents ?",
@@ -53,7 +53,7 @@ export const FAQS: readonly Faq[] = [
   {
     question: "Comment fonctionne la tarification ?",
     answer:
-      "Un prix par agent, sans palier caché : 100 € HT par agent et par mois, ou 1 000 € HT par agent et par an si vous réglez à l'année (2 mois offerts). Vous composez votre équipe librement, avec des postes du catalogue ou des postes créés pour vous. S'y ajoutent des frais d'intégration uniques, à partir de 500 € HT par agent, qui dépendent des outils à connecter et des process à modéliser ; le montant exact est fixé sur devis après l'audit gratuit. Les besoins spécifiques (hébergement chez vous, applications dédiées, intégration ERP lourde) relèvent de l'offre Sur-mesure.",
+      `Un prix par agent, sans palier caché : ${eur(PRICE_PER_AGENT)} HT par agent et par mois, ou ${eur(PRICE_PER_AGENT_YEAR)} HT par agent et par an si vous réglez à l'année (2 mois offerts). Vous composez votre équipe librement, avec des postes du catalogue ou des postes créés pour vous. S'y ajoutent des frais d'intégration uniques, à partir de ${eur(INTEGRATION_PER_AGENT)} HT par agent, qui dépendent des outils à connecter et des process à modéliser ; le montant exact est fixé sur devis après l'audit gratuit. Les besoins spécifiques (hébergement chez vous, applications dédiées, intégration lourde à votre logiciel de gestion) relèvent de l'offre Sur-mesure.`,
     offer: `Offre de lancement : les frais d'intégration sont offerts pour toute commande passée jusqu'au ${LAUNCH_OFFER_END}.`,
   },
   {

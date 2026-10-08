@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Fin de page V4 : sécurité compacte (sans photo de baie de serveurs),
+ * Fin de page : sécurité compacte (sans photo de baie de serveurs),
  * « qui est derrière » (le fondateur mène l'audit ; pas de téléphone, consigne
  * de Victor du 08/10), appel final avec ce que l'audit apporte, barre d'action
  * fixe sur mobile.
@@ -9,9 +9,9 @@
 
 import { useEffect, useState } from "react";
 import { AUDIT_URL, CONTACT_EMAIL } from "@/lib/links";
-import { AUDIT_DELIVERABLES } from "@/data/v4";
-import { Icon } from "../site/Icons";
-import { Photo } from "../site/Photo";
+import { AUDIT_DELIVERABLES } from "@/data/home";
+import { Icon } from "./Icons";
+import { Photo } from "./Photo";
 import { Reveal } from "./Bits";
 
 const NB = " ";
@@ -23,7 +23,7 @@ const GUARDS: { icon: "server" | "shield" | "file" | "eye"; title: string; text:
   { icon: "eye", title: "Vous gardez la main", text: "Les actions sensibles vous sont soumises, chaque action est journalisée, un agent hors de son périmètre vous passe la main." },
 ];
 
-export function SecurityV4() {
+export function Security() {
   return (
     <section className="section" id="securite">
       <div className="shell flex flex-col gap-10">
@@ -79,7 +79,7 @@ export function Founder() {
   );
 }
 
-export function FinalCtaV4() {
+export function FinalCta() {
   return (
     <section className="shell pb-16 lg:pb-24" id="audit">
       <div className="strong grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center px-7 py-12 md:px-12 md:py-16 lg:px-16 lg:py-[72px]">

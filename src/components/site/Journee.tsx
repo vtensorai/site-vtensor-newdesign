@@ -4,7 +4,7 @@
  * récapitulatif du soir. Remplace « Ce que ça change » et ses piliers.
  */
 
-import { DAY } from "@/data/v4";
+import { DAY } from "@/data/home";
 import { Artefact } from "./Artefacts";
 import { Reveal } from "./Bits";
 

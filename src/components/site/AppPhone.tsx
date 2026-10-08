@@ -1,15 +1,15 @@
 /**
- * Application V4 : un téléphone lisible (même sur mobile) qui montre ce que voit
+ * Application : un téléphone lisible (même sur mobile) qui montre ce que voit
  * le dirigeant le soir — les décisions à prendre et ce qui a été fait. Remplace
  * la réplique du tableau de bord (invite de terminal, tool_calls, réduite à 28 % sur mobile).
  * Données d'exemple.
  */
 
 import { APP_URL } from "@/lib/links";
-import type { AgentKey } from "@/data/v4";
-import { AGENT_COLOR } from "@/data/v4";
-import { Icon } from "../site/Icons";
-import { LogoMark } from "../site/Logo";
+import type { AgentKey } from "@/data/home";
+import { AGENT_COLOR } from "@/data/home";
+import { Icon } from "./Icons";
+import { LogoMark } from "./Logo";
 import { AgentTag, Reveal } from "./Bits";
 
 const NB = " ";
