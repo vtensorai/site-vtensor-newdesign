@@ -124,13 +124,16 @@ export default function PolitiqueConfidentialitePage() {
         </li>
         <li>
           <strong>SideGuide Technologies, Inc.</strong> (Firecrawl, États-Unis) — lecture des
-          pages publiques de sites internet, pour nos recherches de prospection.
+          pages publiques de sites internet, pour nos recherches de prospection, jusqu&apos;au
+          8 octobre 2026.
         </li>
       </ul>
       <p>
-        Les transferts vers Cloudflare, Cal.com et Anthropic sont encadrés par les garanties
-        prévues au chapitre V du RGPD (clauses contractuelles types de la Commission
-        européenne). Nous ne vendons ni ne louons vos données.
+        Les transferts vers Cloudflare et Cal.com sont encadrés par les garanties prévues au
+        chapitre V du RGPD (clauses contractuelles types de la Commission européenne). Pour
+        Anthropic et Firecrawl, voir la section{" "}
+        <a href="#prospection-commerciale">Prospection commerciale</a>. Nous ne vendons ni ne
+        louons vos données.
       </p>
 
       <h2 id="prospection-commerciale">Prospection commerciale</h2>
@@ -213,15 +216,19 @@ export default function PolitiqueConfidentialitePage() {
           d&apos;intelligence artificielle qui nous aide à rechercher les informations
           publiques sur votre entreprise et à rédiger les messages. Les données qui
           lui sont transmises peuvent être traitées hors de l&apos;Union européenne, y compris
-          aux États-Unis. Ce transfert est encadré par les clauses contractuelles types de la
-          Commission européenne, prévues par l&apos;accord de traitement des données
-          d&apos;Anthropic. Anthropic s&apos;engage par contrat à ne pas utiliser ces données
-          pour entraîner ses modèles.
+          aux États-Unis. Nous utilisons ce modèle de deux façons. Par son interface de
+          programmation (API) : le transfert est alors encadré par les clauses contractuelles
+          types de la Commission européenne, prévues par l&apos;accord de traitement des données
+          d&apos;Anthropic, et Anthropic s&apos;engage par contrat à ne pas utiliser ces données
+          pour entraîner ses modèles. Par notre abonnement Claude : nous y avons désactivé
+          l&apos;utilisation de nos échanges pour l&apos;entraînement des modèles
+          d&apos;Anthropic.
         </li>
         <li>
-          <strong>SideGuide Technologies, Inc.</strong> (Firecrawl, États-Unis) — lit pour nous
-          les pages publiques des sites internet, dont celle où votre adresse e-mail est
-          publiée. Ces pages sont traitées aux États-Unis.
+          <strong>SideGuide Technologies, Inc.</strong> (Firecrawl, États-Unis) — a lu pour
+          nous, jusqu&apos;au 8 octobre 2026, les pages publiques des sites internet, dont celle
+          où votre adresse e-mail est publiée. Ces pages sont traitées aux États-Unis. Nous ne
+          l&apos;utilisons plus.
         </li>
       </ul>
 
