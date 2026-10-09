@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { LegalLayout } from "@/components/site/LegalLayout";
 import { CONTACT_EMAIL } from "@/lib/links";
+import { OptOutAudience } from "@/components/site/OptOutAudience";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/politique-de-confidentialite/" },
@@ -54,7 +55,7 @@ export default function PolitiqueConfidentialitePage() {
       </p>
       <p>
         <strong>Le site n&apos;utilise aucun cookie de mesure d&apos;audience ni traceur
-        publicitaire.</strong> La fréquentation est mesurée avec deux outils sans cookie ni
+        publicitaire.</strong>{" "}La fréquentation est mesurée avec deux outils sans cookie ni
         identifiant individuel, qui ne suivent pas les visiteurs d&apos;un site à l&apos;autre et
         ne nous fournissent que des statistiques agrégées :
       </p>
@@ -62,16 +63,16 @@ export default function PolitiqueConfidentialitePage() {
         <li>
           <strong>Umami</strong>, un logiciel libre que nous hébergeons nous-mêmes chez Hetzner,
           en Allemagne : pages vues, provenance des visites (site d&apos;origine, lien de
-          l&apos;un de nos e-mails), pays et ville approximative, type d&apos;appareil et de
-          navigateur, clics sur nos boutons de prise de rendez-vous, d&apos;accès à
-          l&apos;application et de contact. Votre adresse IP sert uniquement à estimer votre
-          localisation et à regrouper les pages d&apos;une même visite ; elle n&apos;est pas
-          conservée. Ces statistiques sont gardées 25 mois au plus.
+          l&apos;un de nos e-mails), pays, type d&apos;appareil et de navigateur, clics sur nos
+          boutons de prise de rendez-vous, d&apos;accès à l&apos;application et de contact.
+          Votre adresse IP sert uniquement à regrouper les pages d&apos;une même visite ; elle
+          n&apos;est pas conservée. Ces statistiques sont gardées 25 mois au plus.
         </li>
         <li>
-          <strong>Cloudflare Web Analytics</strong> : pages vues, pays, type d&apos;appareil.
+          <strong>Cloudflare Web Analytics</strong>{" "}: pages vues, pays, type d&apos;appareil.
         </li>
       </ul>
+      <OptOutAudience />
       <p>
         Aucune bannière de consentement n&apos;est donc nécessaire. Si cela devait évoluer,
         cette politique serait mise à jour avant toute mise en place.
@@ -80,20 +81,20 @@ export default function PolitiqueConfidentialitePage() {
       <h2>Finalités et bases légales</h2>
       <ul>
         <li>
-          <strong>Organiser l&apos;audit et répondre à vos demandes</strong> — exécution de
+          <strong>Organiser l&apos;audit et répondre à vos demandes</strong>{" "}— exécution de
           mesures précontractuelles prises à votre demande (art. 6.1.b RGPD).
         </li>
         <li>
-          <strong>Assurer la sécurité et le fonctionnement du site</strong> — intérêt légitime
+          <strong>Assurer la sécurité et le fonctionnement du site</strong>{" "}— intérêt légitime
           (art. 6.1.f RGPD).
         </li>
         <li>
-          <strong>Vous recontacter au sujet de nos services</strong> à la suite d&apos;un
+          <strong>Vous recontacter au sujet de nos services</strong>{" "}à la suite d&apos;un
           premier échange, dans un cadre strictement professionnel (B2B) — intérêt légitime
           (art. 6.1.f RGPD), avec possibilité de vous y opposer à tout moment.
         </li>
         <li>
-          <strong>Vous présenter nos services par e-mail</strong> si vous dirigez une entreprise
+          <strong>Vous présenter nos services par e-mail</strong>{" "}si vous dirigez une entreprise
           (prospection commerciale) — intérêt légitime (art. 6.1.f RGPD). Détails dans la
           section <a href="#prospection-commerciale">Prospection commerciale</a>.
         </li>
@@ -120,26 +121,26 @@ export default function PolitiqueConfidentialitePage() {
       </p>
       <ul>
         <li>
-          <strong>Hetzner Online GmbH</strong> (Allemagne) — hébergement, données stockées
+          <strong>Hetzner Online GmbH</strong>{" "}(Allemagne) — hébergement, données stockées
           dans l&apos;Union européenne.
         </li>
         <li>
-          <strong>Cloudflare, Inc.</strong> (États-Unis) — diffusion et protection du site.
+          <strong>Cloudflare, Inc.</strong>{" "}(États-Unis) — diffusion et protection du site.
         </li>
         <li>
-          <strong>Cal.com, Inc.</strong> (États-Unis) — prise de rendez-vous.
+          <strong>Cal.com, Inc.</strong>{" "}(États-Unis) — prise de rendez-vous.
         </li>
         <li>
-          <strong>IONOS SARL</strong> (France) — messagerie électronique, données traitées dans
+          <strong>IONOS SARL</strong>{" "}(France) — messagerie électronique, données traitées dans
           l&apos;Espace économique européen.
         </li>
         <li>
-          <strong>Anthropic Ireland, Limited</strong> (Irlande) — modèle d&apos;intelligence
+          <strong>Anthropic Ireland, Limited</strong>{" "}(Irlande) — modèle d&apos;intelligence
           artificielle qui nous aide à rédiger nos messages de prospection, avec un traitement
           possible aux États-Unis.
         </li>
         <li>
-          <strong>SideGuide Technologies, Inc.</strong> (Firecrawl, États-Unis) — lecture des
+          <strong>SideGuide Technologies, Inc.</strong>{" "}(Firecrawl, États-Unis) — lecture des
           pages publiques de sites internet, pour nos recherches de prospection, jusqu&apos;au
           8 octobre 2026.
         </li>
@@ -190,7 +191,7 @@ export default function PolitiqueConfidentialitePage() {
       <ul>
         <li>
           Le <strong>Registre national des entreprises</strong>, tenu par l&apos;INPI, et le
-          répertoire <strong>Sirene</strong> de l&apos;Insee, consultés via l&apos;API publique
+          répertoire <strong>Sirene</strong>{" "}de l&apos;Insee, consultés via l&apos;API publique
           «&nbsp;Recherche d&apos;entreprises&nbsp;» de l&apos;État : nom, numéro SIREN, activité
           et effectif de l&apos;entreprise, nom et fonction de ses dirigeants.
         </li>
@@ -223,15 +224,15 @@ export default function PolitiqueConfidentialitePage() {
       </p>
       <ul>
         <li>
-          <strong>Hetzner Online GmbH</strong> (Allemagne) — hébergement de notre application
+          <strong>Hetzner Online GmbH</strong>{" "}(Allemagne) — hébergement de notre application
           et de sa base de données, dans l&apos;Union européenne.
         </li>
         <li>
-          <strong>IONOS SARL</strong> (France) — envoi et réception des e-mails. Les données
+          <strong>IONOS SARL</strong>{" "}(France) — envoi et réception des e-mails. Les données
           sont traitées dans l&apos;Espace économique européen.
         </li>
         <li>
-          <strong>Anthropic Ireland, Limited</strong> (Irlande) — fournit le modèle
+          <strong>Anthropic Ireland, Limited</strong>{" "}(Irlande) — fournit le modèle
           d&apos;intelligence artificielle qui nous aide à rechercher les informations
           publiques sur votre entreprise et à rédiger les messages. Les données qui
           lui sont transmises peuvent être traitées hors de l&apos;Union européenne, y compris
@@ -244,7 +245,7 @@ export default function PolitiqueConfidentialitePage() {
           d&apos;Anthropic.
         </li>
         <li>
-          <strong>SideGuide Technologies, Inc.</strong> (Firecrawl, États-Unis) — a lu pour
+          <strong>SideGuide Technologies, Inc.</strong>{" "}(Firecrawl, États-Unis) — a lu pour
           nous, jusqu&apos;au 8 octobre 2026, les pages publiques des sites internet, dont celle
           où votre adresse e-mail est publiée. Ces pages sont traitées aux États-Unis. Nous ne
           l&apos;utilisons plus.
