@@ -14,7 +14,7 @@ export default function PolitiqueConfidentialitePage() {
     <LegalLayout
       kicker="Politique de confidentialité"
       title="Politique de confidentialité"
-      updated="8 octobre 2026"
+      updated="9 octobre 2026"
     >
       <p>
         Cette politique décrit les données personnelles collectées lorsque vous utilisez le site
@@ -54,11 +54,27 @@ export default function PolitiqueConfidentialitePage() {
       </p>
       <p>
         <strong>Le site n&apos;utilise aucun cookie de mesure d&apos;audience ni traceur
-        publicitaire.</strong> La fréquentation est mesurée avec Cloudflare Web Analytics, un
-        outil sans cookie ni identifiant individuel, qui ne suit pas les visiteurs d&apos;un site
-        à l&apos;autre et ne fournit que des statistiques agrégées (pages vues, pays, type
-        d&apos;appareil). Aucune bannière de consentement n&apos;est donc nécessaire. Si cela
-        devait évoluer, cette politique serait mise à jour avant toute mise en place.
+        publicitaire.</strong> La fréquentation est mesurée avec deux outils sans cookie ni
+        identifiant individuel, qui ne suivent pas les visiteurs d&apos;un site à l&apos;autre et
+        ne nous fournissent que des statistiques agrégées :
+      </p>
+      <ul>
+        <li>
+          <strong>Umami</strong>, un logiciel libre que nous hébergeons nous-mêmes chez Hetzner,
+          en Allemagne : pages vues, provenance des visites (site d&apos;origine, lien de
+          l&apos;un de nos e-mails), pays et ville approximative, type d&apos;appareil et de
+          navigateur, clics sur nos boutons de prise de rendez-vous, d&apos;accès à
+          l&apos;application et de contact. Votre adresse IP sert uniquement à estimer votre
+          localisation et à regrouper les pages d&apos;une même visite ; elle n&apos;est pas
+          conservée. Ces statistiques sont gardées 25 mois au plus.
+        </li>
+        <li>
+          <strong>Cloudflare Web Analytics</strong> : pages vues, pays, type d&apos;appareil.
+        </li>
+      </ul>
+      <p>
+        Aucune bannière de consentement n&apos;est donc nécessaire. Si cela devait évoluer,
+        cette politique serait mise à jour avant toute mise en place.
       </p>
 
       <h2>Finalités et bases légales</h2>
@@ -190,7 +206,10 @@ export default function PolitiqueConfidentialitePage() {
         Vos données sont enregistrées dans notre application, hébergée en Allemagne. Nos
         messages sont rédigés avec l&apos;aide d&apos;un agent d&apos;intelligence artificielle, à
         partir de ces informations. Ils sont envoyés en texte brut, sans pixel de suivi ni
-        lien traçant : nous ne savons pas si vous les avez ouverts.
+        lien individuel : nous ne savons pas si vous les avez ouverts, ni si vous avez cliqué.
+        Les liens vers notre site et vers notre agenda sont les mêmes pour tous les
+        destinataires : ils nous permettent seulement de compter, globalement, les visites
+        venues de nos e-mails (voir «&nbsp;Données techniques&nbsp;» ci-dessus).
       </p>
       <p>
         Après notre premier message, nous envoyons au plus deux relances. Elles s&apos;arrêtent

@@ -104,7 +104,7 @@ export function AppPhone() {
               </li>
             ))}
           </ul>
-          <a href={APP_URL} target="_blank" rel="noopener noreferrer" className="btn-ghost self-start">
+          <a href={APP_URL} target="_blank" rel="noopener noreferrer" className="btn-ghost self-start" data-umami-event="Ouvrir l'application" data-umami-event-emplacement="section-application">
             Accéder à l&apos;application <Icon.external size={15} />
           </a>
         </div>

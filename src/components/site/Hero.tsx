@@ -54,7 +54,7 @@ export function Hero() {
           Pendant que vous êtes à l&apos;atelier, sur un chantier ou en rendez-vous. Chaque agent est développé pour votre entreprise, travaille dans vos outils et vous transmet ce qui demande votre décision.
         </p>
         <div className="flex flex-wrap items-center gap-x-7 gap-y-4">
-          <a href={AUDIT_URL} target="_blank" rel="noopener noreferrer" className="btn">
+          <a href={AUDIT_URL} target="_blank" rel="noopener noreferrer" data-umami-event="Réserver un échange" data-umami-event-emplacement="haut-de-page" className="btn">
             Réserver un audit gratuit · 30{NB}min <Icon.arrow size={16} />
           </a>
           <a href="#journee" className="btn-ghost">

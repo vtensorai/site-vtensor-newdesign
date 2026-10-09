@@ -35,7 +35,7 @@ export function Faq() {
           <h2 className="h2">Vos questions, nos réponses.</h2>
           <p className="p">
             Il en manque une{NB}?{" "}
-            <a href={`mailto:${CONTACT_EMAIL}`} className="text-accent underline underline-offset-4 hover:text-ink transition-colors">
+            <a href={`mailto:${CONTACT_EMAIL}`} data-umami-event="Écrire par mail" data-umami-event-emplacement="questions" className="text-accent underline underline-offset-4 hover:text-ink transition-colors">
               Écrivez-nous
             </a>
             , on répond sous 24{NB}h.

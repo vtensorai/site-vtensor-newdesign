@@ -68,7 +68,7 @@ export function Founder() {
               <span className="text-[15px]">
                 <span className="font-medium text-ink">Victor Arnoul</span> <span className="text-muted">· fondateur de Vtensor</span>
               </span>
-              <a href={`mailto:${CONTACT_EMAIL}`} className="text-[15px] text-accent underline underline-offset-4 hover:text-ink transition-colors">
+              <a href={`mailto:${CONTACT_EMAIL}`} data-umami-event="Écrire par mail" data-umami-event-emplacement="qui-est-derriere" className="text-[15px] text-accent underline underline-offset-4 hover:text-ink transition-colors">
                 {CONTACT_EMAIL}
               </a>
             </div>
@@ -88,12 +88,12 @@ export function FinalCta() {
           <h2 className="serif m-0" style={{ fontSize: "clamp(36px, 4vw, 56px)", lineHeight: 1.02, letterSpacing: "-0.015em" }}>
             Parlons de votre équipe.
           </h2>
-          <a href={AUDIT_URL} target="_blank" rel="noopener noreferrer" className="btn-inv self-start mt-2" style={{ padding: "18px 26px", fontSize: 15 }}>
+          <a href={AUDIT_URL} target="_blank" rel="noopener noreferrer" data-umami-event="Réserver un échange" data-umami-event-emplacement="fin-de-page" className="btn-inv self-start mt-2" style={{ padding: "18px 26px", fontSize: 15 }}>
             Choisir un créneau <Icon.arrow size={16} />
           </a>
           <span className="muted text-[14px]">
             ou écrivez-moi :{" "}
-            <a href={`mailto:${CONTACT_EMAIL}`} className="underline underline-offset-4 hover:text-strong-accent transition-colors">
+            <a href={`mailto:${CONTACT_EMAIL}`} data-umami-event="Écrire par mail" data-umami-event-emplacement="fin-de-page" className="underline underline-offset-4 hover:text-strong-accent transition-colors">
               {CONTACT_EMAIL}
             </a>
           </span>
@@ -141,7 +141,7 @@ export function StickyCta() {
   }, []);
   return (
     <div className="sticky-cta" data-show={show} aria-hidden={!show}>
-      <a href={AUDIT_URL} target="_blank" rel="noopener noreferrer" className="btn w-full" tabIndex={show ? 0 : -1}>
+      <a href={AUDIT_URL} target="_blank" rel="noopener noreferrer" data-umami-event="Réserver un échange" data-umami-event-emplacement="bandeau" className="btn w-full" tabIndex={show ? 0 : -1}>
         Réserver un audit gratuit · 30{NB}min <Icon.arrow size={16} />
       </a>
     </div>

@@ -39,15 +39,15 @@ export function Footer() {
               {l}
             </a>
           ))}
-          <a href={APP_URL} target="_blank" rel="noopener noreferrer" className={link}>
+          <a href={APP_URL} target="_blank" rel="noopener noreferrer" data-umami-event="Ouvrir l'application" data-umami-event-emplacement="pied-de-page" className={link}>
             Accéder à l&apos;app
           </a>
         </Col>
         <Col title="Contact">
-          <a href={AUDIT_URL} target="_blank" rel="noopener noreferrer" className={link}>
+          <a href={AUDIT_URL} target="_blank" rel="noopener noreferrer" data-umami-event="Réserver un échange" data-umami-event-emplacement="pied-de-page" className={link}>
             Réserver un audit gratuit
           </a>
-          <a href={`mailto:${CONTACT_EMAIL}`} className={link}>
+          <a href={`mailto:${CONTACT_EMAIL}`} data-umami-event="Écrire par mail" data-umami-event-emplacement="pied-de-page" className={link}>
             {CONTACT_EMAIL}
           </a>
         </Col>

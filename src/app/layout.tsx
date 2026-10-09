@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, JetBrains_Mono, Newsreader } from "next/font/google";
 import "./globals.css";
+import { UMAMI_SRC, UMAMI_WEBSITE_ID } from "@/lib/links";
 
 // V3 (2026-09-08) — Newsreader (titres) · Geist (texte) · JetBrains Mono (logo, repères).
 const fontGeist = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
@@ -64,7 +65,6 @@ const ORGANIZATION_LD = {
 };
 
 const THEME_SCRIPT = `(function(){try{var t=localStorage.getItem('vt-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();`;
-
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
@@ -76,6 +76,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <meta name="build" content={BUILD_STAMP} />
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_LD) }} />
+        <script defer src={UMAMI_SRC} data-website-id={UMAMI_WEBSITE_ID} data-domains="vtensor.ai,www.vtensor.ai" />
       </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

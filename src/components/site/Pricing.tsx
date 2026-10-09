@@ -68,7 +68,7 @@ export function Pricing() {
                 );
               })}
             </div>
-            <a href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Un poste sur mesure")}`} className="flex items-center justify-between gap-4 px-4 py-3.5 border border-dashed border-faint text-[14px] hover:border-accent transition-colors">
+            <a href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Un poste sur mesure")}`} data-umami-event="Écrire par mail" data-umami-event-emplacement="tarifs-poste-sur-mesure" className="flex items-center justify-between gap-4 px-4 py-3.5 border border-dashed border-faint text-[14px] hover:border-accent transition-colors">
               <span>
                 <span className="text-accent font-medium whitespace-nowrap">+ Votre poste</span> <span className="text-muted">· un besoin qui n&apos;est pas dans la liste, on le développe</span>
               </span>
@@ -136,7 +136,7 @@ export function Pricing() {
               </div>
             )}
             <div className="px-5 py-5 border-t border-rule-2 flex flex-col">
-              <a href={AUDIT_URL} target="_blank" rel="noopener noreferrer" className="btn">
+              <a href={AUDIT_URL} target="_blank" rel="noopener noreferrer" data-umami-event="Réserver un échange" data-umami-event-emplacement="tarifs" className="btn">
                 Réserver mon audit gratuit <Icon.arrow size={16} />
               </a>
             </div>
@@ -156,7 +156,7 @@ export function Pricing() {
               </li>
             ))}
           </ul>
-          <a href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Demande de devis sur-mesure")}`} className="btn-inv lg:col-span-3 lg:justify-self-end">
+          <a href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Demande de devis sur-mesure")}`} data-umami-event="Écrire par mail" data-umami-event-emplacement="tarifs-devis" className="btn-inv lg:col-span-3 lg:justify-self-end">
             Demander un devis <Icon.arrow size={16} />
           </a>
         </div>

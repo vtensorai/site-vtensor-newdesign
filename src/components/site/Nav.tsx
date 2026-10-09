@@ -45,10 +45,10 @@ export function Nav() {
         </nav>
 
         <div className="flex items-center gap-3 lg:gap-5">
-          <a href={APP_URL} target="_blank" rel="noopener noreferrer" className="hidden md:inline text-[15px] text-muted hover:text-ink transition-colors">
+          <a href={APP_URL} target="_blank" rel="noopener noreferrer" data-umami-event="Ouvrir l'application" data-umami-event-emplacement="menu" className="hidden md:inline text-[15px] text-muted hover:text-ink transition-colors">
             Accéder à l&apos;app
           </a>
-          <a href={AUDIT_URL} target="_blank" rel="noopener noreferrer" className="btn btn-sm">
+          <a href={AUDIT_URL} target="_blank" rel="noopener noreferrer" data-umami-event="Réserver un échange" data-umami-event-emplacement="menu" className="btn btn-sm">
             Audit gratuit
           </a>
           <ThemeToggle />
@@ -74,11 +74,11 @@ export function Nav() {
                 {l.label}
               </a>
             ))}
-            <a href={APP_URL} target="_blank" rel="noopener noreferrer" className="py-3.5 text-[17px] text-ink border-b border-rule-2 hover:text-accent transition-colors inline-flex items-center gap-2">
+            <a href={APP_URL} target="_blank" rel="noopener noreferrer" data-umami-event="Ouvrir l'application" data-umami-event-emplacement="menu-mobile" className="py-3.5 text-[17px] text-ink border-b border-rule-2 hover:text-accent transition-colors inline-flex items-center gap-2">
               Accéder à l&apos;app
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6" /></svg>
             </a>
-            <a href={AUDIT_URL} target="_blank" rel="noopener noreferrer" className="btn mt-3 self-start">
+            <a href={AUDIT_URL} target="_blank" rel="noopener noreferrer" data-umami-event="Réserver un échange" data-umami-event-emplacement="menu-mobile" className="btn mt-3 self-start">
               Réserver un audit gratuit
             </a>
           </nav>
