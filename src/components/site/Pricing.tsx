@@ -4,12 +4,14 @@
  * Tarifs : le visiteur compose son équipe en cochant des postes (plutôt
  * qu'un compteur abstrait), le reçu se met à jour, prix ramené au jour,
  * offre de lancement dite une seule fois. Sur-mesure en bandeau.
+ * « S'abonner » (2026-10-12) : page de paiement Stripe pour l'équipe composée,
+ * via l'API de l'application ; l'audit gratuit reste proposé juste en dessous.
  */
 
 import { useState } from "react";
-import { AUDIT_URL, CONTACT_EMAIL } from "@/lib/links";
-import { INTEGRATION_PER_AGENT, LAUNCH_OFFER_ACTIVE, LAUNCH_OFFER_END, PRICE_PER_AGENT, PRICE_PER_AGENT_YEAR, PRICE_PER_DAY, eur } from "@/data/pricing";
-import { AGENT_COLOR, AGENTS, type AgentKey } from "@/data/home";
+import { API_URL, AUDIT_URL, CONTACT_EMAIL } from "@/lib/links";
+import { INTEGRATION_PER_AGENT, LAUNCH_OFFER_ACTIVE, LAUNCH_OFFER_END, ONLINE_SUBSCRIPTION, PRICE_PER_AGENT, PRICE_PER_AGENT_YEAR, PRICE_PER_DAY, eur } from "@/data/pricing";
+import { AGENT_COLOR, AGENTS, BILLING_AGENT, type AgentKey } from "@/data/home";
 import { Icon } from "./Icons";
 
 const NB = " ";
@@ -23,6 +25,29 @@ export function Pricing() {
   const monthly = n * PRICE_PER_AGENT;
   const yearly = n * PRICE_PER_AGENT_YEAR;
   const perDay = (annual ? yearly : monthly * 12) / 365;
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  /** Ouvre la page de paiement Stripe pour l'équipe composée (mêmes agents, même périodicité). */
+  async function subscribe() {
+    if (n === 0 || pending) return;
+    setPending(true);
+    setError(null);
+    try {
+      const res = await fetch(`${API_URL}/api/public/checkout`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ agents: AGENTS.filter((a) => team.has(a.key)).map((a) => BILLING_AGENT[a.key]), interval: annual ? "year" : "month" }),
+      });
+      const data = (await res.json().catch(() => ({}))) as { url?: string; error?: string };
+      if (!res.ok || !data.url) throw new Error(data.error || "Paiement indisponible");
+      window.location.assign(data.url);
+    } catch (e) {
+      setError(e instanceof Error && e.message ? e.message : "Paiement indisponible");
+      setPending(false);
+    }
+  }
+
   const toggle = (k: AgentKey) =>
     setTeam((t) => {
       const next = new Set(t);
@@ -135,10 +160,31 @@ export function Pricing() {
                 Offre de lancement : frais d&apos;intégration offerts pour toute commande passée jusqu&apos;au {LAUNCH_OFFER_END}.
               </div>
             )}
-            <div className="px-5 py-5 border-t border-rule-2 flex flex-col">
-              <a href={AUDIT_URL} target="_blank" rel="noopener noreferrer" data-umami-event="Réserver un échange" data-umami-event-emplacement="tarifs" className="btn">
-                Réserver mon audit gratuit <Icon.arrow size={16} />
-              </a>
+            <div className="px-5 py-5 border-t border-rule-2 flex flex-col gap-3">
+              {ONLINE_SUBSCRIPTION ? (
+                <>
+                  <button type="button" className="btn w-full" disabled={n === 0 || pending} onClick={subscribe} data-umami-event="S'abonner" data-umami-event-emplacement="tarifs" data-umami-event-agents={n}>
+                    {pending ? "Ouverture du paiement…" : n === 0 ? "Cochez au moins un poste" : <>S&apos;abonner · {eur(annual ? yearly : monthly)}{NB}HT / {annual ? "an" : "mois"}</>}
+                    {!pending && n > 0 && <Icon.arrow size={16} />}
+                  </button>
+                  {error && (
+                    <p role="alert" className="m-0 text-[13px] text-offer">
+                      {error}. Réessayez, ou écrivez-nous : {CONTACT_EMAIL}
+                    </p>
+                  )}
+                  <p className="m-0 text-center text-[14px] text-muted">
+                    Des questions{NB}?{" "}
+                    <a href={AUDIT_URL} target="_blank" rel="noopener noreferrer" data-umami-event="Réserver un échange" data-umami-event-emplacement="tarifs" className="text-accent underline underline-offset-4 hover:text-ink transition-colors">
+                      Réservez un audit gratuit de 30{NB}min
+                    </a>
+                  </p>
+                  <p className="m-0 text-center small text-faint">Paiement sécurisé par Stripe. Nous vous contactons ensuite pour la mise en service.</p>
+                </>
+              ) : (
+                <a href={AUDIT_URL} target="_blank" rel="noopener noreferrer" data-umami-event="Réserver un échange" data-umami-event-emplacement="tarifs" className="btn">
+                  Réserver mon audit gratuit <Icon.arrow size={16} />
+                </a>
+              )}
             </div>
           </div>
         </div>

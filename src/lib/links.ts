@@ -2,6 +2,8 @@
 export const AUDIT_URL = "https://cal.com/vtensor/audit-30min";
 export const APP_URL = "https://app.vtensor.ai";
 export const CONTACT_EMAIL = "victor@vtensor.ai";
+/** API de l'application (commande en ligne : POST /api/public/checkout). */
+export const API_URL = "https://api.vtensor.ai";
 
 /** Mesure d'audience Umami, hébergée chez nous (stats.vtensor.ai) : sans cookie, sans adresse IP conservée.
  *  Seul vtensor.ai est compté (data-domains), pas les aperçus ni le poste de développement. */

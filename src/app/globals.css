@@ -110,6 +110,8 @@ html[data-theme="dark"] {
   /* ── Boutons ──────────────────────────────────────────────────────── */
   .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--accent); color: var(--on-accent); padding: 15px 22px; font-size: 15px; font-weight: 500; line-height: 1.2; transition: background-color 150ms, color 150ms, transform 150ms; cursor: pointer; }
   .btn:hover { background: var(--ink); color: var(--bg); }
+  .btn:disabled { opacity: 0.55; cursor: not-allowed; }
+  .btn:disabled:hover { background: var(--accent); color: var(--on-accent); }
   .btn-sm { padding: 11px 18px; font-size: 14px; white-space: nowrap; }
   .btn-ghost { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); padding: 15px 8px; font-size: 15px; font-weight: 500; border-bottom: 1px solid var(--ink); transition: color 150ms, border-color 150ms; cursor: pointer; }
   .btn-ghost:hover { color: var(--accent); border-color: var(--accent); }

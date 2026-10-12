@@ -132,6 +132,16 @@ export const AGENTS: readonly Agent[] = [
 
 export const agentByKey = (k: AgentKey) => AGENTS.find((a) => a.key === k)!;
 
+/** Identifiant de l'agent côté facturation (metadata.agent des produits Stripe). */
+export const BILLING_AGENT: Record<AgentKey, string> = {
+  SAV: "sav",
+  COM: "commercial",
+  ADM: "adv",
+  WEB: "webmaster",
+  MKT: "marketing",
+  STA: "standardiste",
+};
+
 /** Hero : la tâche du titre, la notification et l'équipe changent ensemble. */
 export type Slide = {
   id: string;

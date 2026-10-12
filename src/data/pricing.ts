@@ -14,6 +14,10 @@ export const INTEGRATION_PER_AGENT = 500;
 export const LAUNCH_OFFER_ACTIVE = true;
 export const LAUNCH_OFFER_END = "31 octobre 2026";
 export const LAUNCH_OFFER_END_SHORT = "31 oct.";
+/** Abonnement en ligne depuis la page Tarifs (2026-10-12, demande Victor). Tant que l'intégration est offerte,
+ *  il n'y a rien d'autre à payer à la commande. Après l'offre, la règle pour l'intégration reste à décider
+ *  (Victor) : d'ici là, le bouton « S'abonner » cède la place à l'audit gratuit. */
+export const ONLINE_SUBSCRIPTION = LAUNCH_OFFER_ACTIVE;
 
 const NB = " ";
 /** 1234.5 → « 1 234,50 € » (espaces insécables). */
