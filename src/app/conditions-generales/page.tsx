@@ -20,7 +20,7 @@ const NB = " ";
 
 export default function ConditionsGeneralesPage() {
   return (
-    <LegalLayout kicker="Conditions générales" title="Conditions générales de vente et d'utilisation" updated="8 octobre 2026">
+    <LegalLayout kicker="Conditions générales" title="Conditions générales de vente et d'utilisation" updated="12 octobre 2026">
       <p>
         Les présentes conditions générales (les «{NB}Conditions{NB}») régissent la fourniture, par la société V TENSOR AI (le
         «{NB}Prestataire{NB}»), de ses services de conception, de mise en place et d&apos;exploitation d&apos;agents d&apos;intelligence
@@ -96,9 +96,10 @@ export default function ConditionsGeneralesPage() {
           règlement annuel d&apos;avance (soit deux mois offerts par rapport au règlement mensuel).
         </li>
         <li>
-          <strong>Frais d&apos;intégration</strong>{NB}: facturés une seule fois, à partir de {eur(INTEGRATION_PER_AGENT)}{" "}hors taxes par Agent, selon les
-          outils à connecter et les processus à modéliser. Leur montant exact figure au Devis. Le Prestataire peut proposer des offres
-          de lancement, notamment la prise en charge des frais d&apos;intégration{NB}; leurs conditions figurent au Devis.
+          <strong>Frais d&apos;intégration</strong>{NB}: facturés une seule fois, {eur(INTEGRATION_PER_AGENT)}{" "}hors taxes par Agent, réglés à la
+          commande. Ils couvrent la connexion aux outils du Client, la modélisation de ses processus et la mise en service. Les besoins
+          relevant de l&apos;offre Sur-mesure font l&apos;objet d&apos;un Devis. Le Prestataire peut proposer des offres de lancement, notamment la
+          prise en charge des frais d&apos;intégration{NB}; leurs conditions sont indiquées sur le site ou au Devis.
         </li>
         <li>
           <strong>Sur-mesure</strong>{NB}: les besoins spécifiques (hébergement chez le Client ou dans un pays déterminé, applications

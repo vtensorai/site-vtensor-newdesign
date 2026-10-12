@@ -53,7 +53,7 @@ export const FAQS: readonly Faq[] = [
   {
     question: "Comment fonctionne la tarification ?",
     answer:
-      `Un prix par agent, sans palier caché : ${eur(PRICE_PER_AGENT)} HT par agent et par mois, ou ${eur(PRICE_PER_AGENT_YEAR)} HT par agent et par an si vous réglez à l'année (2 mois offerts). Vous composez votre équipe librement, avec des postes du catalogue ou des postes créés pour vous. S'y ajoutent des frais d'intégration uniques, à partir de ${eur(INTEGRATION_PER_AGENT)} HT par agent, qui dépendent des outils à connecter et des process à modéliser ; le montant exact est fixé sur devis après l'audit gratuit. Les besoins spécifiques (hébergement chez vous, applications dédiées, intégration lourde à votre logiciel de gestion) relèvent de l'offre Sur-mesure.`,
+      `Un prix par agent, sans palier caché : ${eur(PRICE_PER_AGENT)} HT par agent et par mois, ou ${eur(PRICE_PER_AGENT_YEAR)} HT par agent et par an si vous réglez à l'année (2 mois offerts). Vous composez votre équipe librement, avec des postes du catalogue ou des postes créés pour vous. S'y ajoutent des frais d'intégration uniques de ${eur(INTEGRATION_PER_AGENT)} HT par agent, réglés à la commande : connexion à vos outils, modélisation de vos process, mise en service. Les besoins spécifiques (hébergement chez vous, applications dédiées, intégration lourde à votre logiciel de gestion) relèvent de l'offre Sur-mesure.`,
     offer: `Offre de lancement : les frais d'intégration sont offerts pour toute commande passée jusqu'au ${LAUNCH_OFFER_END}.`,
   },
   {

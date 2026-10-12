@@ -10,8 +10,9 @@
 
 import { useState } from "react";
 import { API_URL, AUDIT_URL, CONTACT_EMAIL } from "@/lib/links";
-import { INTEGRATION_PER_AGENT, LAUNCH_OFFER_ACTIVE, LAUNCH_OFFER_END, ONLINE_SUBSCRIPTION, PRICE_PER_AGENT, PRICE_PER_AGENT_YEAR, PRICE_PER_DAY, eur } from "@/data/pricing";
+import { INTEGRATION_PER_AGENT, LAUNCH_OFFER_END, PRICE_PER_AGENT, PRICE_PER_AGENT_YEAR, PRICE_PER_DAY, eur } from "@/data/pricing";
 import { AGENT_COLOR, AGENTS, BILLING_AGENT, type AgentKey } from "@/data/home";
+import { useLaunchOffer } from "./Bits";
 import { Icon } from "./Icons";
 
 const NB = " ";
@@ -25,6 +26,8 @@ export function Pricing() {
   const monthly = n * PRICE_PER_AGENT;
   const yearly = n * PRICE_PER_AGENT_YEAR;
   const perDay = (annual ? yearly : monthly * 12) / 365;
+  const offer = useLaunchOffer();
+  const integration = n * INTEGRATION_PER_AGENT;
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -147,22 +150,27 @@ export function Pricing() {
             </div>
             <div className="px-5 py-3.5 border-t border-rule-2 flex justify-between items-baseline gap-4 text-[14px]">
               <span className="text-muted">Intégration, une fois</span>
-              {LAUNCH_OFFER_ACTIVE ? (
+              {offer ? (
                 <span className="mono text-right">
-                  <s className="text-faint">dès {eur(n * INTEGRATION_PER_AGENT)}</s> <span className="text-offer font-semibold">offerte</span>
+                  <s className="text-faint">{eur(integration)}</s> <span className="text-offer font-semibold">offerte</span>
                 </span>
               ) : (
-                <span className="mono">dès {eur(n * INTEGRATION_PER_AGENT)}{NB}HT</span>
+                <span className="mono">{eur(integration)}{NB}HT</span>
               )}
             </div>
-            {LAUNCH_OFFER_ACTIVE && (
+            {!offer && n > 0 && (
+              <div className="px-5 py-3.5 border-t border-rule-2 flex justify-between items-baseline gap-4 text-[14px]">
+                <span className="font-medium">À régler à la commande</span>
+                <span className="mono font-medium">{eur((annual ? yearly : monthly) + integration)}{NB}HT</span>
+              </div>
+            )}
+            {offer && (
               <div className="px-5 py-2.5 border-t border-offer text-[13px] text-offer" style={{ background: "color-mix(in srgb, var(--offer) 7%, transparent)" }}>
                 Offre de lancement : frais d&apos;intégration offerts pour toute commande passée jusqu&apos;au {LAUNCH_OFFER_END}.
               </div>
             )}
             <div className="px-5 py-5 border-t border-rule-2 flex flex-col gap-3">
-              {ONLINE_SUBSCRIPTION ? (
-                <>
+              <>
                   <button type="button" className="btn w-full" disabled={n === 0 || pending} onClick={subscribe} data-umami-event="S'abonner" data-umami-event-emplacement="tarifs" data-umami-event-agents={n}>
                     {pending ? "Ouverture du paiement…" : n === 0 ? "Cochez au moins un poste" : <>S&apos;abonner · {eur(annual ? yearly : monthly)}{NB}HT / {annual ? "an" : "mois"}</>}
                     {!pending && n > 0 && <Icon.arrow size={16} />}
@@ -179,12 +187,7 @@ export function Pricing() {
                     </a>
                   </p>
                   <p className="m-0 text-center small text-faint">Paiement sécurisé par Stripe. Nous vous contactons ensuite pour la mise en service.</p>
-                </>
-              ) : (
-                <a href={AUDIT_URL} target="_blank" rel="noopener noreferrer" data-umami-event="Réserver un échange" data-umami-event-emplacement="tarifs" className="btn">
-                  Réserver mon audit gratuit <Icon.arrow size={16} />
-                </a>
-              )}
+              </>
             </div>
           </div>
         </div>

@@ -7,17 +7,24 @@
 
 export const PRICE_PER_AGENT = 99;
 export const PRICE_PER_AGENT_YEAR = PRICE_PER_AGENT * 10;
-/** Frais d'intégration : à partir de 500 € HT par agent, une fois (décision Victor 2026-09-08). */
-export const INTEGRATION_PER_AGENT = 500;
-/** Offre de lancement : frais d'intégration offerts jusqu'au 31 octobre 2026 (décision Victor 2026-09-15, prolongée le 2026-10-01 ; remplace « 10 premiers clients »).
- *  Passer LAUNCH_OFFER_ACTIVE à false et redéployer à la fin de l'offre. */
-export const LAUNCH_OFFER_ACTIVE = true;
+/** Frais d'intégration : 499 € HT par agent, une fois, réglés à la commande (décision Victor 2026-10-12 ;
+ *  avant : « à partir de 500 € »). Même montant que le prix Stripe `VT-INTEG-agent`. */
+export const INTEGRATION_PER_AGENT = 499;
+/** Offre de lancement : frais d'intégration offerts jusqu'au LAUNCH_OFFER_LAST_DAY inclus, heure de Paris
+ *  (décision Victor 2026-09-15, prolongée le 2026-10-01). Prolonger = changer les trois constantes ci-dessous
+ *  ET la metadata `offered_until` du prix Stripe `VT-INTEG-agent` (c'est elle qui décide de ce qui est facturé). */
+export const LAUNCH_OFFER_LAST_DAY = "2026-10-31";
 export const LAUNCH_OFFER_END = "31 octobre 2026";
 export const LAUNCH_OFFER_END_SHORT = "31 oct.";
-/** Abonnement en ligne depuis la page Tarifs (2026-10-12, demande Victor). Tant que l'intégration est offerte,
- *  il n'y a rien d'autre à payer à la commande. Après l'offre, la règle pour l'intégration reste à décider
- *  (Victor) : d'ici là, le bouton « S'abonner » cède la place à l'audit gratuit. */
-export const ONLINE_SUBSCRIPTION = LAUNCH_OFFER_ACTIVE;
+export function launchOfferActive(now = new Date()): boolean {
+  const today = new Intl.DateTimeFormat("fr-CA", { timeZone: "Europe/Paris", year: "numeric", month: "2-digit", day: "2-digit" }).format(now);
+  return today <= LAUNCH_OFFER_LAST_DAY;
+}
+/** Valeur au moment du build (pages statiques, et état initial identique dans le navigateur pour l'hydratation) ;
+ *  les composants client la réévaluent ensuite avec la date réelle (`useLaunchOffer`). */
+export const LAUNCH_OFFER_ACTIVE = process.env.NEXT_PUBLIC_BUILT_ON_PARIS
+  ? process.env.NEXT_PUBLIC_BUILT_ON_PARIS <= LAUNCH_OFFER_LAST_DAY
+  : launchOfferActive();
 
 const NB = " ";
 /** 1234.5 → « 1 234,50 € » (espaces insécables). */

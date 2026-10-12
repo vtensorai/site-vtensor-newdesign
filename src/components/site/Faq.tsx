@@ -8,12 +8,13 @@
 
 import { useState } from "react";
 import { FAQS } from "@/data/faq";
-import { LAUNCH_OFFER_ACTIVE } from "@/data/pricing";
+import { useLaunchOffer } from "./Bits";
 import { CONTACT_EMAIL } from "@/lib/links";
 
 const NB = " ";
 
 export function Faq() {
+  const offer = useLaunchOffer();
   const [open, setOpen] = useState<number | null>(null);
 
   const jsonLd = {
@@ -68,7 +69,7 @@ export function Faq() {
                   <div className="qa-panel-inner">
                     <p className="p text-[15px] pb-7">
                       {f.answer}
-                      {f.offer && LAUNCH_OFFER_ACTIVE && (
+                      {f.offer && offer && (
                         <>
                           {" "}
                           <span className="text-offer font-medium">{f.offer}</span>

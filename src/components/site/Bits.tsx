@@ -2,8 +2,17 @@
 
 /** Briques communes de la page d'accueil : étiquette d'agent, apparition au défilement, gras inline. */
 
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { AGENT_COLOR, agentByKey, type AgentKey } from "@/data/home";
+import { LAUNCH_OFFER_ACTIVE, launchOfferActive } from "@/data/pricing";
+
+/** Offre de lancement en cours, réévaluée dans le navigateur : après la date de fin, le site
+ *  affiche les frais d'intégration même si les pages n'ont pas été reconstruites. */
+export function useLaunchOffer(): boolean {
+  const [active, setActive] = useState(LAUNCH_OFFER_ACTIVE);
+  useEffect(() => setActive(launchOfferActive()), []);
+  return active;
+}
 
 export function AgentTag({ k, full = false }: { k: AgentKey; full?: boolean }) {
   return (

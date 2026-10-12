@@ -8,11 +8,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import { AUDIT_URL } from "@/lib/links";
-import { INTEGRATION_PER_AGENT, LAUNCH_OFFER_ACTIVE, LAUNCH_OFFER_END_SHORT, PRICE_PER_AGENT, eur } from "@/data/pricing";
+import { INTEGRATION_PER_AGENT, LAUNCH_OFFER_END_SHORT, PRICE_PER_AGENT, eur } from "@/data/pricing";
 import { AGENT_COLOR, SLIDES, agentByKey } from "@/data/home";
 import { Icon } from "./Icons";
 import { Photo } from "./Photo";
-import { AgentTag } from "./Bits";
+import { AgentTag, useLaunchOffer } from "./Bits";
 
 const NB = " ";
 const DURATION = 6000;
@@ -22,6 +22,7 @@ export function Hero() {
   const [paused, setPaused] = useState(false);
   const [mounted, setMounted] = useState<ReadonlySet<number>>(() => new Set([0]));
   const manual = useRef(false);
+  const offer = useLaunchOffer();
 
   useEffect(() => {
     if (paused || manual.current) return;
@@ -114,10 +115,10 @@ export function Hero() {
               </div>
               <div className="flex justify-between items-baseline gap-3 pt-1.5 text-[12px] text-muted">
                 <span>Intégration</span>
-                {LAUNCH_OFFER_ACTIVE ? (
+                {offer ? (
                   <span className="mono text-offer font-semibold">offerte jusqu&apos;au {LAUNCH_OFFER_END_SHORT}</span>
                 ) : (
-                  <span className="mono">dès {eur(INTEGRATION_PER_AGENT * s.agents.length)}{NB}HT</span>
+                  <span className="mono">{eur(INTEGRATION_PER_AGENT * s.agents.length)}{NB}HT</span>
                 )}
               </div>
             </div>
