@@ -4,9 +4,9 @@
  * Agent vocal du site (2026-10-14, demande de Victor) : un rond en bas à droite ; au clic, le
  * visiteur parle à l'assistante vocale de Vtensor dans son navigateur.
  *
- * Chaîne : Cloudflare Turnstile (invisible) → SDK Retell `RetellClient` dont `baseURL` pointe
- * sur notre API (`/api/public/voice`, qui garde la clé, vérifie Turnstile et applique les
- * limites) → audio direct navigateur ↔ Retell. Le SDK et Turnstile ne sont chargés qu'au
+ * Chaîne : Cloudflare Turnstile (invisible) → SDK Retell `RetellClient` dont le `fetch` envoie la
+ * création d'appel à notre API (`/api/public/voice`, qui garde la clé, vérifie Turnstile et
+ * applique les limites) → audio direct navigateur ↔ Retell. Le SDK et Turnstile ne sont chargés qu'au
  * premier clic. Le rond s'anime avec le niveau de la voix de l'agent (snapshots `onAudio`).
  */
 
@@ -109,12 +109,13 @@ export function VoiceAgent() {
       const { RetellClient } = await import("retell-client-js-sdk");
       const client = new RetellClient({
         key: "site",
-        baseURL: `${API_URL}/api/public/voice`,
-        // Seule la création d'appel passe par notre API : on y joint le jeton Turnstile.
+        // Les requêtes de contrôle (création d'appel) passent par notre API, avec le jeton Turnstile.
+        // Pas de `baseURL` : le SDK en dérive aussi l'adresse de la passerelle audio, qui doit rester
+        // celle de Retell (api.retellai.com/webrtc-proxy/…, authentifiée par le jeton d'accès de l'appel).
         fetch: (url, init) => {
           const headers = new Headers(init?.headers);
           headers.set("X-Turnstile-Token", token);
-          return fetch(url, { ...init, headers });
+          return fetch(`${API_URL}/api/public/voice${new URL(String(url)).pathname}`, { ...init, headers });
         },
       });
       const call = client.createWebCall({
