@@ -15,7 +15,7 @@ export default function PolitiqueConfidentialitePage() {
     <LegalLayout
       kicker="Politique de confidentialité"
       title="Politique de confidentialité"
-      updated="9 octobre 2026"
+      updated="14 octobre 2026"
     >
       <p>
         Cette politique décrit les données personnelles collectées lorsque vous utilisez le site
@@ -46,6 +46,17 @@ export default function PolitiqueConfidentialitePage() {
       <p>
         Lorsque vous nous écrivez, nous conservons votre adresse e-mail et le contenu de nos
         échanges pour vous répondre et assurer le suivi de votre demande.
+      </p>
+      <h3>Conversation avec notre agent vocal</h3>
+      <p>
+        Si vous cliquez sur le bouton de l&apos;agent vocal, votre navigateur vous demande
+        l&apos;accès au micro, utilisé seulement pendant la conversation. Votre voix est traitée
+        en temps réel pour vous comprendre et vous répondre. La conversation est enregistrée et
+        transcrite : nous recevons sa transcription, un résumé, sa durée, et les coordonnées que
+        vous choisissez de donner pour être recontacté. Avant chaque conversation, un contrôle
+        anti-robot de Cloudflare (Turnstile) est effectué ; votre adresse IP sert à limiter le
+        nombre de conversations et n&apos;est conservée que sous la forme d&apos;une empreinte
+        chiffrée qui ne permet pas de la retrouver.
       </p>
       <h3>Données techniques</h3>
       <p>
@@ -89,6 +100,10 @@ export default function PolitiqueConfidentialitePage() {
           (art. 6.1.f RGPD).
         </li>
         <li>
+          <strong>Répondre à vos questions avec notre agent vocal et y donner suite</strong>{" "}—
+          exécution de mesures précontractuelles prises à votre demande (art. 6.1.b RGPD).
+        </li>
+        <li>
           <strong>Vous recontacter au sujet de nos services</strong>{" "}à la suite d&apos;un
           premier échange, dans un cadre strictement professionnel (B2B) — intérêt légitime
           (art. 6.1.f RGPD), avec possibilité de vous y opposer à tout moment.
@@ -106,6 +121,11 @@ export default function PolitiqueConfidentialitePage() {
           Données de contact et échanges : 3 ans après notre dernier échange, ou pendant la
           durée de la relation contractuelle si vous devenez client, puis selon les
           obligations légales applicables.
+        </li>
+        <li>
+          Conversations avec l&apos;agent vocal : transcription et résumé conservés comme nos
+          autres échanges ; l&apos;enregistrement et la transcription détenus par Retell AI sont
+          supprimés automatiquement après 30 jours.
         </li>
         <li>Journaux techniques de connexion : au maximum 12 mois.</li>
         <li>
@@ -125,7 +145,8 @@ export default function PolitiqueConfidentialitePage() {
           dans l&apos;Union européenne.
         </li>
         <li>
-          <strong>Cloudflare, Inc.</strong>{" "}(États-Unis) — diffusion et protection du site.
+          <strong>Cloudflare, Inc.</strong>{" "}(États-Unis) — diffusion et protection du site,
+          contrôle anti-robot avant une conversation avec l&apos;agent vocal.
         </li>
         <li>
           <strong>Cal.com, Inc.</strong>{" "}(États-Unis) — prise de rendez-vous.
@@ -136,8 +157,16 @@ export default function PolitiqueConfidentialitePage() {
         </li>
         <li>
           <strong>Anthropic Ireland, Limited</strong>{" "}(Irlande) — modèle d&apos;intelligence
-          artificielle qui nous aide à rédiger nos messages de prospection, avec un traitement
-          possible aux États-Unis.
+          artificielle qui nous aide à rédiger nos messages de prospection et qui formule les
+          réponses de l&apos;agent vocal, avec un traitement possible aux États-Unis.
+        </li>
+        <li>
+          <strong>Retell AI</strong>{" "}(États-Unis) — conduite de la conversation avec
+          l&apos;agent vocal : reconnaissance de la parole, enregistrement, transcription et
+          résumé.
+        </li>
+        <li>
+          <strong>ElevenLabs</strong>{" "}(États-Unis) — voix de synthèse de l&apos;agent vocal.
         </li>
         <li>
           <strong>SideGuide Technologies, Inc.</strong>{" "}(Firecrawl, États-Unis) — lecture des

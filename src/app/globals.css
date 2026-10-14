@@ -284,3 +284,13 @@ html[data-theme="dark"] {
   .sticky-cta[data-show="true"] { transform: none; }
   @media (min-width: 768px) { .sticky-cta { display: none; } }
 }
+
+/* ── Agent vocal du site (VoiceAgent.tsx, 2026-10-14) ─────────────────── */
+.voice-disc { transition: transform 90ms linear, opacity 200ms; }
+.voice-ring { transition: transform 90ms linear, opacity 90ms linear; }
+.voice-wait { animation: voice-wait 1.6s ease-in-out infinite; }
+@keyframes voice-wait { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .voice-disc, .voice-ring { transition: none; transform: none !important; }
+  .voice-wait { animation: none; }
+}
