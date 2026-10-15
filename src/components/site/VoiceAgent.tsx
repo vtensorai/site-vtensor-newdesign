@@ -1,8 +1,8 @@
 "use client";
 
 /**
- * Agent vocal du site (2026-10-14, demande de Victor) : un rond en bas à droite ; au clic, le
- * visiteur parle à l'assistante vocale de Vtensor dans son navigateur.
+ * Agent vocal du site (2026-10-14, demande de Victor) : un rond en bas à droite de toutes les pages,
+ * « Essayez notre agent standardiste » (2026-10-15) ; au clic, le visiteur parle à l'agent dans son navigateur.
  *
  * Chaîne : Cloudflare Turnstile (invisible) → SDK Retell `RetellClient` dont le `fetch` envoie la
  * création d'appel à notre API (`/api/public/voice`, qui garde la clé, vérifie Turnstile et
@@ -91,6 +91,8 @@ export function VoiceAgent() {
   const [error, setError] = useState("");
   const [muted, setMuted] = useState(false);
   const [level, setLevel] = useState(0);
+  // Mobile : l'étiquette s'affiche 8 secondes puis seul le rond reste (il ne masque pas le contenu).
+  const [hint, setHint] = useState(true);
   const callRef = useRef<WebCall | null>(null);
   const turnstileHost = useRef<HTMLDivElement>(null);
   const smooth = useRef(0);
@@ -188,23 +190,29 @@ export function VoiceAgent() {
 
   useEffect(() => () => void callRef.current?.end().catch(() => {}), []);
 
+  useEffect(() => {
+    if (!window.matchMedia("(max-width: 639px)").matches) return;
+    const t = window.setTimeout(() => setHint(false), 8000);
+    return () => window.clearTimeout(t);
+  }, []);
+
   const scale = 1 + level * 0.18;
 
   return (
-    <div className="voice-agent fixed z-50 right-4 bottom-4 sm:right-6 sm:bottom-6 flex flex-col items-end gap-3">
+    <div className="voice-agent fixed z-40 right-4 bottom-4 sm:right-6 sm:bottom-6 flex flex-col items-end gap-3">
       <div ref={turnstileHost} className="hidden" aria-hidden="true" />
 
       {open && (
         <section
           role="dialog"
-          aria-label="Assistante vocale de Vtensor"
+          aria-label="Démonstration de l'agent standardiste de Vtensor"
           className="box w-[calc(100vw-32px)] max-w-[340px] p-5 flex flex-col gap-5"
           style={{ boxShadow: "var(--shadow-card)" }}
         >
           <header className="flex items-start justify-between gap-4">
             <div className="flex flex-col gap-1">
-              <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-faint">Assistante vocale</span>
-              <span className="text-[16px] font-medium text-ink">Parlez à un agent Vtensor</span>
+              <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-faint">Démonstration</span>
+              <span className="text-[16px] font-medium text-ink">Essayez notre agent standardiste</span>
             </div>
             <button
               type="button"
@@ -275,14 +283,14 @@ export function VoiceAgent() {
           setOpen(true);
           void start();
         }}
-        aria-label={open ? "Fermer l'assistante vocale" : "Parler à notre agent vocal"}
+        aria-label={open ? "Fermer l'agent standardiste" : "Essayez notre agent standardiste"}
         aria-expanded={open}
         className="group flex items-center gap-3 cursor-pointer"
         data-umami-event={open ? undefined : "Agent vocal : ouvrir"}
       >
         {!open && (
-          <span className="hidden sm:inline-flex box px-3 py-2 text-[14px] text-ink group-hover:border-ink transition-colors" style={{ boxShadow: "var(--shadow-soft)" }}>
-            Parler à notre agent
+          <span className={`${hint ? "inline-flex" : "hidden sm:inline-flex"} box px-3 py-2 text-[13px] sm:text-[14px] text-ink group-hover:border-ink transition-colors`} style={{ boxShadow: "var(--shadow-soft)" }}>
+            Essayez notre agent standardiste
           </span>
         )}
         <span
