@@ -18,6 +18,7 @@ import {
   PRICE_PER_AGENT,
   PRICE_PER_AGENT_YEAR,
   PRICE_PER_DAY,
+  TEAM_INTEGRATION,
   TEAM_OFFER_LIVE,
   TEAM_PRICE,
   TEAM_PRICE_YEAR,
@@ -31,7 +32,7 @@ const NB = " ";
 
 const INCLUDED = ["Chaque agent développé pour vous", "Évolutions et nouveaux modèles inclus", "Email, téléphone, application", "Hébergement en Allemagne", "Sans engagement en mensuel", "Intégration à vos outils"];
 
-/** `teamOffer` : formule « Équipe complète » affichée (en ligne quand TEAM_OFFER_LIVE, forcée sur l'aperçu /tarifs-equipe/). */
+/** `teamOffer` : formule « Équipe complète » affichée (TEAM_OFFER_LIVE, en ligne depuis le 2026-10-19). */
 export function Pricing({ teamOffer = TEAM_OFFER_LIVE }: { teamOffer?: boolean } = {}) {
   const [annual, setAnnual] = useState(false);
   const [team, setTeam] = useState<ReadonlySet<AgentKey>>(() => new Set<AgentKey>(["SAV", "STA", "ADM"]));
@@ -50,7 +51,7 @@ export function Pricing({ teamOffer = TEAM_OFFER_LIVE }: { teamOffer?: boolean }
    *  de la formule : le sixième est alors offert). */
   const toTeam = teamPeriod - (annual ? listYearly : listMonthly);
   const offer = useLaunchOffer();
-  const integration = n * INTEGRATION_PER_AGENT;
+  const integration = fullTeam ? TEAM_INTEGRATION : n * INTEGRATION_PER_AGENT;
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
 

@@ -18,7 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${BASE}/conditions-generales/`,
-      lastModified: new Date("2026-09-08"),
+      lastModified: new Date("2026-10-19"),
       changeFrequency: "yearly",
       priority: 0.3,
     },

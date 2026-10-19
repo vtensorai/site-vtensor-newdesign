@@ -20,7 +20,7 @@ const NB = " ";
 
 export default function ConditionsGeneralesPage() {
   return (
-    <LegalLayout kicker="Conditions générales" title="Conditions générales de vente et d'utilisation" updated="12 octobre 2026">
+    <LegalLayout kicker="Conditions générales" title="Conditions générales de vente et d'utilisation" updated="19 octobre 2026">
       <p>
         Les présentes conditions générales (les «{NB}Conditions{NB}») régissent la fourniture, par la société V TENSOR AI (le
         «{NB}Prestataire{NB}»), de ses services de conception, de mise en place et d&apos;exploitation d&apos;agents d&apos;intelligence
