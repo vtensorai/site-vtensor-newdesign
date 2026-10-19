@@ -6,11 +6,23 @@
  * offre de lancement dite une seule fois. Sur-mesure en bandeau.
  * « S'abonner » (2026-10-12) : page de paiement Stripe pour l'équipe composée,
  * via l'API de l'application ; l'audit gratuit reste proposé juste en dessous.
+ * Formule « Équipe complète » (2026-10-19) : les six postes cochés = prix de la
+ * formule, comme le serveur le facture ; case « Toute l'équipe » pour tout cocher.
  */
 
 import { useState } from "react";
 import { API_URL, AUDIT_URL, CONTACT_EMAIL } from "@/lib/links";
-import { INTEGRATION_PER_AGENT, LAUNCH_OFFER_END, PRICE_PER_AGENT, PRICE_PER_AGENT_YEAR, PRICE_PER_DAY, eur } from "@/data/pricing";
+import {
+  INTEGRATION_PER_AGENT,
+  LAUNCH_OFFER_END,
+  PRICE_PER_AGENT,
+  PRICE_PER_AGENT_YEAR,
+  PRICE_PER_DAY,
+  TEAM_OFFER_LIVE,
+  TEAM_PRICE,
+  TEAM_PRICE_YEAR,
+  eur,
+} from "@/data/pricing";
 import { AGENT_COLOR, AGENTS, BILLING_AGENT, type AgentKey } from "@/data/home";
 import { useLaunchOffer } from "./Bits";
 import { Icon } from "./Icons";
@@ -19,13 +31,23 @@ const NB = " ";
 
 const INCLUDED = ["Chaque agent développé pour vous", "Évolutions et nouveaux modèles inclus", "Email, téléphone, application", "Hébergement en Allemagne", "Sans engagement en mensuel", "Intégration à vos outils"];
 
-export function Pricing() {
+/** `teamOffer` : formule « Équipe complète » affichée (en ligne quand TEAM_OFFER_LIVE, forcée sur l'aperçu /tarifs-equipe/). */
+export function Pricing({ teamOffer = TEAM_OFFER_LIVE }: { teamOffer?: boolean } = {}) {
   const [annual, setAnnual] = useState(false);
   const [team, setTeam] = useState<ReadonlySet<AgentKey>>(() => new Set<AgentKey>(["SAV", "STA", "ADM"]));
   const n = team.size;
-  const monthly = n * PRICE_PER_AGENT;
-  const yearly = n * PRICE_PER_AGENT_YEAR;
+  const fullTeam = teamOffer && n === AGENTS.length;
+  const listMonthly = n * PRICE_PER_AGENT;
+  const listYearly = n * PRICE_PER_AGENT_YEAR;
+  const monthly = fullTeam ? TEAM_PRICE : listMonthly;
+  const yearly = fullTeam ? TEAM_PRICE_YEAR : listYearly;
   const perDay = (annual ? yearly : monthly * 12) / 365;
+  /** Prix des six postes à l'unité, pour la période affichée (prix barré de la formule). */
+  const allList = AGENTS.length * (annual ? PRICE_PER_AGENT_YEAR : PRICE_PER_AGENT);
+  const teamPeriod = annual ? TEAM_PRICE_YEAR : TEAM_PRICE;
+  const missing = AGENTS.length - n;
+  /** Écart avec la formule quand il ne manque qu'un ou deux postes (incitation chiffrée, jamais négative). */
+  const toTeam = teamPeriod - (annual ? listYearly : listMonthly);
   const offer = useLaunchOffer();
   const integration = n * INTEGRATION_PER_AGENT;
   const [pending, setPending] = useState(false);
@@ -58,6 +80,8 @@ export function Pricing() {
       else next.add(k);
       return next;
     });
+  /** Case « Toute l'équipe » : coche les six postes, ou les décoche tous si elle l'était. */
+  const toggleAll = () => setTeam(() => (fullTeam ? new Set<AgentKey>() : new Set<AgentKey>(AGENTS.map((a) => a.key))));
 
   return (
     <section className="section" id="tarifs">
@@ -72,6 +96,11 @@ export function Pricing() {
               {eur(PRICE_PER_AGENT)} <span className="font-sans text-[16px] text-muted">HT par agent et par mois</span>
             </span>
             <span className="small">soit environ {eur(PRICE_PER_DAY, 2)}{NB}HT par jour · ou {eur(PRICE_PER_AGENT_YEAR)}{NB}HT par an, 2 mois offerts</span>
+            {teamOffer && (
+              <span className="small">
+                Toute l&apos;équipe{NB}: <span className="text-ink font-medium">{eur(TEAM_PRICE)}{NB}HT par mois</span> au lieu de {eur(AGENTS.length * PRICE_PER_AGENT)}
+              </span>
+            )}
           </div>
         </div>
 
@@ -79,6 +108,21 @@ export function Pricing() {
           {/* Composer */}
           <div className="lg:col-span-7 flex flex-col gap-4">
             <span className="mono text-[11px] tracking-[0.14em] uppercase text-muted">Composez votre équipe</span>
+            {teamOffer && (
+              <button type="button" className="pick" aria-pressed={fullTeam} onClick={toggleAll} data-umami-event="Toute l'équipe" data-umami-event-emplacement="tarifs">
+                <span className="flex items-center justify-between gap-3 w-full">
+                  <span className="text-[15px] font-medium text-ink">Toute l&apos;équipe</span>
+                  <span className="inline-flex items-center gap-3">
+                    <span className="mono text-[13px] text-right">
+                      <s className="text-faint">{eur(allList)}</s> {eur(teamPeriod)}
+                      {NB}HT{NB}/{NB}{annual ? "an" : "mois"}
+                    </span>
+                    <span className="pick-box" aria-hidden="true">{fullTeam && <Icon.check size={13} />}</span>
+                  </span>
+                </span>
+                <span className="text-[12.5px] sm:text-[13px] text-muted leading-snug">Les six postes, et ceux qui s&apos;ajouteront au catalogue, pour un prix unique.</span>
+              </button>
+            )}
             <div className="grid grid-cols-2 xl:grid-cols-3 gap-2.5 sm:gap-3">
               {AGENTS.map((a) => {
                 const on = team.has(a.key);
@@ -135,9 +179,22 @@ export function Pricing() {
                     <span className="w-[7px] h-[7px] rounded-full" style={{ background: AGENT_COLOR[a.key] }} aria-hidden="true" />
                     {a.name}
                   </span>
-                  <span className="mono text-[13px] text-muted">{annual ? eur(PRICE_PER_AGENT_YEAR) : eur(PRICE_PER_AGENT)}</span>
+                  <span className="mono text-[13px] text-muted">{fullTeam ? "inclus" : annual ? eur(PRICE_PER_AGENT_YEAR) : eur(PRICE_PER_AGENT)}</span>
                 </div>
               ))}
+              {fullTeam && (
+                <div className="flex justify-between items-baseline gap-4 pt-2.5 text-[14px]">
+                  <span className="font-medium">Toute l&apos;équipe</span>
+                  <span className="mono text-[13px]">
+                    <s className="text-faint">{eur(annual ? listYearly : listMonthly)}</s> {eur(annual ? yearly : monthly)}
+                  </span>
+                </div>
+              )}
+              {teamOffer && !fullTeam && missing > 0 && missing <= 2 && toTeam > 0 && (
+                <button type="button" onClick={toggleAll} className="mt-2 text-left text-[13px] text-accent underline underline-offset-4 hover:text-ink transition-colors">
+                  Toute l&apos;équipe pour {eur(toTeam)}{NB}HT de plus par {annual ? "an" : "mois"}
+                </button>
+              )}
             </div>
             <div className="px-5 py-4 border-t border-ink flex flex-col gap-1" aria-live="polite">
               <div className="flex justify-between items-baseline gap-4">

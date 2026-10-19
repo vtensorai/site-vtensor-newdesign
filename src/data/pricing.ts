@@ -7,6 +7,14 @@
 
 export const PRICE_PER_AGENT = 99;
 export const PRICE_PER_AGENT_YEAR = PRICE_PER_AGENT * 10;
+/** Formule « Équipe complète » (décision Victor 2026-10-19) : tous les agents du catalogue pour 500 € HT par mois,
+ *  annuel = 10 mois comme par agent. Mêmes montants que les prix Stripe `VT-PACK-ALL-monthly|yearly` : c'est le
+ *  serveur qui applique la formule dès que tous les agents sont choisis, le site affiche ce qu'il facturera. */
+export const TEAM_PRICE = 500;
+export const TEAM_PRICE_YEAR = TEAM_PRICE * 10;
+/** Formule affichée sur l'accueil, la FAQ et les conditions générales. Tant que false, elle n'est visible que sur
+ *  l'aperçu /tarifs-equipe/ (non indexé) : passer à true après validation de Victor. */
+export const TEAM_OFFER_LIVE = false;
 /** Frais d'intégration : 499 € HT par agent, une fois, réglés à la commande (décision Victor 2026-10-12 ;
  *  avant : « à partir de 500 € »). Même montant que le prix Stripe `VT-INTEG-agent`. */
 export const INTEGRATION_PER_AGENT = 499;
@@ -33,3 +41,5 @@ export function eur(n: number, decimals = 0) {
 }
 /** Coût par jour d'un agent en mensuel (prix × 12 / 365). */
 export const PRICE_PER_DAY = (PRICE_PER_AGENT * 12) / 365;
+/** Formule équipe, article 4 des conditions générales (affiché aussi sur l'aperçu pour relecture). */
+export const TEAM_TERMS = `${eur(TEAM_PRICE)} hors taxes par mois pour l'ensemble des Agents du catalogue publié sur le site, ou ${eur(TEAM_PRICE_YEAR)} hors taxes par an en règlement annuel d'avance. Les Agents ajoutés au catalogue pendant l'abonnement y sont inclus sans supplément ; les postes développés sur mesure pour le Client n'en font pas partie.`;

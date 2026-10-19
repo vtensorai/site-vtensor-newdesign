@@ -5,9 +5,26 @@
  * maître ; prix lus dans data/pricing.ts). Pas d'acronymes (consigne du 08/10).
  */
 
-import { INTEGRATION_PER_AGENT, LAUNCH_OFFER_END, PRICE_PER_AGENT, PRICE_PER_AGENT_YEAR, eur } from "@/data/pricing";
+import {
+  INTEGRATION_PER_AGENT,
+  LAUNCH_OFFER_END,
+  PRICE_PER_AGENT,
+  PRICE_PER_AGENT_YEAR,
+  TEAM_OFFER_LIVE,
+  TEAM_PRICE,
+  TEAM_PRICE_YEAR,
+  eur,
+} from "@/data/pricing";
 
 export type Faq = { question: string; answer: string; /** Phrase liée à l'offre limitée, affichée en rouge tant que l'offre est active. */ offer?: string };
+
+/** Réponse « tarification » ; `withTeam` ajoute la formule équipe (en ligne quand TEAM_OFFER_LIVE, montrée sur l'aperçu /tarifs-equipe/). */
+export function pricingAnswer(withTeam = TEAM_OFFER_LIVE): string {
+  const team = withTeam
+    ? ` Pour toute l'équipe, les six postes du catalogue et ceux qui s'y ajouteront : ${eur(TEAM_PRICE)} HT par mois, ou ${eur(TEAM_PRICE_YEAR)} HT par an.`
+    : "";
+  return `Un prix par agent, sans palier caché : ${eur(PRICE_PER_AGENT)} HT par agent et par mois, ou ${eur(PRICE_PER_AGENT_YEAR)} HT par agent et par an si vous réglez à l'année (2 mois offerts).${team} Vous composez votre équipe librement, avec des postes du catalogue ou des postes créés pour vous. S'y ajoutent des frais d'intégration uniques de ${eur(INTEGRATION_PER_AGENT)} HT par agent, réglés à la commande : connexion à vos outils, modélisation de vos process, mise en service. Les besoins spécifiques (hébergement chez vous, applications dédiées, intégration lourde à votre logiciel de gestion) relèvent de l'offre Sur-mesure.`;
+}
 
 export const FAQS: readonly Faq[] = [
   {
@@ -52,8 +69,7 @@ export const FAQS: readonly Faq[] = [
   },
   {
     question: "Comment fonctionne la tarification ?",
-    answer:
-      `Un prix par agent, sans palier caché : ${eur(PRICE_PER_AGENT)} HT par agent et par mois, ou ${eur(PRICE_PER_AGENT_YEAR)} HT par agent et par an si vous réglez à l'année (2 mois offerts). Vous composez votre équipe librement, avec des postes du catalogue ou des postes créés pour vous. S'y ajoutent des frais d'intégration uniques de ${eur(INTEGRATION_PER_AGENT)} HT par agent, réglés à la commande : connexion à vos outils, modélisation de vos process, mise en service. Les besoins spécifiques (hébergement chez vous, applications dédiées, intégration lourde à votre logiciel de gestion) relèvent de l'offre Sur-mesure.`,
+    answer: pricingAnswer(),
     offer: `Offre de lancement : les frais d'intégration sont offerts pour toute commande passée jusqu'au ${LAUNCH_OFFER_END}.`,
   },
   {

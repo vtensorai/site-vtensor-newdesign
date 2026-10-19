@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { LegalLayout } from "@/components/site/LegalLayout";
 import { CONTACT_EMAIL } from "@/lib/links";
-import { INTEGRATION_PER_AGENT, PRICE_PER_AGENT, PRICE_PER_AGENT_YEAR, eur } from "@/data/pricing";
+import { INTEGRATION_PER_AGENT, PRICE_PER_AGENT, PRICE_PER_AGENT_YEAR, TEAM_OFFER_LIVE, TEAM_TERMS, eur } from "@/data/pricing";
 
 /**
  * Conditions générales de vente et d'utilisation — version publique (2026-09-08),
@@ -95,6 +95,11 @@ export default function ConditionsGeneralesPage() {
           <strong>Abonnement</strong>{NB}: {eur(PRICE_PER_AGENT)} hors taxes par Agent et par mois, ou {eur(PRICE_PER_AGENT_YEAR)}{" "}hors taxes par Agent et par an en
           règlement annuel d&apos;avance (soit deux mois offerts par rapport au règlement mensuel).
         </li>
+        {TEAM_OFFER_LIVE && (
+          <li>
+            <strong>Formule Équipe complète</strong>{NB}: {TEAM_TERMS}
+          </li>
+        )}
         <li>
           <strong>Frais d&apos;intégration</strong>{NB}: facturés une seule fois, {eur(INTEGRATION_PER_AGENT)}{" "}hors taxes par Agent, réglés à la
           commande. Ils couvrent la connexion aux outils du Client, la modélisation de ses processus et la mise en service. Les besoins

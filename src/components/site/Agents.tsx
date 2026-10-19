@@ -10,7 +10,7 @@
 
 import { useState } from "react";
 import { AGENT_COLOR, AGENTS, type Agent } from "@/data/home";
-import { PRICE_PER_AGENT, eur } from "@/data/pricing";
+import { PRICE_PER_AGENT, TEAM_OFFER_LIVE, TEAM_PRICE, eur } from "@/data/pricing";
 import { CHANNEL_ICON, Icon } from "./Icons";
 import { AgentTag, rich } from "./Bits";
 
@@ -82,7 +82,9 @@ export function Agents() {
           </div>
           <div className="lg:col-start-9 lg:col-span-4 flex flex-col gap-3">
             <p className="p">Des exemples pour vous donner des idées : vous adaptez un poste ou vous inventez celui qui vous manque. Chaque agent se branche sur vos outils.</p>
-            <span className="mono text-[13px] text-ink">{eur(PRICE_PER_AGENT)}{NB}HT par mois, chacun.</span>
+            <span className="mono text-[13px] text-ink">
+              {eur(PRICE_PER_AGENT)}{NB}HT par mois, chacun.{TEAM_OFFER_LIVE && <> Les six{NB}: {eur(TEAM_PRICE)}{NB}HT par mois.</>}
+            </span>
           </div>
         </div>
 
