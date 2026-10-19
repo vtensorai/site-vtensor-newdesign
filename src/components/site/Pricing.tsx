@@ -46,7 +46,8 @@ export function Pricing({ teamOffer = TEAM_OFFER_LIVE }: { teamOffer?: boolean }
   const allList = AGENTS.length * (annual ? PRICE_PER_AGENT_YEAR : PRICE_PER_AGENT);
   const teamPeriod = annual ? TEAM_PRICE_YEAR : TEAM_PRICE;
   const missing = AGENTS.length - n;
-  /** Écart avec la formule quand il ne manque qu'un ou deux postes (incitation chiffrée, jamais négative). */
+  /** Écart avec la formule quand il ne manque qu'un ou deux postes (à 100 € par poste, cinq postes coûtent déjà le prix
+   *  de la formule : le sixième est alors offert). */
   const toTeam = teamPeriod - (annual ? listYearly : listMonthly);
   const offer = useLaunchOffer();
   const integration = n * INTEGRATION_PER_AGENT;
@@ -190,9 +191,13 @@ export function Pricing({ teamOffer = TEAM_OFFER_LIVE }: { teamOffer?: boolean }
                   </span>
                 </div>
               )}
-              {teamOffer && !fullTeam && missing > 0 && missing <= 2 && toTeam > 0 && (
+              {teamOffer && !fullTeam && missing > 0 && missing <= 2 && toTeam >= 0 && (
                 <button type="button" onClick={toggleAll} className="mt-2 text-left text-[13px] text-accent underline underline-offset-4 hover:text-ink transition-colors">
-                  Toute l&apos;équipe pour {eur(toTeam)}{NB}HT de plus par {annual ? "an" : "mois"}
+                  {toTeam === 0 ? (
+                    <>{missing === 1 ? "Le dernier poste est offert" : "Les postes restants sont offerts"}{NB}: toute l&apos;équipe au même prix</>
+                  ) : (
+                    <>Toute l&apos;équipe pour {eur(toTeam)}{NB}HT de plus par {annual ? "an" : "mois"}</>
+                  )}
                 </button>
               )}
             </div>

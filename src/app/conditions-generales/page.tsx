@@ -6,7 +6,7 @@ import { INTEGRATION_PER_AGENT, PRICE_PER_AGENT, PRICE_PER_AGENT_YEAR, TEAM_OFFE
 /**
  * Conditions générales de vente et d'utilisation — version publique (2026-09-08),
  * dérivée du brouillon CGU du 2026-05-02 (Output/legal), alignée sur l'offre
- * en vigueur (prix lus dans data/pricing.ts : 99 € HT par agent et par mois depuis le 2026-10-08), intégration
+ * en vigueur (prix lus dans data/pricing.ts : 100 € HT par agent et par mois, retour du 2026-10-19), intégration
  * sur devis, mensuel sans engagement, plus d'agent maître.
  */
 

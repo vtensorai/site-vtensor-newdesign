@@ -1,11 +1,12 @@
 /**
  * Prix publics de l'abonnement (une seule source pour la page d'accueil, la FAQ
  * et les conditions générales).
- * 99 € HT par agent et par mois depuis le 2026-10-08 (décision Victor ; 3D NUM
- * garde son abonnement en cours). Annuel = 10 mois (2 mois offerts).
+ * 100 € HT par agent et par mois (décision Victor du 2026-10-19 : « on arrête les prix à 99 €, ça marche pour
+ * le retail en TTC, pas en HT chez les pros » ; 99 € du 08/10 au 19/10). Annuel = 10 mois (2 mois offerts).
+ * Mêmes montants que les prix Stripe `VT-SUB-<CODE>-monthly|yearly`.
  */
 
-export const PRICE_PER_AGENT = 99;
+export const PRICE_PER_AGENT = 100;
 export const PRICE_PER_AGENT_YEAR = PRICE_PER_AGENT * 10;
 /** Formule « Équipe complète » (décision Victor 2026-10-19) : tous les agents du catalogue pour 500 € HT par mois,
  *  annuel = 10 mois comme par agent. Mêmes montants que les prix Stripe `VT-PACK-ALL-monthly|yearly` : c'est le
