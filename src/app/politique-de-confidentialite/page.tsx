@@ -15,7 +15,7 @@ export default function PolitiqueConfidentialitePage() {
     <LegalLayout
       kicker="Politique de confidentialité"
       title="Politique de confidentialité"
-      updated="14 octobre 2026"
+      updated="20 octobre 2026"
     >
       <p>
         Cette politique décrit les données personnelles collectées lorsque vous utilisez le site
@@ -87,6 +87,17 @@ export default function PolitiqueConfidentialitePage() {
       <p>
         Aucune bannière de consentement n&apos;est donc nécessaire. Si cela devait évoluer,
         cette politique serait mise à jour avant toute mise en place.
+      </p>
+      <h3 id="parrainage">Parrainage</h3>
+      <p>
+        Si vous arrivez sur le site par un lien de parrainage, le code de votre parrain est
+        enregistré dans le stockage local de votre navigateur pendant 90 jours, uniquement pour
+        attribuer votre éventuelle souscription à votre parrain. Vous pouvez le supprimer depuis
+        la rubrique Tarifs ou en effaçant les données du site.
+      </p>
+      <p>
+        Si vous souscrivez par parrainage, votre parrain voit le nom de votre entreprise, la date
+        de votre souscription et le montant de ses commissions.
       </p>
 
       <h2>Finalités et bases légales</h2>

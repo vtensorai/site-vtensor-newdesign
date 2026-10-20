@@ -11,7 +11,7 @@ import { FAQS } from "@/data/faq";
 import { useLaunchOffer } from "./Bits";
 import { CONTACT_EMAIL } from "@/lib/links";
 
-const NB = " ";
+const NB = " ";
 
 export function Faq() {
   const offer = useLaunchOffer();

@@ -12,7 +12,7 @@ import { Icon } from "./Icons";
 import { LogoMark } from "./Logo";
 import { AgentTag, Reveal } from "./Bits";
 
-const NB = " ";
+const NB = " ";
 
 const DONE: [AgentKey, string][] = [
   ["SAV", "12 mails clients traités"],

@@ -2,7 +2,7 @@
 
 import { Reveal } from "./Bits";
 
-const NB = " ";
+const NB = " ";
 
 const STEPS = [
   { meta: `30${NB}min, en visio`, title: "Audit gratuit", text: "On repère avec vous les tâches qui vous coûtent le plus de temps, et les outils que vous utilisez déjà." },

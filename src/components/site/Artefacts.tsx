@@ -8,7 +8,7 @@ import type { Moment } from "@/data/home";
 import { Icon } from "./Icons";
 import { AgentTag } from "./Bits";
 
-const NB = " ";
+const NB = " ";
 
 function Head({ m, label }: { m: Moment; label: string }) {
   return (

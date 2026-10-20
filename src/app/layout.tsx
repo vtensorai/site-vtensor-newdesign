@@ -3,6 +3,7 @@ import { Geist, JetBrains_Mono, Newsreader } from "next/font/google";
 import "./globals.css";
 import { UMAMI_SRC, UMAMI_WEBSITE_ID } from "@/lib/links";
 import { VoiceAgent } from "@/components/site/VoiceAgent";
+import { ReferralCapture } from "@/components/site/ReferralCapture";
 
 // V3 (2026-09-08) — Newsreader (titres) · Geist (texte) · JetBrains Mono (logo, repères).
 const fontGeist = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
@@ -83,6 +84,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         {children}
         {/* Agent standardiste en démonstration, sur toutes les pages (go Victor 2026-10-15). */}
         <VoiceAgent />
+        {/* Programme de parrainage (2026-10-20) : code du parrain lu dans ?parrain= et mémorisé 90 jours. */}
+        <ReferralCapture />
       </body>
     </html>
   );

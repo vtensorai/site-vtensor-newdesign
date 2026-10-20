@@ -14,7 +14,7 @@ import { PRICE_PER_AGENT, TEAM_OFFER_LIVE, TEAM_PRICE, eur } from "@/data/pricin
 import { CHANNEL_ICON, Icon } from "./Icons";
 import { AgentTag, rich } from "./Bits";
 
-const NB = " ";
+const NB = " ";
 const CHANNEL: Record<Agent["channels"][number], string> = { email: "Email", whatsapp: "WhatsApp", phone: "Téléphone", web: "Application" };
 
 function Fiche({ a, id, role }: { a: Agent; id: string; role?: string }) {

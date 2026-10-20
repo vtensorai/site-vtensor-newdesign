@@ -25,10 +25,12 @@ import {
   eur,
 } from "@/data/pricing";
 import { AGENT_COLOR, AGENTS, BILLING_AGENT, type AgentKey } from "@/data/home";
+import { currentReferral } from "@/lib/referral";
 import { useLaunchOffer } from "./Bits";
 import { Icon } from "./Icons";
+import { ReferralCode } from "./ReferralCode";
 
-const NB = " ";
+const NB = " ";
 
 const INCLUDED = ["Chaque agent développé pour vous", "Évolutions et nouveaux modèles inclus", "Email, téléphone, application", "Hébergement en Allemagne", "Sans engagement en mensuel", "Intégration à vos outils"];
 
@@ -61,10 +63,16 @@ export function Pricing({ teamOffer = TEAM_OFFER_LIVE }: { teamOffer?: boolean }
     setPending(true);
     setError(null);
     try {
+      // Programme de parrainage (2026-10-20) : code du parrain mémorisé, s'il y en a un (code inconnu ignoré par le serveur).
+      const referral = currentReferral();
       const res = await fetch(`${API_URL}/api/public/checkout`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ agents: AGENTS.filter((a) => team.has(a.key)).map((a) => BILLING_AGENT[a.key]), interval: annual ? "year" : "month" }),
+        body: JSON.stringify({
+          agents: AGENTS.filter((a) => team.has(a.key)).map((a) => BILLING_AGENT[a.key]),
+          interval: annual ? "year" : "month",
+          ...(referral ? { parrain: referral.code } : {}),
+        }),
       });
       const data = (await res.json().catch(() => ({}))) as { url?: string; error?: string };
       if (!res.ok || !data.url) throw new Error(data.error || "Paiement indisponible");
@@ -243,6 +251,7 @@ export function Pricing({ teamOffer = TEAM_OFFER_LIVE }: { teamOffer?: boolean }
                       {error}. Réessayez, ou écrivez-nous : {CONTACT_EMAIL}
                     </p>
                   )}
+                  <ReferralCode />
                   <p className="m-0 text-center text-[14px] text-muted">
                     Des questions{NB}?{" "}
                     <a href={AUDIT_URL} target="_blank" rel="noopener noreferrer" data-umami-event="Réserver un échange" data-umami-event-emplacement="tarifs" className="text-accent underline underline-offset-4 hover:text-ink transition-colors">

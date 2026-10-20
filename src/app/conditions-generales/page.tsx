@@ -16,11 +16,11 @@ export const metadata: Metadata = {
   description: "Conditions générales de vente et d'utilisation des services d'agents IA de V TENSOR AI.",
 };
 
-const NB = " ";
+const NB = " ";
 
 export default function ConditionsGeneralesPage() {
   return (
-    <LegalLayout kicker="Conditions générales" title="Conditions générales de vente et d'utilisation" updated="19 octobre 2026">
+    <LegalLayout kicker="Conditions générales" title="Conditions générales de vente et d'utilisation" updated="20 octobre 2026">
       <p>
         Les présentes conditions générales (les «{NB}Conditions{NB}») régissent la fourniture, par la société V TENSOR AI (le
         «{NB}Prestataire{NB}»), de ses services de conception, de mise en place et d&apos;exploitation d&apos;agents d&apos;intelligence
@@ -314,6 +314,25 @@ export default function ConditionsGeneralesPage() {
         Les présentes Conditions sont soumises au droit français. En cas de différend, les parties recherchent d&apos;abord une solution
         amiable. À défaut d&apos;accord dans un délai de trente (30) jours, le litige est porté devant le Tribunal de commerce de
         Versailles, nonobstant pluralité de défendeurs ou appel en garantie.
+      </p>
+
+      {/* Programme de parrainage (décision de Victor du 2026-10-20), présenté sur /parrainage/. */}
+      <h2 id="parrainage">17. Programme de parrainage</h2>
+      <p>
+        Tout client ou partenaire professionnel de Vtensor dispose d&apos;un lien et d&apos;un code de parrainage. Lorsqu&apos;une
+        entreprise qui n&apos;était pas cliente de Vtensor souscrit un abonnement par ce lien ou avec ce code, son parrain perçoit une
+        commission égale à 20{NB}% du montant hors taxes de chaque facture d&apos;abonnement payée par cette entreprise, tant que
+        l&apos;abonnement est actif. Les frais d&apos;intégration, les taxes et les montants remboursés n&apos;ouvrent pas droit à
+        commission. Le parrainage ne porte que sur un niveau.
+      </p>
+      <p>
+        Une commission est validée trente jours après le paiement de la facture correspondante. Pour un parrain client abonné au mois,
+        les commissions validées sont déduites de sa facture Vtensor suivante{NB}; dans les autres cas, elles sont versées chaque mois
+        par virement, sur facture du parrain.
+      </p>
+      <p>
+        Un client ne peut pas se parrainer lui-même. Vtensor peut modifier ou arrêter le programme en respectant un préavis de trente
+        jours{NB}; les commissions des abonnements déjà souscrits restent dues dans les conditions en vigueur à la date de la souscription.
       </p>
 
       <h2>Éditeur</h2>

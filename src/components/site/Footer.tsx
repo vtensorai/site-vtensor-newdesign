@@ -39,6 +39,9 @@ export function Footer() {
               {l}
             </a>
           ))}
+          <a href="/parrainage/" className={link}>
+            Parrainage
+          </a>
           <a href={APP_URL} target="_blank" rel="noopener noreferrer" data-umami-event="Ouvrir l'application" data-umami-event-emplacement="pied-de-page" className={link}>
             Accéder à l&apos;app
           </a>

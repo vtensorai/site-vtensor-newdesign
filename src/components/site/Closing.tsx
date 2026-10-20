@@ -14,7 +14,7 @@ import { Icon } from "./Icons";
 import { Photo } from "./Photo";
 import { Reveal } from "./Bits";
 
-const NB = " ";
+const NB = " ";
 
 const GUARDS: { icon: "server" | "shield" | "file" | "eye"; title: string; text: string }[] = [
   { icon: "server", title: `Allemagne, ISO${NB}27001`, text: "Serveurs Hetzner en Allemagne. Chaque client a son propre espace : vos données ne croisent jamais celles d'un autre." },

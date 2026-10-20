@@ -8,7 +8,7 @@ import { DAY } from "@/data/home";
 import { Artefact } from "./Artefacts";
 import { Reveal } from "./Bits";
 
-const NB = " ";
+const NB = " ";
 
 export function Journee() {
   return (

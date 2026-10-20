@@ -16,15 +16,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.3,
     },
+    { url: `${BASE}/parrainage/`, lastModified: new Date("2026-10-20"), changeFrequency: "monthly", priority: 0.6 },
     {
       url: `${BASE}/conditions-generales/`,
-      lastModified: new Date("2026-10-19"),
+      lastModified: new Date("2026-10-20"),
       changeFrequency: "yearly",
       priority: 0.3,
     },
     {
       url: `${BASE}/politique-de-confidentialite/`,
-      lastModified: new Date("2026-09-14"),
+      lastModified: new Date("2026-10-20"),
       changeFrequency: "yearly",
       priority: 0.3,
     },

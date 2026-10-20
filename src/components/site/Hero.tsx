@@ -14,7 +14,7 @@ import { Icon } from "./Icons";
 import { Photo } from "./Photo";
 import { AgentTag, useLaunchOffer } from "./Bits";
 
-const NB = " ";
+const NB = " ";
 const DURATION = 6000;
 
 export function Hero() {
