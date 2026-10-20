@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/politique-de-confidentialite/" },
   title: "Politique de confidentialité — Vtensor",
   description:
-    "Comment V TENSOR AI collecte, utilise et protège vos données personnelles : site vtensor.ai et prospection commerciale par e-mail.",
+    "Comment V TENSOR AI collecte, utilise et protège vos données personnelles sur le site vtensor.ai.",
 };
 
 export default function PolitiqueConfidentialitePage() {
@@ -21,10 +21,6 @@ export default function PolitiqueConfidentialitePage() {
         Cette politique décrit les données personnelles collectées lorsque vous utilisez le site
         vtensor.ai, les raisons de cette collecte et vos droits, conformément au Règlement
         général sur la protection des données (RGPD) et à la loi Informatique et Libertés.
-      </p>
-      <p>
-        Elle s&apos;applique aussi aux professionnels que nous contactons par e-mail : voir la
-        section <a href="#prospection-commerciale">Prospection commerciale</a>.
       </p>
 
       <h2>Responsable du traitement</h2>
@@ -119,11 +115,6 @@ export default function PolitiqueConfidentialitePage() {
           premier échange, dans un cadre strictement professionnel (B2B) — intérêt légitime
           (art. 6.1.f RGPD), avec possibilité de vous y opposer à tout moment.
         </li>
-        <li>
-          <strong>Vous présenter nos services par e-mail</strong>{" "}si vous dirigez une entreprise
-          (prospection commerciale) — intérêt légitime (art. 6.1.f RGPD). Détails dans la
-          section <a href="#prospection-commerciale">Prospection commerciale</a>.
-        </li>
       </ul>
 
       <h2>Durées de conservation</h2>
@@ -139,10 +130,6 @@ export default function PolitiqueConfidentialitePage() {
           supprimés automatiquement après 30 jours.
         </li>
         <li>Journaux techniques de connexion : au maximum 12 mois.</li>
-        <li>
-          Données de prospection commerciale : voir la section{" "}
-          <a href="#prospection-commerciale">Prospection commerciale</a>.
-        </li>
       </ul>
 
       <h2>Destinataires et sous-traitants</h2>
@@ -168,8 +155,8 @@ export default function PolitiqueConfidentialitePage() {
         </li>
         <li>
           <strong>Anthropic Ireland, Limited</strong>{" "}(Irlande) — modèle d&apos;intelligence
-          artificielle qui nous aide à rédiger nos messages de prospection et qui formule les
-          réponses de l&apos;agent vocal, avec un traitement possible aux États-Unis.
+          artificielle qui formule les réponses de l&apos;agent vocal, avec un traitement possible
+          aux États-Unis.
         </li>
         <li>
           <strong>Retell AI</strong>{" "}(États-Unis) — conduite de la conversation avec
@@ -179,160 +166,11 @@ export default function PolitiqueConfidentialitePage() {
         <li>
           <strong>ElevenLabs</strong>{" "}(États-Unis) — voix de synthèse de l&apos;agent vocal.
         </li>
-        <li>
-          <strong>SideGuide Technologies, Inc.</strong>{" "}(Firecrawl, États-Unis) — lecture des
-          pages publiques de sites internet, pour nos recherches de prospection, jusqu&apos;au
-          8 octobre 2026.
-        </li>
       </ul>
       <p>
         Les transferts vers Cloudflare et Cal.com sont encadrés par les garanties prévues au
-        chapitre V du RGPD (clauses contractuelles types de la Commission européenne). Pour
-        Anthropic et Firecrawl, voir la section{" "}
-        <a href="#prospection-commerciale">Prospection commerciale</a>. Nous ne vendons ni ne
-        louons vos données.
-      </p>
-
-      <h2 id="prospection-commerciale">Prospection commerciale</h2>
-      <p>
-        Nous écrivons par e-mail à des dirigeants d&apos;entreprises françaises pour leur
-        présenter nos services. Si vous avez reçu l&apos;un de ces messages, cette section
-        vous explique d&apos;où viennent vos coordonnées, ce que nous en faisons et comment ne
-        plus être contacté. Le responsable du traitement est V TENSOR AI (coordonnées
-        ci-dessus).
-      </p>
-
-      <h3>Pourquoi nous vous écrivons</h3>
-      <p>
-        Pour vous présenter nos agents d&apos;intelligence artificielle, qui peuvent aider
-        votre entreprise. Nous écrivons uniquement à des professionnels, au sujet de leur
-        activité professionnelle.
-      </p>
-      <p>
-        Base légale : notre intérêt légitime à faire connaître nos services aux entreprises
-        (art. 6.1.f RGPD). Vous pouvez vous y opposer à tout moment, sans donner de motif.
-      </p>
-
-      <h3>Données utilisées</h3>
-      <ul>
-        <li>votre nom, votre prénom et votre fonction dans l&apos;entreprise ;</li>
-        <li>
-          des informations sur votre entreprise : nom, numéro SIREN, activité, effectif, site
-          internet ;
-        </li>
-        <li>votre adresse e-mail professionnelle ;</li>
-        <li>
-          nos échanges : messages envoyés, vos réponses, dates et statut (envoyé, répondu,
-          désinscrit).
-        </li>
-      </ul>
-
-      <h3>D&apos;où viennent ces données</h3>
-      <ul>
-        <li>
-          Le <strong>Registre national des entreprises</strong>, tenu par l&apos;INPI, et le
-          répertoire <strong>Sirene</strong>{" "}de l&apos;Insee, consultés via l&apos;API publique
-          «&nbsp;Recherche d&apos;entreprises&nbsp;» de l&apos;État : nom, numéro SIREN, activité
-          et effectif de l&apos;entreprise, nom et fonction de ses dirigeants.
-        </li>
-        <li>
-          Le <strong>site internet de votre entreprise</strong>, ou à défaut sa fiche dans un
-          annuaire professionnel public (l&apos;annuaire des professionnels RGE de
-          l&apos;ADEME, par exemple) : l&apos;adresse e-mail qui y est publiée.
-        </li>
-      </ul>
-
-      <h3>Comment nous les utilisons</h3>
-      <p>
-        Vos données sont enregistrées dans notre application, hébergée en Allemagne. Nos
-        messages sont rédigés avec l&apos;aide d&apos;un agent d&apos;intelligence artificielle, à
-        partir de ces informations. Ils sont envoyés en texte brut, sans pixel de suivi ni
-        lien individuel : nous ne savons pas si vous les avez ouverts, ni si vous avez cliqué.
-        Les liens vers notre site et vers notre agenda sont les mêmes pour tous les
-        destinataires : ils nous permettent seulement de compter, globalement, les visites
-        venues de nos e-mails (voir «&nbsp;Données techniques&nbsp;» ci-dessus).
-      </p>
-      <p>
-        Après notre premier message, nous envoyons au plus deux relances. Elles s&apos;arrêtent
-        dès que vous répondez ou que vous vous désinscrivez.
-      </p>
-
-      <h3>Qui y a accès</h3>
-      <p>
-        L&apos;équipe de V TENSOR AI et les prestataires suivants, qui agissent sur nos
-        instructions :
-      </p>
-      <ul>
-        <li>
-          <strong>Hetzner Online GmbH</strong>{" "}(Allemagne) — hébergement de notre application
-          et de sa base de données, dans l&apos;Union européenne.
-        </li>
-        <li>
-          <strong>IONOS SARL</strong>{" "}(France) — envoi et réception des e-mails. Les données
-          sont traitées dans l&apos;Espace économique européen.
-        </li>
-        <li>
-          <strong>Anthropic Ireland, Limited</strong>{" "}(Irlande) — fournit le modèle
-          d&apos;intelligence artificielle qui nous aide à rechercher les informations
-          publiques sur votre entreprise et à rédiger les messages. Les données qui
-          lui sont transmises peuvent être traitées hors de l&apos;Union européenne, y compris
-          aux États-Unis. Nous utilisons ce modèle de deux façons. Par son interface de
-          programmation (API) : le transfert est alors encadré par les clauses contractuelles
-          types de la Commission européenne, prévues par l&apos;accord de traitement des données
-          d&apos;Anthropic, et Anthropic s&apos;engage par contrat à ne pas utiliser ces données
-          pour entraîner ses modèles. Par notre abonnement Claude : nous y avons désactivé
-          l&apos;utilisation de nos échanges pour l&apos;entraînement des modèles
-          d&apos;Anthropic.
-        </li>
-        <li>
-          <strong>SideGuide Technologies, Inc.</strong>{" "}(Firecrawl, États-Unis) — a lu pour
-          nous, jusqu&apos;au 8 octobre 2026, les pages publiques des sites internet, dont celle
-          où votre adresse e-mail est publiée. Ces pages sont traitées aux États-Unis. Nous ne
-          l&apos;utilisons plus.
-        </li>
-      </ul>
-
-      <h3>Combien de temps nous les gardons</h3>
-      <ul>
-        <li>
-          Vos données de prospection : 3 ans à compter de leur collecte ou du dernier contact
-          venant de vous (une réponse à l&apos;un de nos messages, par exemple), puis elles sont
-          supprimées.
-        </li>
-        <li>
-          Notre liste d&apos;opposition : si vous vous désinscrivez, nous y inscrivons une
-          empreinte de votre adresse e-mail (un code calculé à partir de l&apos;adresse par
-          hachage SHA-256, qui ne la contient pas en clair). Elle sert uniquement à ne plus vous
-          écrire. Nous la conservons tant que nous faisons de la prospection, et au moins 3 ans,
-          comme le recommande la CNIL.
-        </li>
-      </ul>
-
-      <h3>Vous opposer et exercer vos droits</h3>
-      <p>
-        Vous pouvez refuser nos messages à tout moment, gratuitement et sans donner de motif :
-      </p>
-      <ul>
-        <li>en cliquant sur le lien de désinscription présent en bas de chaque message ;</li>
-        <li>en répondant «&nbsp;STOP&nbsp;» à l&apos;un de nos messages ;</li>
-        <li>
-          en écrivant à <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
-        </li>
-      </ul>
-      <p>
-        Une fois votre demande prise en compte, vous ne recevez plus aucun message de notre
-        part, relances comprises.
-      </p>
-      <p>
-        Vous pouvez aussi demander l&apos;accès à vos données, leur rectification, leur
-        effacement ou la limitation de leur traitement, à la même adresse. Si vous demandez
-        l&apos;effacement, nous gardons seulement l&apos;empreinte de votre adresse dans la liste
-        d&apos;opposition, pour ne plus vous écrire. Nous répondons dans un délai d&apos;un mois.
-        Vous pouvez enfin introduire une réclamation auprès de la CNIL (
-        <a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer">
-          www.cnil.fr
-        </a>
-        ).
+        chapitre V du RGPD (clauses contractuelles types de la Commission européenne). Nous ne
+        vendons ni ne louons vos données.
       </p>
 
       <h2>Sécurité</h2>
